@@ -73,8 +73,9 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
                 width = obj_annotation(i,3);
                 height = obj_annotation(i,4);
                 rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
-                info_dat_output(fid,[x1 y1 width height],count);
             end
+            
+            info_dat_output(fid,[x1 y1 width height],count);
         end
     end
     
