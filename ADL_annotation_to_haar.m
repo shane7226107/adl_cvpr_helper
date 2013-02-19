@@ -101,7 +101,7 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
                     rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
                 end
 
-                info_dat_output(fid,[x1 y1 width height],frame,count);
+                info_dat_output(fid,[x1 y1 width height],frame,count,obj_index);
             end
         end
     end
@@ -111,8 +111,22 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
     fclose all;
 end
 
-function info_dat_output(fid,bbox,frame,count)
-    filename = sprintf('img/%03d.jpg',count);
+function info_dat_output(fid,bbox,frame,count,obj_index)
+    label = {
+                'bed' 'book' 'bottle' 'cell' 'dent_floss'
+                'detergent' 'dish' 'door' 'fridge' 'kettle'
+                'laptop' 'microwave' 'monitor' 'pan' 'pitcher'
+                'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv'
+                'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can'
+                'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'
+                'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes'
+                'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container'
+                'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice'
+                'mop' 'none' 'none' 'none' 'none'
+            };
+    label = label';
+    
+    filename = sprintf('img/%s_%03d.jpg',label{obj_index},count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
     imwrite(frame, filename);
 end
