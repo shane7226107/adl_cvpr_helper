@@ -1,6 +1,9 @@
 function ADL_annotation_to_haar(video_index, obj_index, show ,debug)
     fprintf('running ADL_annotation_to_haar_info\n');
     
+    system('rm -r img');
+    system('mkdir img');
+    
     obj_annotation = obj_annotation_read(video_index);
     grab_info_and_img(video_index, obj_annotation, obj_index , show , debug);    
     
@@ -58,6 +61,12 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
     count = 0;
     
     for i=1:size(obj_annotation,1)
+        
+        if(mod((i/video_obj.NumberOfFrames * 100),10) <= 0.002)
+            fprintf('%.2f...\n', i/video_obj.NumberOfFrames * 100);
+        end
+        
+        
         %When finding required obj_index
         if obj_index == obj_annotation(i,7)
             
