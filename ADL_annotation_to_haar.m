@@ -44,14 +44,19 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
     fprintf('grabbing img and output info.dat...\n');
     video_obj = video_load(video_index);
     
+    fid = fopen('info.dat','w');
+    
     if show 
         figure;
     end
     
+    count = 0;
+    
     for i=1:size(obj_annotation,1)
         %When finding required obj_index
         if obj_index == obj_annotation(i,7)
-            %fprintf('%d\n',obj_annotation(i,7));
+         
+            count = count + 1;
             
             %Avoiding to crash at frame 0
             frame_to_grab = obj_annotation(i,5);
@@ -61,20 +66,23 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
  
             %show the frame
             if show
-                image(read(video_obj, frame_to_grab));
-                x1 = obj_annotation(i,1)*2 ;
+                frame = read(video_obj, frame_to_grab);
+                image(frame);
+                x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF)
                 y1 = obj_annotation(i,2)*2;
                 width = obj_annotation(i,3);
                 height = obj_annotation(i,4);
                 rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
+                info_dat_output(fid,[x1 y1 width height],count);
             end
         end
     end
     
     % save('obj_annotation.mat','obj_annotation');
     close all;
+    fclose all;
 end
 
-function result_output()    
-
+function info_dat_output(fid,bbox,count)
+    fprintf(fid, 'img/%03d.jpg 1 %d %d %d %d \n',count,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));    
 end
