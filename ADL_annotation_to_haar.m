@@ -1,8 +1,8 @@
-function ADL_annotation_to_haar(video_index, obj_index, show)
+function ADL_annotation_to_haar(video_index, obj_index, show ,debug)
     fprintf('running ADL_annotation_to_haar_info\n');
     
     obj_annotation = obj_annotation_read(video_index);
-    grab_info_and_img(video_index, obj_annotation, obj_index , show);    
+    grab_info_and_img(video_index, obj_annotation, obj_index , show , debug);    
     
     fprintf('Done!\n');
 end
@@ -40,8 +40,13 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function grab_info_and_img(video_index, obj_annotation , obj_index , show)
+function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug)
+    if nargin < 5
+        debug = false;
+    end
+
     fprintf('grabbing img and output info.dat...\n');
+    
     video_obj = video_load(video_index);
     
     fid = fopen('info.dat','w');
@@ -56,9 +61,15 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
         %When finding required obj_index
         if obj_index == obj_annotation(i,7)
             
-            %Grab inter frames in each interval (out of 30 frames)
+            % Grab inter frames in each interval (out of 30 frames)
+            % Setup frequency param here
             for j=0:6:30
+                
                 count = count + 1;
+                %Debug mode
+                if debug && count > 10
+                    break;
+                end
 
                 %Avoid to crash at boundaries
                 frame_to_grab = obj_annotation(i,5) + j;
@@ -67,19 +78,21 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
                 elseif frame_to_grab == video_obj.NumberOfFrames;
                   frame_to_grab = video_obj.NumberOfFrames;
                 end
-
+                
+                %The bbox
+                x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
+                y1 = obj_annotation(i,2)*2;
+                width = obj_annotation(i,3);
+                height = obj_annotation(i,4);
+                
                 %Show the frame
+                frame = read(video_obj, frame_to_grab);
                 if show
-                    frame = read(video_obj, frame_to_grab);
                     image(frame);
-                    x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
-                    y1 = obj_annotation(i,2)*2;
-                    width = obj_annotation(i,3);
-                    height = obj_annotation(i,4);
                     rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
                 end
 
-                info_dat_output(fid,[x1 y1 width height],count);
+                info_dat_output(fid,[x1 y1 width height],frame,count);
             end
         end
     end
@@ -89,6 +102,8 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
     fclose all;
 end
 
-function info_dat_output(fid,bbox,count)
-    fprintf(fid, 'img/%03d.jpg 1 %d %d %d %d \n',count,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));    
+function info_dat_output(fid,bbox,frame,count)
+    filename = sprintf('img/%03d.jpg',count);
+    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
+    imwrite(frame, filename);
 end
