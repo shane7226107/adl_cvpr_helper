@@ -55,27 +55,32 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show)
     for i=1:size(obj_annotation,1)
         %When finding required obj_index
         if obj_index == obj_annotation(i,7)
-         
-            count = count + 1;
             
-            %Avoiding to crash at frame 0
-            frame_to_grab = obj_annotation(i,5);
-            if obj_annotation(i,5) == 0
-              frame_to_grab = obj_annotation(i,5)+1;  
+            %Grab inter frames in each interval (out of 30 frames)
+            for j=0:6:30
+                count = count + 1;
+
+                %Avoid to crash at boundaries
+                frame_to_grab = obj_annotation(i,5) + j;
+                if frame_to_grab == 0
+                  frame_to_grab = 1;
+                elseif frame_to_grab == video_obj.NumberOfFrames;
+                  frame_to_grab = video_obj.NumberOfFrames;
+                end
+
+                %Show the frame
+                if show
+                    frame = read(video_obj, frame_to_grab);
+                    image(frame);
+                    x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
+                    y1 = obj_annotation(i,2)*2;
+                    width = obj_annotation(i,3);
+                    height = obj_annotation(i,4);
+                    rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
+                end
+
+                info_dat_output(fid,[x1 y1 width height],count);
             end
- 
-            %show the frame
-            if show
-                frame = read(video_obj, frame_to_grab);
-                image(frame);
-                x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF)
-                y1 = obj_annotation(i,2)*2;
-                width = obj_annotation(i,3);
-                height = obj_annotation(i,4);
-                rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
-            end
-            
-            info_dat_output(fid,[x1 y1 width height],count);
         end
     end
     
