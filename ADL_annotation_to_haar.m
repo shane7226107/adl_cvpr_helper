@@ -17,18 +17,24 @@
 %               'towel':'31','tooth_brush':'32','electric_keys':'33','container':'34','shoes':'35',
 %               'cell_phone':'36','thermostat':'37','vacuum':'38','washer/dryer':'39','large_container':'40',
 %               'keyboard':'41','blanket':'42','comb':'43','perfume':'44','milk/juice':'45',
-%               'mop':'46'	
-% 		 }
+%               'mop':'46'
+%             }
 
-
-function ADL_annotation_to_haar(video_index, obj_index, show ,debug)
-    fprintf('running ADL_annotation_to_haar_info\n');
+function total_count = ADL_annotation_to_haar(video_index, obj_index, show ,debug ,total_count)
+    if nargin < 5
+        total_count = 0;
+    end
     
-    system('rm -r img');
-    system('mkdir img');
+    % total_count == 0 means we are creating a new info.dat
+    if total_count == 0
+        system('rm -r img');
+        system('mkdir img');
+    end
+    
+    fprintf('running ADL_annotation_to_haar_info\n');    
     
     obj_annotation = obj_annotation_read(video_index);
-    grab_info_and_img(video_index, obj_annotation, obj_index , show , debug);    
+    total_count = grab_info_and_img(video_index, obj_annotation, obj_index , show , debug , total_count);    
     
     fprintf('Done!\n');
 end
@@ -66,7 +72,7 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug)
+function total_count = grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug, total_count)
     if nargin < 5
         debug = false;
     end
@@ -89,10 +95,14 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
 %         if(mod((i/size(obj_annotation,1) * 100),10) <= 0.002)
 %             fprintf('%.2f..\n',i/size(obj_annotation,1));
 %         end
-        if mod(i,50) == 0
+        if mod(i,300) == 0
             fprintf('%d/%d  %.2f\n',i,size(obj_annotation,1),i/size(obj_annotation,1));
         end
         
+        %Debug mode
+        if debug && count > 10
+            break;
+        end
         
         %When finding required obj_index
         if obj_index == obj_annotation(i,7)
@@ -102,11 +112,13 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
             for j=0:10:30
                 
                 count = count + 1;
+                
                 %Debug mode
                 if debug && count > 10
+                    count = count - 1;
                     break;
                 end
-
+                
                 %Avoid to crash at boundaries
                 frame_to_grab = obj_annotation(i,5) + j;
                 if frame_to_grab == 0
@@ -128,7 +140,7 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
                     rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
                 end
 
-                info_dat_output(fid,[x1 y1 width height],frame,count,obj_index);
+                info_dat_output(fid,[x1 y1 width height],frame,count + total_count,obj_index);
             end
         end
     end
@@ -136,6 +148,8 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
     % save('obj_annotation.mat','obj_annotation');
     close all;
     fclose all;
+    
+    total_count = count + total_count;
 end
 
 function info_dat_output(fid,bbox,frame,count,obj_index)
