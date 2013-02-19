@@ -25,7 +25,7 @@ function obj_annotation = obj_annotation_read(index)
 end
 
 function video_obj = video_load(index)
-    fprintf('reading video...\n');
+    fprintf('loading video...\n');
     index_to_str = num2str(index, '%02d');
     filename = ['../ADL_videos/P_' index_to_str '.MP4'];
     
@@ -60,10 +60,14 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
     
     count = 0;
     
+    fprintf('Running through obj_annotaiton file...\n');
     for i=1:size(obj_annotation,1)
         
-        if(mod((i/video_obj.NumberOfFrames * 100),10) <= 0.002)
-            fprintf('%.2f...\n', i/video_obj.NumberOfFrames * 100);
+%         if(mod((i/size(obj_annotation,1) * 100),10) <= 0.002)
+%             fprintf('%.2f..\n',i/size(obj_annotation,1));
+%         end
+        if mod(i,50) == 0
+            fprintf('%d/%d  %.2f\n',i,size(obj_annotation,1),i/size(obj_annotation,1));
         end
         
         
@@ -72,7 +76,7 @@ function grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug
             
             % Grab inter frames in each interval (out of 30 frames)
             % Setup frequency param here
-            for j=0:6:30
+            for j=0:10:30
                 
                 count = count + 1;
                 %Debug mode
