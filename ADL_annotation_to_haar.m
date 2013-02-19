@@ -1,3 +1,26 @@
+
+% Usage: 
+%         video_index: index of CVPR12 dataset video clips
+%         obj_index : index of CVPR12 dataset objects
+%         show : display fiqure or not (boolean)
+%         debug : debugging mode, break the program when 10 obejct annotation for haar created(boolean)
+%
+% example : ADL_annotation_to_haar(2,31,false, true)
+% 
+% obj_index : {
+%               'bed': '1','book': '2','bottle':'3','cell':'4','dent_floss':'5',
+%               'detergent':'6','dish':'7','door':'8','fridge':'9','kettle':'10',
+%               'laptop':'11','microwave':'12','monitor':'13','pan':'14','pitcher':'15',
+%               'soap_liquid':'16','tap':'17','tea_bag':'18','tooth_paste':'19','tv':'20',
+%               'tv_remote':'21','mug/cup':'22','oven/stove':'23','person':'24','trash_can':'25',
+%               'cloth':'26','knife/spoon/fork':'27','food/snack':'28','pills':'29','basket':'30',
+%               'towel':'31','tooth_brush':'32','electric_keys':'33','container':'34','shoes':'35',
+%               'cell_phone':'36','thermostat':'37','vacuum':'38','washer/dryer':'39','large_container':'40',
+%               'keyboard':'41','blanket':'42','comb':'43','perfume':'44','milk/juice':'45',
+%               'mop':'46'	
+% 		 }
+
+
 function ADL_annotation_to_haar(video_index, obj_index, show ,debug)
     fprintf('running ADL_annotation_to_haar_info\n');
     
