@@ -21,6 +21,12 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     fprintf('running Batch ADL_annotation_to_haar_info\n'); 
     
     %Argin translation
+    if strcmp(obj_index,'all')
+        all_objects = 1;
+    else
+        all_objects = 0;
+    end
+    
     if strcmp(active_or_not,'active')
         active_or_not = 1;
     else
@@ -39,18 +45,27 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
         debug = 0;
     end
     
+    
     % Accumulating counter
     total_count = 0;
     
-    for i=1:size(video_index_array,2)
-        
-        fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array \n', video_index_array(1,i), i,size(video_index_array,2));
-        
-        if i == 1
-            total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug);
-        else
-            total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, total_count);
-        end        
-        
+    if (all_objects == 0)
+        fprintf('single object: %d\n',obj_index);
+        for i=1:size(video_index_array,2)
+
+            fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array \n', video_index_array(1,i), i,size(video_index_array,2));
+
+            if i == 1
+                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug);
+            else
+                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, total_count);
+            end        
+
+        end
+    else
+        fprintf('all objects\n');
     end
+    
+    
+    fprintf('Batch ADL_annotation_to_haar_info all Done!\n'); 
 end
