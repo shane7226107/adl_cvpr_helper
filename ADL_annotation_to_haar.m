@@ -58,7 +58,15 @@ end
 function video_obj = video_load(index)
     fprintf('loading video...\n');
     index_to_str = num2str(index, '%02d');
-    filename = ['../ADL_videos/P_' index_to_str '.MP4'];
+    
+    %Machine depandent file format
+    if strcmp('GLNXA64',computer)
+        %Run in Ubuntu
+        filename = ['../ADL_videos/P_' index_to_str '.avi'];
+    else
+        %Run in Mac
+        filename = ['../ADL_videos/P_' index_to_str '.MP4'];
+    end
     
     xyloObj = VideoReader(filename);
 
