@@ -29,6 +29,7 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     if total_count == 0
         system('rm -r img');
         system('mkdir img');
+        system('rm info.dat');
     end
     
     fprintf('running ADL_annotation_to_haar_info\n');    
@@ -81,7 +82,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     
     video_obj = video_load(video_index);
     
-    fid = fopen('info.dat','w');
+    fid = fopen('info.dat','a');
     
     if show 
         figure;
