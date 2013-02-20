@@ -133,7 +133,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 frame_to_grab = obj_annotation(i,5) + j;
                 if frame_to_grab == 0
                   frame_to_grab = 1;
-                elseif frame_to_grab == video_obj.NumberOfFrames;
+                elseif frame_to_grab > video_obj.NumberOfFrames;
                   frame_to_grab = video_obj.NumberOfFrames;
                 end
                 
@@ -171,7 +171,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
             end
             
             %Making bg.txt and output imgs
-            frame = read(video_obj, i);
+            frame = read(video_obj, obj_annotation(i,5));
             back_output(fid_bg, frame, back_count + total_count(2));
         end
     end
