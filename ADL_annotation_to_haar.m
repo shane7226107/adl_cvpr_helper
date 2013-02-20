@@ -20,8 +20,8 @@
 %               'mop':'46'
 %             }
 
-function total_count = ADL_annotation_to_haar(video_index, obj_index, show ,debug ,total_count)
-    if nargin < 5
+function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_not, show ,debug ,total_count)
+    if nargin < 6
         total_count = 0;
     end
     
@@ -34,7 +34,7 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, show ,debu
     fprintf('running ADL_annotation_to_haar_info\n');    
     
     obj_annotation = obj_annotation_read(video_index);
-    total_count = grab_info_and_img(video_index, obj_annotation, obj_index , show , debug , total_count);    
+    total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count);    
     
     fprintf('Done!\n');
 end
@@ -72,7 +72,7 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function total_count = grab_info_and_img(video_index, obj_annotation , obj_index , show ,debug, total_count)
+function total_count = grab_info_and_img(video_index, obj_annotation , obj_index, active_or_not , show ,debug, total_count)
     if nargin < 5
         debug = false;
     end
@@ -105,7 +105,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
         end
         
         %When finding required obj_index
-        if obj_index == obj_annotation(i,7)
+        if (obj_index == obj_annotation(i,7)) && (active_or_not == obj_annotation(i,6))
             
             % Grab inter frames in each interval (out of 30 frames)
             % Setup frequency param here
@@ -139,8 +139,9 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                     image(frame);
                     rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
                 end
-
-                info_dat_output(fid,[x1 y1 width height],frame,count + total_count,obj_index);
+                
+                %Making info.dat
+                info_dat_output(fid,[x1 y1 width height],frame,active_or_not,count + total_count,obj_index);
             end
         end
     end
@@ -152,7 +153,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     total_count = count + total_count;
 end
 
-function info_dat_output(fid,bbox,frame,count,obj_index)
+function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
     label = {
                 'bed' 'book' 'bottle' 'cell' 'dent_floss'
                 'detergent' 'dish' 'door' 'fridge' 'kettle'
@@ -167,7 +168,13 @@ function info_dat_output(fid,bbox,frame,count,obj_index)
             };
     label = label';
     
-    filename = sprintf('img/%s_%03d.jpg',label{obj_index},count);
+    if active_or_not
+        state = 'active';
+    else
+        state = 'passive';
+    end
+    
+    filename = sprintf('img/%s_%s_%03d.jpg',state,label{obj_index},count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
     imwrite(frame, filename);
 end
