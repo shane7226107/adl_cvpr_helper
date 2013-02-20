@@ -114,7 +114,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 count = count + 1;
                 
                 %Debug mode
-                if debug && count > 10
+                if debug && count > 5
                     count = count - 1;
                     break;
                 end

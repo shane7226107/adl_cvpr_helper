@@ -20,6 +20,25 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     
     fprintf('running Batch ADL_annotation_to_haar_info\n'); 
     
+    %Argin translation
+    if strcmp(active_or_not,'active')
+        active_or_not = 1;
+    else
+        active_or_not = 0;
+    end
+    
+    if strcmp(show,'show')
+        show = 1;
+    else
+        show = 0;
+    end
+    
+    if strcmp(debug,'debug')
+        debug = 1;
+    else
+        debug = 0;
+    end
+    
     % Accumulating counter
     total_count = 0;
     
