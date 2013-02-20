@@ -46,8 +46,8 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     end
     
     
-    % Accumulating counter
-    total_count = 0;
+    % Accumulating counter [foreground background]
+    total_count = [0 0];
     
     if (all_objects == 0)
         fprintf('single object: %d\n',obj_index);

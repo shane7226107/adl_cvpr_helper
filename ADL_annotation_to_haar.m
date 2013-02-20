@@ -22,20 +22,21 @@
 
 function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_not, show ,debug ,total_count)
     if nargin < 6
-        total_count = 0;
+        total_count = [0 0];
     end
     
     % total_count == 0 means we are creating a new info.dat
-    if total_count == 0
+    if total_count == [0 0]
         system('rm -r img');
         system('mkdir img');
         system('rm info.dat');
+        system('rm bg.txt');
     end
     
     fprintf('running ADL_annotation_to_haar_info\n');    
     
     obj_annotation = obj_annotation_read(video_index);
-    total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count);    
+    total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count)
     
     fprintf('Done!\n');
 end
@@ -83,25 +84,25 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     video_obj = video_load(video_index);
     
     fid = fopen('info.dat','a');
+    fid_bg = fopen('bg.txt','a');
     
     if show 
         figure;
     end
     
-    count = 0;
+    fore_count = 0;
+    back_count = 0;
     
     fprintf('Running through obj_annotaiton file...\n');
     for i=1:size(obj_annotation,1)
-        
-%         if(mod((i/size(obj_annotation,1) * 100),10) <= 0.002)
-%             fprintf('%.2f..\n',i/size(obj_annotation,1));
-%         end
+       
+        %Progress precentage 
         if mod(i,300) == 0
             fprintf('%d/%d  %.2f\n',i,size(obj_annotation,1),i/size(obj_annotation,1));
         end
         
         %Debug mode
-        if debug && count > 10
+        if debug && fore_count > 5
             break;
         end
         
@@ -112,11 +113,11 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
             % Setup frequency param here
             for j=0:10:30
                 
-                count = count + 1;
+                fore_count = fore_count + 1;
                 
                 %Debug mode
-                if debug && count > 5
-                    count = count - 1;
+                if debug && fore_count > 5
+                    fore_count = fore_count - 1;
                     break;
                 end
                 
@@ -134,16 +135,36 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 width = obj_annotation(i,3);
                 height = obj_annotation(i,4);
                 
-                %Show the frame
+                %grab the frame
                 frame = read(video_obj, frame_to_grab);
+                
+                %Show the frame
                 if show
                     image(frame);
                     rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
                 end
                 
-                %Making info.dat
-                info_dat_output(fid,[x1 y1 width height],frame,active_or_not,count + total_count,obj_index);
+                %Making info.dat and output imgs
+                info_dat_output(fid,[x1 y1 width height],frame,active_or_not,fore_count + total_count(1),obj_index);
             end
+        %Otherwise background img
+        else
+            back_count = back_count + 1;
+            
+            %Max number of bg img
+            %Debug mode
+            if debug && back_count > 5
+               back_count = back_count - 1;
+               continue;
+            end
+            
+            if (back_count + total_count(2) > 10000)
+                continue;
+            end
+            
+            %Making bg.txt and output imgs
+            frame = read(video_obj, i);
+            back_output(fid_bg, frame, back_count + total_count(2));
         end
     end
     
@@ -151,7 +172,15 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     close all;
     fclose all;
     
-    total_count = count + total_count;
+    total_count = total_count + [fore_count back_count];
+end
+
+function back_output(fid,frame,count)
+
+    filename = sprintf('img/background_%05d.jpg',count);
+    fprintf(fid, '%s\n',filename);
+    imwrite(frame, filename);
+
 end
 
 function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
