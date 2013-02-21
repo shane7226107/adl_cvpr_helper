@@ -26,9 +26,11 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     end
     
     
-    %Global variables here
+    %Global variables
     global SAMPLE_FREQ DEBUG_COUNT
-    SAMPLE_FREQ = 1:1:30;
+    %The freq to grab frames in each interval(30 frames)
+    SAMPLE_FREQ = 0:1:30;
+    %Maximum number before breaking
     DEBUG_COUNT = 5;
     
     
@@ -69,7 +71,7 @@ function video_obj = video_load(index)
     %Machine depandent file format
     if strcmp('GLNXA64',computer)
         %Run in Ubuntu
-        filename = ['../ADL_videos/P_' index_to_str '.avi'];
+        filename = ['../ADL_videos/P_' index_to_str '.MP4.avi'];
     else
         %Run in Mac
         filename = ['../ADL_videos/P_' index_to_str '.MP4'];
@@ -180,8 +182,16 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 continue;
             end
             
+            %Avoid to crash at boundaries
+            frame_to_grab = obj_annotation(i,5);
+            if frame_to_grab == 0
+              frame_to_grab = 1;
+            elseif frame_to_grab > video_obj.NumberOfFrames;
+              frame_to_grab = video_obj.NumberOfFrames;
+            end
+            
             %Making bg.txt and output imgs
-            frame = read(video_obj, obj_annotation(i,5));
+            frame = read(video_obj, frame_to_grab);
             back_output(fid_bg, frame, back_count + total_count(2));
         end
     end
