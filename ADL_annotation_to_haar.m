@@ -92,7 +92,7 @@ function video_obj = video_load(index)
     %Machine depandent file format
     if strcmp('GLNXA64',computer)
         %Run in Ubuntu
-        filename = ['../ADL_videos/P_' index_to_str '.MP4.avi'];
+        filename = ['../ADL_videos/P_' index_to_str '.avi'];
     else
         %Run in Mac
         filename = ['../ADL_videos/P_' index_to_str '.MP4'];
