@@ -100,15 +100,6 @@ function video_obj = video_load(index)
     
     xyloObj = VideoReader(filename);
 
-%     nFrames = xyloObj.NumberOfFrames;
-%     vidHeight = xyloObj.Height;
-%     vidWidth = xyloObj.Width;
-    
-    % Preallocate movie structure.
-%     mov(1:nFrames) = ...
-%         struct('cdata', zeros(vidHeight, vidWidth, 3, 'uint8'),...
-%                'colormap', []);
-           
     video_obj = xyloObj;
 end
 
@@ -125,7 +116,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     video_obj = video_load(video_index);
     
     %filename = sprintf('%sinfo.dat',OBJ_FOLDER)
-    fid = fopen([OBJ_FOLDER 'info.fat'],'a');
+    fid = fopen([OBJ_FOLDER 'info.dat'],'a');
     %filename = sprintf('%sbg.txt',OBJ_FOLDER)
     fid_bg = fopen([OBJ_FOLDER 'bg.txt'],'a');
     

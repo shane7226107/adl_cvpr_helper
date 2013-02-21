@@ -46,7 +46,8 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     end
     
     %The all obj array for 'all' mode
-    all_obj_index_array = [1 9 12];
+    %Taking obj from 1:23 just like CVPR12
+    all_obj_index_array = 1:23;
     %The active objs array
     active_objs = [9 12 16 22 23];    
     
