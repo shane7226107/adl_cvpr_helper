@@ -25,6 +25,13 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
         total_count = [0 0];
     end
     
+    
+    %Global variables here
+    global SAMPLE_FREQ DEBUG_COUNT
+    SAMPLE_FREQ = 1:1:30;
+    DEBUG_COUNT = 5;
+    
+    
     % total_count == 0 means we are creating a new info.dat
     if total_count == [0 0]
         system('rm -r img');
@@ -86,6 +93,9 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     if nargin < 5
         debug = false;
     end
+    
+    %Global variables here
+    global SAMPLE_FREQ DEBUG_COUNT
 
     fprintf('grabbing img and output info.dat...\n');
     
@@ -110,7 +120,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
         end
         
         %Debug mode
-        if debug && fore_count > 5
+        if debug && fore_count > DEBUG_COUNT
             break;
         end
         
@@ -119,12 +129,12 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
             
             % Grab inter frames in each interval (out of 30 frames)
             % Setup frequency param here
-            for j=0:10:30
+            for j=SAMPLE_FREQ
                 
                 fore_count = fore_count + 1;
                 
                 %Debug mode
-                if debug && fore_count > 5
+                if debug && fore_count > DEBUG_COUNT
                     fore_count = fore_count - 1;
                     break;
                 end
@@ -161,7 +171,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
             
             %Max number of bg img
             %Debug mode
-            if debug && back_count > 5
+            if debug && back_count > DEBUG_COUNT
                back_count = back_count - 1;
                continue;
             end
