@@ -21,28 +21,33 @@
 %             }
 
 function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_not, show ,debug ,total_count)
+    fprintf('running ADL_annotation_to_haar_info\n'); 
+    
     if nargin < 6
         total_count = [0 0];
+    end    
+    
+    %Recreating the obj folder
+    if active_or_not == 1
+        state = 'active';
+    else
+        state = 'passive';
     end
     
-    
     %Global variables
-    global SAMPLE_FREQ DEBUG_COUNT
+    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER
     %The freq to grab frames in each interval(30 frames)
     SAMPLE_FREQ = 0:1:30;
     %Maximum number before breaking
-    DEBUG_COUNT = 5;
-    
-    
-    % total_count == 0 means we are creating a new info.dat
+    DEBUG_COUNT = 3;
+    %obj folder
+    OBJ_FOLDER = sprintf('output/%s_%03d/',state,obj_index);
+        
     if total_count == [0 0]
-        system('rm -r img');
-        system('mkdir img');
-        system('rm info.dat');
-        system('rm bg.txt');
+        system(['rm -r ' OBJ_FOLDER]);
+        system(['mkdir ' OBJ_FOLDER]);  
+        system(['mkdir ' OBJ_FOLDER 'img']);
     end
-    
-    fprintf('running ADL_annotation_to_haar_info\n');    
     
     obj_annotation = obj_annotation_read(video_index);
     total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count)
@@ -97,14 +102,16 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     end
     
     %Global variables here
-    global SAMPLE_FREQ DEBUG_COUNT
+    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER
 
     fprintf('grabbing img and output info.dat...\n');
     
     video_obj = video_load(video_index);
     
-    fid = fopen('info.dat','a');
-    fid_bg = fopen('bg.txt','a');
+    %filename = sprintf('%sinfo.dat',OBJ_FOLDER)
+    fid = fopen([OBJ_FOLDER 'info.fat'],'a');
+    %filename = sprintf('%sbg.txt',OBJ_FOLDER)
+    fid_bg = fopen([OBJ_FOLDER 'bg.txt'],'a');
     
     if show 
         figure;
@@ -205,13 +212,18 @@ end
 
 function back_output(fid,frame,count)
 
-    filename = sprintf('img/background_%05d.jpg',count);
+    global OBJ_FOLDER;
+
+    filename = sprintf('%simg/background_%05d.jpg',OBJ_FOLDER,count);
     fprintf(fid, '%s\n',filename);
     imwrite(frame, filename);
 
 end
 
 function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
+    
+    global OBJ_FOLDER;
+    
     label = {
                 'bed' 'book' 'bottle' 'cell' 'dent_floss'
                 'detergent' 'dish' 'door' 'fridge' 'kettle'
@@ -232,7 +244,7 @@ function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
         state = 'passive';
     end
     
-    filename = sprintf('img/%s_%s_%03d.jpg',state,label{obj_index},count);
+    filename = sprintf('%simg/%s_%s_%03d.jpg',OBJ_FOLDER,state,label{obj_index},count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
     imwrite(frame, filename);
 end

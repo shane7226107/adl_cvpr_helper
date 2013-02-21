@@ -49,6 +49,10 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     % Accumulating counter [foreground background]
     total_count = [0 0];
     
+    % Recreate the output folders
+    system('rm -r output');
+    system('mkdir output');      
+    
     if (all_objects == 0)
         fprintf('single object: %d\n',obj_index);
         for i=1:size(video_index_array,2)
