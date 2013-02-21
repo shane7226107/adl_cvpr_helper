@@ -39,11 +39,11 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     %The freq to grab frames in each interval(30 frames)
     SAMPLE_FREQ = 0:1:30;
     %Maximum number before breaking
-    DEBUG_COUNT = 3;
+    DEBUG_COUNT = 1;
     %obj folder
     OBJ_FOLDER = sprintf('output/%s_%03d/',state,obj_index);
         
-    if total_count == [0 0]
+    if isequal(total_count,[0 0])
         system(['rm -r ' OBJ_FOLDER]);
         system(['mkdir ' OBJ_FOLDER]);  
         system(['mkdir ' OBJ_FOLDER 'img']);

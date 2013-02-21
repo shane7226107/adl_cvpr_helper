@@ -45,14 +45,19 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
         debug = 0;
     end
     
-    
-    % Accumulating counter [foreground background]
-    total_count = [0 0];
+    %The all obj array for 'all' mode
+    all_obj_index_array = [1 9 12];
+    %The active objs array
+    active_objs = [9 12 16 22 23];    
     
     % Recreate the output folders
     system('rm -r output');
-    system('mkdir output');      
+    system('mkdir output'); 
     
+    % Accumulating counter [foreground background]
+    total_count = [0 0];     
+    
+    %Single object mode
     if (all_objects == 0)
         fprintf('single object: %d\n',obj_index);
         for i=1:size(video_index_array,2)
@@ -66,8 +71,42 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
             end        
 
         end
+        
+    %All objects mode
     else
         fprintf('all objects\n');
+        
+        for obj=all_obj_index_array
+            %passive
+            for video=1:size(video_index_array,2)
+
+                fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
+
+                if video == 1
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug);
+                else
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug, total_count);
+                end        
+
+            end
+            %active
+            %Only for those with active annotation
+            tmp = ones(1,5) * obj;
+   
+            if ~isequal(tmp == active_objs, [0 0 0 0 0])
+                for video=1:size(video_index_array,2)
+
+                    fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for active object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
+
+                    if video == 1
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug);
+                    else
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug, total_count);
+                    end        
+
+                end
+            end
+        end
     end
     
     
