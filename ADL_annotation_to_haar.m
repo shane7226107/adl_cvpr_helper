@@ -35,13 +35,29 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     end
     
     %Global variables
-    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER
+    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER LABEL
     %The freq to grab frames in each interval(30 frames)
     SAMPLE_FREQ = 0:1:30;
     %Maximum number before breaking
     DEBUG_COUNT = 1;
+    %obj labels
+    LABEL = {
+            'bed' 'book' 'bottle' 'cell' 'dent_floss'
+            'detergent' 'dish' 'door' 'fridge' 'kettle'
+            'laptop' 'microwave' 'monitor' 'pan' 'pitcher'
+            'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv'
+            'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can'
+            'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'
+            'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes'
+            'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container'
+            'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice'
+            'mop' 'none' 'none' 'none' 'none'
+        };
     %obj folder
-    OBJ_FOLDER = sprintf('output/%s_%03d/',state,obj_index);
+    label = LABEL'
+    OBJ_FOLDER = sprintf('output/%s_%03d_%s/',state,obj_index,label{obj_index});
+    
+
         
     if isequal(total_count,[0 0])
         system(['rm -r ' OBJ_FOLDER]);
@@ -222,21 +238,9 @@ end
 
 function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
     
-    global OBJ_FOLDER;
+    global OBJ_FOLDER LABEL;
     
-    label = {
-                'bed' 'book' 'bottle' 'cell' 'dent_floss'
-                'detergent' 'dish' 'door' 'fridge' 'kettle'
-                'laptop' 'microwave' 'monitor' 'pan' 'pitcher'
-                'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv'
-                'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can'
-                'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'
-                'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes'
-                'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container'
-                'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice'
-                'mop' 'none' 'none' 'none' 'none'
-            };
-    label = label';
+    label = LABEL';
     
     if active_or_not
         state = 'active';
