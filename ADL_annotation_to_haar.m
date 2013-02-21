@@ -54,7 +54,7 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
             'mop' 'none' 'none' 'none' 'none'
         };
     %obj folder
-    label = LABEL'
+    label = LABEL';
     OBJ_FOLDER = sprintf('output/%s_%03d_%s/',state,obj_index,label{obj_index});
     
 
