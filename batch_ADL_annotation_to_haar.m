@@ -100,24 +100,25 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     else
         fprintf('all objects mode\n');
         
-        for obj=all_obj_index_array            
+        for obj_index=all_obj_index_array            
             %passive
             %Decide the repeat number to get enough sample first
             repeat = total_annotation_counter(video_index_array,obj_index, 0);
+            
             for video=1:size(video_index_array,2)
 
-                fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
+                fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj_index);
                 
                 if video == 1
-                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug ,[0 0],repeat);
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,false ,show ,debug ,[0 0],repeat);
                 else
-                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug, total_count, repeat);
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,false ,show ,debug, total_count, repeat);
                 end        
 
             end
             %active
             %Only for those with active annotation
-            tmp = ones(1,5) * obj;
+            tmp = ones(1,5) * obj_index;
    
             if ~isequal(tmp == active_objs, [0 0 0 0 0])
                 %Decide the repeat number to get enough sample first
@@ -128,9 +129,9 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
                     fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for active object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
                                   
                     if video == 1
-                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug,[0 0],repeat);
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,true ,show ,debug,[0 0],repeat);
                     else
-                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug, total_count ,repeat);
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,true ,show ,debug, total_count ,repeat);
                     end        
 
                 end
@@ -144,9 +145,16 @@ end
 
 function repeat = total_annotation_counter(video_index_array,obj_index, active_or_not)
     
-    global SAMPLE_FREQ
-
+    global SAMPLE_FREQ LABEL
+    
+    if active_or_not == 1
+        state = 'active';
+    else
+        state = 'passive';
+    end
+    
     annotation_counter = 0;
+    label = LABEL';
     
     for video = video_index_array
         obj_annotation = obj_annotation_read(video);
@@ -160,7 +168,7 @@ function repeat = total_annotation_counter(video_index_array,obj_index, active_o
         end
     end
     
-    fprintf('Number of annotations of required obj:%d\n',annotation_counter);
+    fprintf('Number of annotations of required obj_%d_%s_%s is %d\n',obj_index,state,label{obj_index},annotation_counter);
     if annotation_counter > 0 
         repeat = ceil(7100/(size(SAMPLE_FREQ,2)* (annotation_counter)));        
         fprintf('Number of repeats needed:%d, To make %d samples\n',repeat,repeat*(size(SAMPLE_FREQ,2)* (annotation_counter)));    
