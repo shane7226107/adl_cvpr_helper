@@ -45,6 +45,26 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
         debug = 0;
     end
     
+    %Global variables
+    global SAMPLE_FREQ DEBUG_COUNT LABEL
+    %The freq to grab frames in each interval(30 frames)
+    SAMPLE_FREQ = 0:1:30;
+    %Maximum number before breaking
+    DEBUG_COUNT = 2;
+    %obj labels
+    LABEL = {
+            'bed' 'book' 'bottle' 'cell' 'dent_floss'
+            'detergent' 'dish' 'door' 'fridge' 'kettle'
+            'laptop' 'microwave' 'monitor' 'pan' 'pitcher'
+            'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv'
+            'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can'
+            'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'
+            'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes'
+            'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container'
+            'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice'
+            'mop' 'none' 'none' 'none' 'none'
+        };
+    
     %The all obj array for 'all' mode
     %Taking obj from 1:23 just like CVPR12
     all_obj_index_array = 1:23;
@@ -60,33 +80,39 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     
     %Single object mode
     if (all_objects == 0)
-        fprintf('single object: %d\n',obj_index);
+        fprintf('single object mode: %d\n',obj_index);
+        
+        %Decide the repeat number to get enough sample first
+        repeat = total_annotation_counter(video_index_array,obj_index, active_or_not);
         for i=1:size(video_index_array,2)
 
             fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array \n', video_index_array(1,i), i,size(video_index_array,2));
-
+            
             if i == 1
-                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug);
+                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, [0 0],repeat);
             else
-                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, total_count);
+                total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, total_count ,repeat);
             end        
 
         end
         
     %All objects mode
     else
-        fprintf('all objects\n');
+        fprintf('all objects mode\n');
         
         for obj=all_obj_index_array
+            %Decide the repeat number to get enough sample first
+            repeat = total_annotation_counter(video_index_array,obj_index, active_or_not);
+            
             %passive
             for video=1:size(video_index_array,2)
 
                 fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
-
+                
                 if video == 1
-                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug);
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug ,[0 0],repeat);
                 else
-                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug, total_count);
+                    total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,false ,show ,debug, total_count, repeat);
                 end        
 
             end
@@ -98,11 +124,11 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
                 for video=1:size(video_index_array,2)
 
                     fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for active object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
-
+                                  
                     if video == 1
-                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug);
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug,[0 0],repeat);
                     else
-                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug, total_count);
+                        total_count = ADL_annotation_to_haar(video_index_array(1,video), obj ,true ,show ,debug, total_count ,repeat);
                     end        
 
                 end
@@ -112,4 +138,44 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     
     
     fprintf('Batch ADL_annotation_to_haar_info all Done!\n'); 
+end
+
+function repeat = total_annotation_counter(video_index_array,obj_index, active_or_not)
+    
+    global SAMPLE_FREQ
+
+    annotation_counter = 0;
+    
+    for video = video_index_array
+        obj_annotation = obj_annotation_read(video);
+        
+        for i=1:size(obj_annotation,1)
+            if (obj_index == obj_annotation(i,7)) && (active_or_not == obj_annotation(i,6))
+                annotation_counter = annotation_counter + 1; 
+            end        
+        end
+    end
+    
+    fprintf('Number of annotations of required obj:%d\n',annotation_counter);
+    if annotation_counter > 0 
+        repeat = ceil(7100/(size(SAMPLE_FREQ,2)* (annotation_counter)));        
+        fprintf('Number of repeats needed:%d, To make %d samples\n',repeat,repeat*(size(SAMPLE_FREQ,2)* (annotation_counter)));    
+    else
+        repeat = 1;
+        fprintf('Number of repeats is 1 because there is no such obj in this video set\n');    
+    end
+end
+
+function obj_annotation = obj_annotation_read(index)    
+    index_to_str = num2str(index, '%02d');
+    filename = ['../ADL_annotations/object_annotation/object_annot_P_' index_to_str '_translated.txt'];
+    fprintf('reading: %s\n', filename);
+    
+    fid = fopen(filename);
+    
+    [A ,count] = fscanf(fid, '%d %d %d %d %d %d %d',[7 , inf]);
+    obj_annotation = A';
+    
+    fclose all;
+    fprintf('finished reading annotation file\n');
 end
