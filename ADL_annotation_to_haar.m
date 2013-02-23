@@ -167,30 +167,32 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
             end
         %Otherwise background img
         else
-            back_count = back_count + 1;
-            
-            %Max number of bg img
-            %Debug mode
-            if debug && back_count > DEBUG_COUNT
-               back_count = back_count - 1;
-               continue;
+            for j=1:10:30
+                back_count = back_count + 1;
+
+                %Max number of bg img
+                %Debug mode
+                if debug && back_count > DEBUG_COUNT
+                   back_count = back_count - 1;
+                   continue;
+                end
+
+                if (back_count + total_count(2) > 10000)
+                    continue;
+                end
+
+                %Avoid to crash at boundaries
+                frame_to_grab = obj_annotation(i,5) + j;
+                if frame_to_grab == 0
+                  frame_to_grab = 1;
+                elseif frame_to_grab > video_obj.NumberOfFrames;
+                  frame_to_grab = video_obj.NumberOfFrames;
+                end
+
+                %Making bg.txt and output imgs
+                frame = read(video_obj, frame_to_grab);
+                back_output(fid_bg, frame, back_count + total_count(2));
             end
-            
-            if (back_count + total_count(2) > 10000)
-                continue;
-            end
-            
-            %Avoid to crash at boundaries
-            frame_to_grab = obj_annotation(i,5);
-            if frame_to_grab == 0
-              frame_to_grab = 1;
-            elseif frame_to_grab > video_obj.NumberOfFrames;
-              frame_to_grab = video_obj.NumberOfFrames;
-            end
-            
-            %Making bg.txt and output imgs
-            frame = read(video_obj, frame_to_grab);
-            back_output(fid_bg, frame, back_count + total_count(2));
         end
     end
     
