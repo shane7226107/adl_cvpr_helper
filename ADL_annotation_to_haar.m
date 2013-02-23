@@ -219,17 +219,13 @@ end
 
 function back_output(fid,frame,count)
 
-    global OBJ_FOLDER;
-
-    filename = sprintf('%simg/background_%05d.jpg',OBJ_FOLDER,count);
+    filename = sprintf('img/background_%05d.jpg',count);
     fprintf(fid, '%s\n',filename);
     imwrite(frame, filename);
 
 end
 
 function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
-    
-    global OBJ_FOLDER LABEL;
     
     label = LABEL';
     
@@ -239,7 +235,7 @@ function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
         state = 'passive';
     end
     
-    filename = sprintf('%simg/%s_%s_%03d.jpg',OBJ_FOLDER,state,label{obj_index},count);
+    filename = sprintf('img/%s_%s_%03d.jpg',state,label{obj_index},count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
     imwrite(frame, filename);
 end
