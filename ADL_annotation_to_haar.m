@@ -235,7 +235,7 @@ function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
         state = 'passive';
     end
     
-    filename = sprintf('img/%s_%s_%03d.jpg',state,label{obj_index},count);
+    filename = sprintf('img/%s_%s_%05d.jpg',state,label{obj_index},count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
     imwrite(frame, filename);
 end
