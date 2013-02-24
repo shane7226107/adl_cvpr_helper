@@ -125,7 +125,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
         %When finding required obj_index
         if (obj_index == obj_annotation(i,7)) && (active_or_not == obj_annotation(i,6))
             for r=1:repeat
-                fprintf('repeating %d/%d\n',r,repeat);
+                % fprintf('repeating %d/%d\n',r,repeat);
                 % Grab inter frames in each interval (out of 30 frames)
                 % Setup frequency param here
                 for j=SAMPLE_FREQ
@@ -168,17 +168,14 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
         %Otherwise background img
         else
             for j=1:10:30
+                
                 back_count = back_count + 1;
 
                 %Max number of bg img
                 %Debug mode
-                if debug && back_count > DEBUG_COUNT
+                if  (debug && back_count > DEBUG_COUNT) || (back_count + total_count(2) > 10000)
                    back_count = back_count - 1;
                    continue;
-                end
-
-                if (back_count + total_count(2) > 10000)
-                    continue;
                 end
 
                 %Avoid to crash at boundaries
