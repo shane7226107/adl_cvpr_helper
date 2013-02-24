@@ -126,7 +126,7 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
                 
                 for video=1:size(video_index_array,2)
 
-                    fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for active object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj);
+                    fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for active object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj_index);
                                   
                     if video == 1
                         total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,true ,show ,debug,[0 0],repeat);
