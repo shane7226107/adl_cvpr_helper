@@ -86,7 +86,7 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
         repeat = total_annotation_counter(video_index_array,obj_index, active_or_not);
         for i=1:size(video_index_array,2)
 
-            fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array \n', video_index_array(1,i), i,size(video_index_array,2));
+            fprintf('\n\n\ngrabbing video: P_%02d    %d/%d in video array \n', video_index_array(1,i), i,size(video_index_array,2));
             
             if i == 1
                 total_count = ADL_annotation_to_haar(video_index_array(1,i), obj_index ,active_or_not ,show ,debug, [0 0],repeat);
@@ -107,7 +107,7 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
             
             for video=1:size(video_index_array,2)
 
-                fprintf('\n\n\ngrabbing video: P_%02d.MP4    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj_index);
+                fprintf('\n\n\ngrabbing video: P_%02d    %d/%d in video array for passive object: %d\n', video_index_array(1,video), video,size(video_index_array,2),obj_index);
                 
                 if video == 1
                     total_count = ADL_annotation_to_haar(video_index_array(1,video), obj_index ,false ,show ,debug ,[0 0],repeat);

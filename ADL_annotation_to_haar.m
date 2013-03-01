@@ -79,6 +79,8 @@ function video_obj = video_load(index)
         filename = ['../ADL_videos/P_' index_to_str '.MP4'];
     end
     
+    
+    fprintf('%s\n',filename);
     xyloObj = VideoReader(filename);
 
     video_obj = xyloObj;
