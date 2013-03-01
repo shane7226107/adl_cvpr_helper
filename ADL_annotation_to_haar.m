@@ -20,7 +20,7 @@
 %               'mop':'46'
 %             }
 
-function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_not, show ,debug ,total_count)
+function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_not, show ,debug ,total_count ,repeat)
     fprintf('running ADL_annotation_to_haar_info\n'); 
     
     if nargin < 6
@@ -35,29 +35,10 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     end
     
     %Global variables
-    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER LABEL
-    %The freq to grab frames in each interval(30 frames)
-    SAMPLE_FREQ = 0:1:30;
-    %Maximum number before breaking
-    DEBUG_COUNT = 1;
-    %obj labels
-    LABEL = {
-            'bed' 'book' 'bottle' 'cell' 'dent_floss'
-            'detergent' 'dish' 'door' 'fridge' 'kettle'
-            'laptop' 'microwave' 'monitor' 'pan' 'pitcher'
-            'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv'
-            'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can'
-            'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'
-            'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes'
-            'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container'
-            'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice'
-            'mop' 'none' 'none' 'none' 'none'
-        };
+    global OBJ_FOLDER LABEL
     %obj folder
     label = LABEL';
     OBJ_FOLDER = sprintf('output/%s_%03d_%s/',state,obj_index,label{obj_index});
-    
-
         
     if isequal(total_count,[0 0])
         system(['rm -r ' OBJ_FOLDER]);
@@ -66,7 +47,7 @@ function total_count = ADL_annotation_to_haar(video_index, obj_index, active_or_
     end
     
     obj_annotation = obj_annotation_read(video_index);
-    total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count)
+    total_count = grab_info_and_img(video_index ,obj_annotation ,obj_index ,active_or_not  ,show ,debug ,total_count, repeat)
     
     fprintf('Done!\n');
 end
@@ -103,7 +84,7 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function total_count = grab_info_and_img(video_index, obj_annotation , obj_index, active_or_not , show ,debug, total_count)
+function total_count = grab_info_and_img(video_index, obj_annotation , obj_index, active_or_not , show ,debug, total_count ,repeat)
     if nargin < 5
         debug = false;
     end
@@ -127,7 +108,8 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     fore_count = 0;
     back_count = 0;
     
-    fprintf('Running through obj_annotaiton file...\n');
+    fprintf('Running through obj_annotaiton file...\n');        
+    
     for i=1:size(obj_annotation,1)
        
         %Progress precentage 
@@ -142,19 +124,60 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
         
         %When finding required obj_index
         if (obj_index == obj_annotation(i,7)) && (active_or_not == obj_annotation(i,6))
-            
-            % Grab inter frames in each interval (out of 30 frames)
-            % Setup frequency param here
-            for j=SAMPLE_FREQ
-                
-                fore_count = fore_count + 1;
-                
-                %Debug mode
-                if debug && fore_count > DEBUG_COUNT
-                    fore_count = fore_count - 1;
-                    break;
+            for r=1:repeat
+                % fprintf('repeating %d/%d\n',r,repeat);
+                % Grab inter frames in each interval (out of 30 frames)
+                % Setup frequency param here
+                for j=SAMPLE_FREQ
+
+                    fore_count = fore_count + 1;
+
+                    %Debug mode
+                    if debug && fore_count > DEBUG_COUNT
+                        fore_count = fore_count - 1;
+                        break;
+                    end
+
+                    %Avoid to crash at boundaries
+                    frame_to_grab = obj_annotation(i,5) + j;
+                    if frame_to_grab == 0
+                      frame_to_grab = 1;
+                    elseif frame_to_grab > video_obj.NumberOfFrames;
+                      frame_to_grab = video_obj.NumberOfFrames;
+                    end
+
+                    %The bbox
+                    x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
+                    y1 = obj_annotation(i,2)*2;
+                    width = obj_annotation(i,3);
+                    height = obj_annotation(i,4);
+
+                    %grab the frame
+                    frame = read(video_obj, frame_to_grab);
+
+                    %Show the frame
+                    if show
+                        image(frame);
+                        rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
+                    end
+
+                    %Making info.dat and output imgs
+                    info_dat_output(fid,[x1 y1 width height],frame,active_or_not,fore_count + total_count(1),obj_index);
                 end
+            end
+        %Otherwise background img
+        else
+            for j=1:10:30
                 
+                back_count = back_count + 1;
+
+                %Max number of bg img
+                %Debug mode
+                if  (debug && back_count > DEBUG_COUNT) || (back_count + total_count(2) > 10000)
+                   back_count = back_count - 1;
+                   continue;
+                end
+
                 %Avoid to crash at boundaries
                 frame_to_grab = obj_annotation(i,5) + j;
                 if frame_to_grab == 0
@@ -162,51 +185,11 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 elseif frame_to_grab > video_obj.NumberOfFrames;
                   frame_to_grab = video_obj.NumberOfFrames;
                 end
-                
-                %The bbox
-                x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
-                y1 = obj_annotation(i,2)*2;
-                width = obj_annotation(i,3);
-                height = obj_annotation(i,4);
-                
-                %grab the frame
+
+                %Making bg.txt and output imgs
                 frame = read(video_obj, frame_to_grab);
-                
-                %Show the frame
-                if show
-                    image(frame);
-                    rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
-                end
-                
-                %Making info.dat and output imgs
-                info_dat_output(fid,[x1 y1 width height],frame,active_or_not,fore_count + total_count(1),obj_index);
+                back_output(fid_bg, frame, back_count + total_count(2));
             end
-        %Otherwise background img
-        else
-            back_count = back_count + 1;
-            
-            %Max number of bg img
-            %Debug mode
-            if debug && back_count > DEBUG_COUNT
-               back_count = back_count - 1;
-               continue;
-            end
-            
-            if (back_count + total_count(2) > 10000)
-                continue;
-            end
-            
-            %Avoid to crash at boundaries
-            frame_to_grab = obj_annotation(i,5);
-            if frame_to_grab == 0
-              frame_to_grab = 1;
-            elseif frame_to_grab > video_obj.NumberOfFrames;
-              frame_to_grab = video_obj.NumberOfFrames;
-            end
-            
-            %Making bg.txt and output imgs
-            frame = read(video_obj, frame_to_grab);
-            back_output(fid_bg, frame, back_count + total_count(2));
         end
     end
     
@@ -218,19 +201,20 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
 end
 
 function back_output(fid,frame,count)
-
+    
     global OBJ_FOLDER;
 
     filename = sprintf('%simg/background_%05d.jpg',OBJ_FOLDER,count);
-    fprintf(fid, '%s\n',filename);
     imwrite(frame, filename);
+    filename = sprintf('img/background_%05d.jpg',count);
+    fprintf(fid, '%s\n',filename);
 
 end
 
 function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
     
     global OBJ_FOLDER LABEL;
-    
+
     label = LABEL';
     
     if active_or_not
@@ -239,7 +223,11 @@ function info_dat_output(fid,bbox,frame,active_or_not,count,obj_index)
         state = 'passive';
     end
     
-    filename = sprintf('%simg/%s_%s_%03d.jpg',OBJ_FOLDER,state,label{obj_index},count);
-    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
+    filename = sprintf('%simg/%s_%s_%05d.jpg',OBJ_FOLDER,state,label{obj_index},count);
     imwrite(frame, filename);
+    filename = sprintf('img/%s_%s_%05d.jpg',state,label{obj_index},count);
+    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));    
 end
+
+
+
