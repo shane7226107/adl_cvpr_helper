@@ -1,4 +1,5 @@
 import os
+import time
 
 #sub-routine used for appending log msgs
 def append_log(p,log):
@@ -16,13 +17,17 @@ all_subdirs = [name for name in os.listdir(".") if os.path.isdir(name)]
 print all_subdirs
 
 for subdir in all_subdirs:
-        print "running on ",subdir
-
+        print "\nProcessing folder:",subdir
+        
         #subdir
         f_out_id = open(subdir+'/log.txt','w')
         
         #log msgs
         log = []
+
+        #begin time
+        localtime = time.asctime( time.localtime(time.time()) )
+        log.append("Begin: " + localtime + "\n")
 
         #recreate the classifier folder
         cmd = 'rm -r ' + subdir + '/classifier'
@@ -41,6 +46,10 @@ for subdir in all_subdirs:
         cmd = 'opencv_traincascade -data '+ subdir + '/classifier -vec ' + subdir + '/samples.vec -bg ' + subdir + '/bg.txt -featureType LBP -precalcValBufSize 512 -precalcIdxBufSize 512'
         p = os.popen(cmd , 'r')
         log = append_log(p,log)
+
+        #end time
+        localtime = time.asctime( time.localtime(time.time()) )
+        log.append("\nEnd: "+localtime)
 
         #logging
         for line in log:
