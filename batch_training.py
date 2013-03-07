@@ -26,12 +26,14 @@ for subdir in all_subdirs:
         log = []
 
         #begin time
-        localtime = time.asctime( time.localtime(time.time()) )
+        begin_time = time.localtime(time.time())
+        localtime = time.asctime(begin_time)
         log.append("Begin: " + localtime + "\n")
 
         #recreate the classifier folder
         cmd = 'rm -r ' + subdir + '/classifier'
         p = os.popen(cmd , 'r')
+        time.sleep(0.5)
         cmd = 'mkdir ' + subdir + '/classifier'
         p = os.popen(cmd , 'r')
         
@@ -48,8 +50,13 @@ for subdir in all_subdirs:
         log = append_log(p,log)
 
         #end time
-        localtime = time.asctime( time.localtime(time.time()) )
+        end_time = time.localtime(time.time()) 
+        localtime = time.asctime(end_time)
         log.append("\nEnd: "+localtime)
+
+        time_spend = '\ntime spend: ' + str(end_time[3] - begin_time[3]) + ' hours ' + str(end_time[4] - begin_time[4]) + ' mins ' + str(end_time[5] - begin_time[5]) + ' secs '                                 
+        log.append(time_spend)
+
 
         #logging
         for line in log:
