@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 
 #sub-routine used for appending log msgs
 def append_log(p,log):
@@ -26,8 +27,8 @@ for subdir in all_subdirs:
         log = []
 
         #begin time
-        begin_time = time.localtime(time.time())
-        localtime = time.asctime(begin_time)
+        begin_time = time.time()
+        localtime = time.asctime(time.localtime(begin_time))
         log.append("Begin: " + localtime + "\n")
 
         #recreate the classifier folder
@@ -50,13 +51,14 @@ for subdir in all_subdirs:
         log = append_log(p,log)
 
         #end time
-        end_time = time.localtime(time.time()) 
-        localtime = time.asctime(end_time)
-        log.append("\nEnd: "+localtime)
+        end_time = time.time()
+        localtime = time.asctime(time.localtime(begin_time))
+        log.append("End: "+localtime)
 
-        time_spend = '\ntime spend: ' + str(end_time[3] - begin_time[3]) + ' hours ' + str(end_time[4] - begin_time[4]) + ' mins ' + str(end_time[5] - begin_time[5]) + ' secs '                                 
-        log.append(time_spend)
-
+        #time spent
+        time_spent = str(datetime.timedelta(seconds= (end_time-begin_time )))
+        print time_spent
+        log.append("\n\n\ntime spent: "+ time_spent)
 
         #logging
         for line in log:
