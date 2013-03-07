@@ -10,7 +10,13 @@ print all_subdirs
 for subdir in all_subdirs:
         #print subdir
         f_out_id = open(subdir+'/log.txt','w')
-
+        
+        #recreate the classifier folder
+        cmd = 'rm -r ' + subdir + '/classifier'
+        p = os.popen(cmd , 'r')
+        cmd = 'mkdir ' + subdir + '/classifier'
+        p = os.popen(cmd , 'r')
+        
         #p = os.popen('pwd','r')
         cmd = 'opencv_createsamples -info ' + subdir + '/info.dat -vec ' + subdir + '/samples.vec -bg ' + subdir +'/bg.txt -w 24 -h 24 -num 7000'
 
