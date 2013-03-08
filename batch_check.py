@@ -18,7 +18,7 @@ print all_subdirs
 for subdir in all_subdirs:
         print "\nProcessing folder:",subdir
         
-        if subdir == ".git":
+        if subdir == ".git" or subdir == "adl_cvpr_helper":
                 print "skipping", subdir
                 continue
 
