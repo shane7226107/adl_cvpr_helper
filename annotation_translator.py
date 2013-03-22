@@ -3,6 +3,7 @@ print "\n\nProgram Begins\n\n"
 index = 20
 filepath = '../ADL_annotations/object_annotation/object_annot_P_' + str(index).zfill(2) + '.txt'
 filepath_out = '../ADL_annotations/object_annotation/object_annot_P_' + str(index).zfill(2) + '_translated.txt'
+#filepath_out = '../ADL_annotations/object_annotation/with_obj_index/object_annot_P_' + str(index).zfill(2) + '_translated_with_obj_index.txt'
 print filepath
 f_in_id = open(filepath,'r')
 f_out_id = open(filepath_out,'w')

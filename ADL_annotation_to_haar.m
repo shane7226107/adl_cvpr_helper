@@ -151,8 +151,8 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                     %The bbox
                     x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
                     y1 = obj_annotation(i,2)*2;
-                    width = obj_annotation(i,3);
-                    height = obj_annotation(i,4);
+                    width = obj_annotation(i,3)*2 - x1;
+                    height = obj_annotation(i,4)*2 - y1;
 
                     %grab the frame
                     frame = read(video_obj, frame_to_grab);
