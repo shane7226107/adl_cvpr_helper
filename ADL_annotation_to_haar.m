@@ -92,7 +92,7 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
     end
     
     %Global variables here
-    global SAMPLE_FREQ DEBUG_COUNT OBJ_FOLDER
+    global DEBUG_COUNT OBJ_FOLDER
 
     fprintf('grabbing img and output info.dat...\n');
     
@@ -130,42 +130,39 @@ function total_count = grab_info_and_img(video_index, obj_annotation , obj_index
                 % fprintf('repeating %d/%d\n',r,repeat);
                 % Grab inter frames in each interval (out of 30 frames)
                 % Setup frequency param here
-                for j=SAMPLE_FREQ
+                fore_count = fore_count + 1;
 
-                    fore_count = fore_count + 1;
-
-                    %Debug mode
-                    if debug && fore_count > DEBUG_COUNT
-                        fore_count = fore_count - 1;
-                        break;
-                    end
-
-                    %Avoid to crash at boundaries
-                    frame_to_grab = obj_annotation(i,5) + j;
-                    if frame_to_grab == 0
-                      frame_to_grab = 1;
-                    elseif frame_to_grab > video_obj.NumberOfFrames;
-                      frame_to_grab = video_obj.NumberOfFrames;
-                    end
-
-                    %The bbox
-                    x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
-                    y1 = obj_annotation(i,2)*2;
-                    width = obj_annotation(i,3)*2 - x1;
-                    height = obj_annotation(i,4)*2 - y1;
-
-                    %grab the frame
-                    frame = read(video_obj, frame_to_grab);
-
-                    %Show the frame
-                    if show
-                        image(frame);
-                        rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
-                    end
-
-                    %Making info.dat and output imgs
-                    info_dat_output(fid,[x1 y1 width height],frame,active_or_not,fore_count + total_count(1),obj_index);
+                %Debug mode
+                if debug && fore_count > DEBUG_COUNT
+                    fore_count = fore_count - 1;
+                    break;
                 end
+
+                %Avoid to crash at boundaries
+                frame_to_grab = obj_annotation(i,5);
+                if frame_to_grab == 0
+                  frame_to_grab = 1;
+                elseif frame_to_grab > video_obj.NumberOfFrames;
+                  frame_to_grab = video_obj.NumberOfFrames;
+                end
+
+                %The bbox
+                x1 = obj_annotation(i,1)*2; %Have to multiply by 2 here(WTF!)
+                y1 = obj_annotation(i,2)*2;
+                width = obj_annotation(i,3)*2 - x1;
+                height = obj_annotation(i,4)*2 - y1;
+
+                %grab the frame
+                frame = read(video_obj, frame_to_grab);
+
+                %Show the frame
+                if show
+                    image(frame);
+                    rectangle('Position',[x1 y1 width height], 'LineWidth',2, 'EdgeColor','b');
+                end
+
+                %Making info.dat and output imgs
+                info_dat_output(fid,[x1 y1 width height],frame,active_or_not,fore_count + total_count(1),obj_index);
             end
         %Otherwise background img
         else

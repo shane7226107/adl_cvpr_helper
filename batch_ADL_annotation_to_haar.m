@@ -46,9 +46,7 @@ function batch_ADL_annotation_to_haar(video_index_array ,obj_index, active_or_no
     end
     
     %Global variables
-    global SAMPLE_FREQ DEBUG_COUNT LABEL
-    %The freq to grab frames in each interval(30 frames)
-    SAMPLE_FREQ = 0:1:30;
+    global DEBUG_COUNT LABEL
     %Maximum number before breaking
     DEBUG_COUNT = 2;
     %obj labels
@@ -145,7 +143,7 @@ end
 
 function repeat = total_annotation_counter(video_index_array,obj_index, active_or_not)
     
-    global SAMPLE_FREQ LABEL
+    global LABEL
     
     if active_or_not == 1
         state = 'active';
@@ -170,8 +168,8 @@ function repeat = total_annotation_counter(video_index_array,obj_index, active_o
     
     fprintf('Number of annotations of required obj_%d_%s_%s is %d\n',obj_index,state,label{obj_index},annotation_counter);
     if annotation_counter > 0 
-        repeat = ceil(7100/(size(SAMPLE_FREQ,2)* (annotation_counter)));        
-        fprintf('Number of repeats needed:%d, To make %d samples\n',repeat,repeat*(size(SAMPLE_FREQ,2)* (annotation_counter)));    
+        repeat = ceil(7100/(annotation_counter)));        
+        fprintf('Number of repeats needed:%d, To make %d samples\n',repeat,repeat* (annotation_counter)));    
     else
         repeat = 1;
         fprintf('Number of repeats is 1 because there is no such obj in this video set\n');    
