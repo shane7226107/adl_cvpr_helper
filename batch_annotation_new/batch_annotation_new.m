@@ -12,7 +12,7 @@ function batch_annotation_new(video_list)
         video_obj = video_load(video);
         
         %Load annotation
-        index_to_str = num2str(video, '%02d');        
+        %index_to_str = num2str(video, '%02d');        
         obj_anno = obj_annotation_read(video);
         %Usage:
         %obj_anno{col}(row)
@@ -42,8 +42,19 @@ function batch_annotation_new(video_list)
             
             %Output
             info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
-            
             obj_counter_positive(obj_index) = obj_counter_positive(obj_index) + 1;
+            
+            
+            %Background
+            for other_obj=1:size(obj_list,1)
+                if other_obj == obj_index
+                    continue;
+                end
+                %Output
+                
+                bg_output(frame,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
+                obj_counter_background(other_obj) = obj_counter_background(other_obj) +1;
+            end
         end
         
     end
@@ -117,6 +128,21 @@ function info_dat_output(bbox,frame,obj_index,obj_name,count)
     imwrite(frame, filename);
     filename = sprintf('img/%s_%05d.jpg',obj_name,count);
     fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
+    
+    fclose all;
+end
+
+function bg_output(frame,obj_index,obj_name,count)
+    
+    index_to_str = num2str(obj_index, '%02d');
+    
+    fid = fopen(['output/' index_to_str '_' obj_name '/bg.txt'],'a');
+   
+    obj_folder = ['output/' index_to_str '_' obj_name];
+    filename = sprintf('%s/img/background_%05d.jpg',obj_folder,count);
+    imwrite(frame, filename);
+    filename = sprintf('img/background_%05d.jpg',count);
+    fprintf(fid, '%s\n',filename);
     
     fclose all;
 end
