@@ -1,7 +1,7 @@
 function batch_annotation_new(video_list)
     
     %Recreate the obj folders & open the fIDs
-    [obj_list ,fid_pos]= recreate_obj_folder();
+    obj_list = recreate_obj_folder();
     
     obj_counter_positive = zeros(size(obj_list));
     obj_counter_background = zeros(size(obj_list));
@@ -20,26 +20,30 @@ function batch_annotation_new(video_list)
         
         %Run through each line
         for line=1:size(obj_anno{1},1)
+                    
             x = obj_anno{1}(line)*2;
             y = obj_anno{2}(line)*2;
             width = obj_anno{3}(line)*2 - x;
             height = obj_anno{4}(line)*2 - y;
-            frame = obj_anno{5}(line);
-            if frame==0
-                frame = 1;
+            frame_index = obj_anno{5}(line);
+            if frame_index==0
+                frame_index = 1;
             end
             obj_index = obj_anno{7}(line);
             obj_name = char(obj_anno{8}(line));
             
-            fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame,obj_index,obj_name);
+            fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame_index,obj_index,obj_name);
             
             %Positive
             %grab the frame
-            frame = read(video_obj, frame);
+            frame = read(video_obj, frame_index);
             image(frame);
             rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
             
+            %Output
+            info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
             
+            obj_counter_positive(obj_index) = obj_counter_positive(obj_index) + 1;
         end
         
     end
@@ -63,8 +67,8 @@ function obj_annotation = obj_annotation_read(index)
     fprintf('finished reading annotation file\n');
 end
 
-function [return_obj_list fids_pos] = recreate_obj_folder()
-    fprintf('recreate the obj folders by obj_list.txt');
+function return_obj_list = recreate_obj_folder()
+    fprintf('recreate the obj folders by obj_list.txt\n');
     
     system(['rm -r ' 'output']);
     system(['mkdir ' 'output']);
@@ -73,13 +77,11 @@ function [return_obj_list fids_pos] = recreate_obj_folder()
     fid = fopen(filename);
     
     obj_list = textscan(fid, '%d : %s');
-    fids_pos = [];
     for i=1:size(obj_list{1})
         index_to_str = num2str(i, '%02d');
         S = char(obj_list{2}(i));
         system(['mkdir ' 'output/' index_to_str '_' S]);
-        tmp = fopen(['output/' index_to_str '_' S '/info.dat'],'w');
-        fids_pos = [fids_pos tmp];
+        system(['mkdir ' 'output/' index_to_str '_' S '/img']);
     end
     
     return_obj_list = obj_list{2};
@@ -105,10 +107,16 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function info_dat_output(fid,bbox,frame,active_or_not,count,obj_)
+function info_dat_output(bbox,frame,obj_index,obj_name,count)    
+    index_to_str = num2str(obj_index, '%02d');
     
-    filename = sprintf('%simg/%s_%s_%05d.jpg',OBJ_FOLDER,state,label{obj_index},count);
+    fid = fopen(['output/' index_to_str '_' obj_name '/info.dat'],'a');
+    
+    obj_folder = ['output/' index_to_str '_' obj_name];
+    filename = sprintf('%s/img/%s_%05d.jpg',obj_folder,obj_name,count);
     imwrite(frame, filename);
-    filename = sprintf('img/%s_%s_%05d.jpg',state,label{obj_index},count);
-    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));    
+    filename = sprintf('img/%s_%05d.jpg',obj_name,count);
+    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));
+    
+    fclose all;
 end

@@ -21,6 +21,7 @@ for files in os.listdir("."):
 
         while True:
                 line = f_in_id.readline().replace('\n','')
+                line = f_in_id.readline().replace('/','_')
 
                 if len(line) == 0:break
 
