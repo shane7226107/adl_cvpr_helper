@@ -1,7 +1,7 @@
 function batch_annotation_new(video_list)
     
-    %Recreate the obj folders
-    obj_list = recreate_obj_folder();
+    %Recreate the obj folders & open the fIDs
+    [obj_list ,fid_pos]= recreate_obj_folder();
     
     obj_counter_positive = zeros(size(obj_list));
     obj_counter_background = zeros(size(obj_list));
@@ -44,6 +44,7 @@ function batch_annotation_new(video_list)
         
     end
     
+    fclose all;
     close all;
 end
 
@@ -62,7 +63,7 @@ function obj_annotation = obj_annotation_read(index)
     fprintf('finished reading annotation file\n');
 end
 
-function return_obj_list = recreate_obj_folder()
+function [return_obj_list fids_pos] = recreate_obj_folder()
     fprintf('recreate the obj folders by obj_list.txt');
     
     system(['rm -r ' 'output']);
@@ -72,15 +73,13 @@ function return_obj_list = recreate_obj_folder()
     fid = fopen(filename);
     
     obj_list = textscan(fid, '%d : %s');
-    
-    save('obj_list.mat','obj_list');
-    
-    %obj_list{2}(3)
-    
+    fids_pos = [];
     for i=1:size(obj_list{1})
         index_to_str = num2str(i, '%02d');
         S = char(obj_list{2}(i));
         system(['mkdir ' 'output/' index_to_str '_' S]);
+        tmp = fopen(['output/' index_to_str '_' S '/info.dat'],'w');
+        fids_pos = [fids_pos tmp];
     end
     
     return_obj_list = obj_list{2};
@@ -106,13 +105,7 @@ function video_obj = video_load(index)
     video_obj = xyloObj;
 end
 
-function info_dat_output(fid,bbox,frame,active_or_not,count,obj_name)
-    
-    if active_or_not
-        state = 'active';
-    else
-        state = 'passive';
-    end
+function info_dat_output(fid,bbox,frame,active_or_not,count,obj_)
     
     filename = sprintf('%simg/%s_%s_%05d.jpg',OBJ_FOLDER,state,label{obj_index},count);
     imwrite(frame, filename);
