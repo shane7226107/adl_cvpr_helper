@@ -1,15 +1,18 @@
 function batch_annotation_new(video_list)
     
     %Recreate the obj folders
-    num_objs = recreate_obj_folder()
+    obj_list = recreate_obj_folder();
     
-    obj_counter_positive = zeros(1,num_objs);
-    obj_counter_background = zeros(1,num_objs);
+    obj_counter_positive = zeros(size(obj_list));
+    obj_counter_background = zeros(size(obj_list));
     
     for video=video_list
         
-        index_to_str = num2str(video, '%02d');
+        %Load video
+        video_obj = video_load(video);
         
+        %Load annotation
+        index_to_str = num2str(video, '%02d');        
         obj_anno = obj_annotation_read(video);
         %Usage:
         %obj_anno{col}(row)
@@ -22,16 +25,26 @@ function batch_annotation_new(video_list)
             width = obj_anno{3}(line)*2 - x;
             height = obj_anno{4}(line)*2 - y;
             frame = obj_anno{5}(line);
+            if frame==0
+                frame = 1;
+            end
             obj_index = obj_anno{7}(line);
             obj_name = char(obj_anno{8}(line));
             
             fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame,obj_index,obj_name);
+            
+            %Positive
+            %grab the frame
+            frame = read(video_obj, frame);
+            image(frame);
+            rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
+            
+            
         end
         
-        
-        save(['P_' index_to_str '_obj_anno.mat'],'obj_anno');
     end
     
+    close all;
 end
 
 function obj_annotation = obj_annotation_read(index)    
@@ -49,7 +62,7 @@ function obj_annotation = obj_annotation_read(index)
     fprintf('finished reading annotation file\n');
 end
 
-function num_of_objs = recreate_obj_folder()
+function return_obj_list = recreate_obj_folder()
     fprintf('recreate the obj folders by obj_list.txt');
     
     system(['rm -r ' 'output']);
@@ -70,5 +83,39 @@ function num_of_objs = recreate_obj_folder()
         system(['mkdir ' 'output/' index_to_str '_' S]);
     end
     
-    num_of_objs = size(obj_list{1},1);
+    return_obj_list = obj_list{2};
+end
+
+function video_obj = video_load(index)
+    fprintf('loading video...\n');
+    index_to_str = num2str(index, '%02d');
+    
+    %Machine depandent file format
+    if strcmp('GLNXA64',computer)
+        %Run in Ubuntu
+        filename = ['../ADL_videos/raw/AVI/P_' index_to_str '.avi'];
+    else
+        %Run in Mac
+        filename = ['../../ADL_videos/P_' index_to_str '.MP4'];
+    end
+    
+    
+    fprintf('%s\n',filename);
+    xyloObj = VideoReader(filename);
+
+    video_obj = xyloObj;
+end
+
+function info_dat_output(fid,bbox,frame,active_or_not,count,obj_name)
+    
+    if active_or_not
+        state = 'active';
+    else
+        state = 'passive';
+    end
+    
+    filename = sprintf('%simg/%s_%s_%05d.jpg',OBJ_FOLDER,state,label{obj_index},count);
+    imwrite(frame, filename);
+    filename = sprintf('img/%s_%s_%05d.jpg',state,label{obj_index},count);
+    fprintf(fid, '%s 1 %d %d %d %d\n',filename,bbox(1,1),bbox(1,2),bbox(1,3),bbox(1,4));    
 end
