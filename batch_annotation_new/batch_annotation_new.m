@@ -18,7 +18,12 @@ function batch_annotation_new(video_list)
         %obj_anno{col}(row)
         %obj_anno{8}(1)
         
+        %Record the frame where this obj have shown
+        %obj_record_positive(line,obj)
+        obj_record_positive = zeros(size(obj_anno{1},1),size(obj_list,1));
+        
         %Run through each line
+        %Make positive annotation
         for line=1:size(obj_anno{1},1)
                     
             x = obj_anno{1}(line)*2;
@@ -32,6 +37,7 @@ function batch_annotation_new(video_list)
             obj_index = obj_anno{7}(line);
             obj_name = char(obj_anno{8}(line));
             
+            fprintf('video:%d positive line:%d/%d\n',video,line,size(obj_anno{1},1));
             fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame_index,obj_index,obj_name);
             
             %Positive
@@ -43,20 +49,35 @@ function batch_annotation_new(video_list)
             %Output
             info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
             obj_counter_positive(obj_index) = obj_counter_positive(obj_index) + 1;
+            obj_record_positive(line,obj_index) = frame_index;
+        end
+        
+        %Run through each line again
+        %Make background annotation
+        for line=1:size(obj_anno{1},1)
+            frame_index = obj_anno{5}(line);
+            obj_index = obj_anno{7}(line);
             
+            fprintf('video:%d background line:%d/%d\n',video,line,size(obj_anno{1},1));
             
-            %Background
             for other_obj=1:size(obj_list,1)
+                
+                %skipping the same obj
                 if other_obj == obj_index
                     continue;
                 end
-                %Output
                 
-                bg_output(frame,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
+                %skipping the other objs shown in the same frame
+                if find(obj_record_positive(:,other_obj) == frame_index, 1)
+                    continue;
+                end
+                
+                %make bg output
+                bg_output(frame_index,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
                 obj_counter_background(other_obj) = obj_counter_background(other_obj) +1;
             end
+            
         end
-        
     end
     
     fclose all;
@@ -105,7 +126,7 @@ function video_obj = video_load(index)
     %Machine depandent file format
     if strcmp('GLNXA64',computer)
         %Run in Ubuntu
-        filename = ['../ADL_videos/raw/AVI/P_' index_to_str '.avi'];
+        filename = ['../../ADL_videos/raw/AVI/P_' index_to_str '.avi'];
     else
         %Run in Mac
         filename = ['../../ADL_videos/P_' index_to_str '.MP4'];
