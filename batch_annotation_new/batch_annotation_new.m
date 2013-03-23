@@ -1,5 +1,8 @@
 function batch_annotation_new(video_list)
     
+    info_dat_num = 12000;
+    bg_txt_num = 12000;
+
     %Recreate the obj folders & open the fIDs
     obj_list = recreate_obj_folder();
     
@@ -40,6 +43,12 @@ function batch_annotation_new(video_list)
             fprintf('video:%d positive line:%d/%d\n',video,line,size(obj_anno{1},1));
             fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame_index,obj_index,obj_name);
             
+            %skipping if the training data is enough
+            if obj_counter_positive(obj_index) > info_dat_num
+                fprintf('skkiping because the number is enough\n');
+                continue;
+            end
+            
             %Positive
             %grab the frame
             frame = read(video_obj, frame_index);
@@ -59,6 +68,12 @@ function batch_annotation_new(video_list)
             obj_index = obj_anno{7}(line);
             
             fprintf('video:%d background line:%d/%d\n',video,line,size(obj_anno{1},1));
+            
+            %skipping if the training data is enough
+            if obj_counter_background(obj_index) > bg_txt_num
+                fprintf('skkiping because the number is enough\n');
+                continue;
+            end
             
             for other_obj=1:size(obj_list,1)
                 
