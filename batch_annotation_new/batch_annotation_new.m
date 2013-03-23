@@ -24,33 +24,33 @@ function batch_annotation_new(video_list)
         
         %Run through each line
         %Make positive annotation
-        for line=1:size(obj_anno{1},1)
-                    
-            x = obj_anno{1}(line)*2;
-            y = obj_anno{2}(line)*2;
-            width = obj_anno{3}(line)*2 - x;
-            height = obj_anno{4}(line)*2 - y;
-            frame_index = obj_anno{5}(line);
-            if frame_index==0
-                frame_index = 1;
-            end
-            obj_index = obj_anno{7}(line);
-            obj_name = char(obj_anno{8}(line));
-            
-            fprintf('video:%d positive line:%d/%d\n',video,line,size(obj_anno{1},1));
-            fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame_index,obj_index,obj_name);
-            
-            %Positive
-            %grab the frame
-            frame = read(video_obj, frame_index);
-            image(frame);
-            rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
-            
-            %Output
-            info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
-            obj_counter_positive(obj_index) = obj_counter_positive(obj_index) + 1;
-            obj_record_positive(line,obj_index) = frame_index;
-        end
+%         for line=1:size(obj_anno{1},1)
+%                     
+%             x = obj_anno{1}(line)*2;
+%             y = obj_anno{2}(line)*2;
+%             width = obj_anno{3}(line)*2 - x;
+%             height = obj_anno{4}(line)*2 - y;
+%             frame_index = obj_anno{5}(line);
+%             if frame_index==0
+%                 frame_index = 1;
+%             end
+%             obj_index = obj_anno{7}(line);
+%             obj_name = char(obj_anno{8}(line));
+%             
+%             fprintf('video:%d positive line:%d/%d\n',video,line,size(obj_anno{1},1));
+%             fprintf('%d %d %d %d %d %d %s\n',x,y,width,height,frame_index,obj_index,obj_name);
+%             
+%             %Positive
+%             %grab the frame
+%             frame = read(video_obj, frame_index);
+%             image(frame);
+%             rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
+%             
+%             %Output
+%             info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
+%             obj_counter_positive(obj_index) = obj_counter_positive(obj_index) + 1;
+%             obj_record_positive(line,obj_index) = frame_index;
+%         end
         
         %Run through each line again
         %Make background annotation
@@ -72,8 +72,11 @@ function batch_annotation_new(video_list)
                     continue;
                 end
                 
+                %grab the frame
+                frame = read(video_obj, frame_index);
+                
                 %make bg output
-                bg_output(frame_index,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
+                bg_output(frame,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
                 obj_counter_background(other_obj) = obj_counter_background(other_obj) +1;
             end
             
