@@ -47,8 +47,10 @@ for subdir in all_subdirs:
 
         print 'lines:',len(lines)
 
-        repeat = math.ceil(float(info_dat_num)/float(len(lines)))
-        print 'repeat:' , repeat
+        if len(lines) >= info_dat_num:
+                repeat = 0
+        else:
+                repeat = math.ceil(float(info_dat_num)/float(len(lines)))
 
         f_in_id.close()
 
@@ -76,7 +78,10 @@ for subdir in all_subdirs:
 
         print 'lines:',len(lines)
 
-        repeat = math.ceil(float(info_dat_num)/float(len(lines)))
+        if len(lines) >= info_dat_num:
+                repeat = 0
+        else:
+                repeat = math.ceil(float(info_dat_num)/float(len(lines)))
         print 'repeat:' , repeat
 
         f_in_id.close()
