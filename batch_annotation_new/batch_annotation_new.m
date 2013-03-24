@@ -21,6 +21,9 @@ function batch_annotation_new(video_list)
         %obj_anno{col}(row)
         %obj_anno{8}(1)
         
+        %Record the bg created by this video
+        obj_counter_background_in_this_video = zeros(size(obj_list));
+        
         %Record the frame where this obj have shown
         %obj_record_positive(line,obj)
         obj_record_positive = zeros(size(obj_anno{1},1),size(obj_list,1));
@@ -82,8 +85,13 @@ function batch_annotation_new(video_list)
                     continue;
                 end
                 
-                %skipping the other objs shown in the same frame
+                %skipping the other objs shown simultaneosly in the same frame
                 if find(obj_record_positive(:,other_obj) == frame_index, 1)
+                    continue;
+                end
+                
+                %skipping when the bg create by this obj in this video is enough
+                if obj_counter_background_in_this_video(other_obj) > 30
                     continue;
                 end
                 
@@ -93,6 +101,7 @@ function batch_annotation_new(video_list)
                 %make bg output
                 bg_output(frame,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
                 obj_counter_background(other_obj) = obj_counter_background(other_obj) +1;
+                obj_counter_background_in_this_video(other_obj) = obj_counter_background_in_this_video(other_obj) +1;
             end
             
         end
