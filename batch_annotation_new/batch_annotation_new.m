@@ -78,6 +78,12 @@ function batch_annotation_new(video_list)
                 continue;
             end
             
+            %skipping when the bg create by this obj in this video is enough
+            if obj_counter_background_in_this_video(obj_index) > 30
+                continue;
+            end
+            
+            %put this obj into other objs as bg data
             for other_obj=1:size(obj_list,1)
                 
                 %skipping the same obj
@@ -90,19 +96,15 @@ function batch_annotation_new(video_list)
                     continue;
                 end
                 
-                %skipping when the bg create by this obj in this video is enough
-                if obj_counter_background_in_this_video(other_obj) > 30
-                    continue;
-                end
-                
                 %grab the frame
                 frame = read(video_obj, frame_index);
                 
                 %make bg output
                 bg_output(frame,other_obj,char(obj_list(other_obj)),obj_counter_background(other_obj));
                 obj_counter_background(other_obj) = obj_counter_background(other_obj) +1;
-                obj_counter_background_in_this_video(other_obj) = obj_counter_background_in_this_video(other_obj) +1;
             end
+            
+            obj_counter_background_in_this_video(other_obj) = obj_counter_background_in_this_video(other_obj) +1;
             
         end
     end
