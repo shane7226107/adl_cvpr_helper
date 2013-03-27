@@ -1,15 +1,31 @@
 function batch_annotation_new(video_list)
     
-    info_dat_num = 12000;
-    bg_txt_num = 12000;
-
-    %Recreate the obj folders & open the fIDs
-    obj_list = recreate_obj_folder();
+    info_dat_num = 10000;
+    bg_txt_num = 10000;
     
-    obj_counter_positive = zeros(size(obj_list));
-    obj_counter_background = zeros(size(obj_list));
+    if exist('record.mat','file') > 0 && exist('obj_counter_positive.mat','file') > 0 && exist('obj_counter_background.mat','file') > 0 && exist('obj_list.mat','file') > 0
+        load('record.mat');
+        load('obj_list.mat');
+        load('obj_counter_positive.mat');
+        load('obj_counter_background.mat');
+    else
+        %Recreate the obj folders & open the fIDs
+        obj_list = recreate_obj_folder();
+        save('obj_list.mat','obj_list');
+        record = [];
+        obj_counter_positive = zeros(size(obj_list));
+        obj_counter_background = zeros(size(obj_list));
+    end
     
     for video=video_list
+        
+        record
+        
+        %Skipped those already processed
+        if ~isempty(find(record==video, 1))
+            fprintf(' video : %d skipped\n',video);
+            continue;
+        end
         
         %Load video
         video_obj = video_load(video);
@@ -55,8 +71,8 @@ function batch_annotation_new(video_list)
             %Positive
             %grab the frame
             frame = read(video_obj, frame_index);
-            image(frame);
-            rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
+            %image(frame);
+            %rectangle('Position',[x y width height], 'LineWidth',2, 'EdgeColor','b');
             
             %Output
             info_dat_output([x y width height],frame,obj_index,obj_name,obj_counter_positive(obj_index));
@@ -107,6 +123,12 @@ function batch_annotation_new(video_list)
             obj_counter_background_in_this_video(other_obj) = obj_counter_background_in_this_video(other_obj) +1;
             
         end
+        
+        record = [record video];
+        save('record.mat','record');
+        save('obj_counter_positive.mat','obj_counter_positive');
+        save('obj_counter_background.mat','obj_counter_background');
+        
     end
     
     fclose all;
