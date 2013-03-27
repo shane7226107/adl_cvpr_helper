@@ -30,14 +30,14 @@ obj_index_dict = {
               'mop':'46'
             }
 
-os.chdir("ADL_annotations/object_annotation/translated")
+os.chdir("../ADL_annotations/object_annotation/translated")
 for files in os.listdir("."):
     if files.endswith(".txt"):
         print files
         #read file
         f_in_id = open(files,'r')
 
-        f_out_id = open('../translated_with_obj_name/'+files.replace('.txt','')+'_with_obj_name.txt','w')
+        f_out_id = open('../translated_2/'+files,'w')
 
         while True:
                 line = f_in_id.readline().replace('\n','')
@@ -63,11 +63,11 @@ for files in os.listdir("."):
 
                 for x in range(len(line_split)-1):
                     f_out_id.write(line_split[x] + ' ')
-                f_out_id.write(obj_name)
+                #f_out_id.write(obj_name)
                 f_out_id.write('\n') 
         f_out_id.close()
         f_in_id.close()
-
+'''
 f_list_id = open('../translated_with_obj_name/obj_list.txt','w')
 
 for i in range(len(obj_index_dict)):
@@ -80,6 +80,6 @@ for i in range(len(obj_index_dict)):
 
 
 f_list_id.close();
-
+'''
 
 print '\n\nDone.'

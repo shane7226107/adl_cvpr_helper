@@ -42,7 +42,7 @@ function action_label_for_crf()
     save('action_table.mat','action_table');
     
     %Load obj annotation for each video
-    dir_name = '../ADL_annotations/object_annotation/translated';
+    dir_name = '../ADL_annotations/object_annotation/translated_2';
     listing = dir(dir_name);
     
     for i=1:size(listing,1)
@@ -51,6 +51,9 @@ function action_label_for_crf()
         end
         
         fprintf('\n=============\n processing : %s\n',listing(i).name);
+        obj_annotation = obj_annotation_read([dir_name '/' listing(i).name]);
+        
+        %builid the action table
         
     end
     
@@ -63,14 +66,24 @@ function action_label_for_crf()
   
 end
 
-function obj_annotation = file_read(name)
+function obj_annotation = obj_annotation_read(name)    
+    
+    fid = fopen(name);
+    
+    [A ,count] = fscanf(fid, '%d %d %d %d %d %d %d',[7 , inf]);
+    obj_annotation = A';
+    
+    fclose all;
+end
+
+function action_annotation = file_read(name)
     
     fid = fopen(name);
     
     %00:08 00:33 14
     [A ,count] = fscanf(fid, '%d:%d %d:%d %d',[5 , inf]);
     
-    obj_annotation = A';
+    action_annotation = A';
     
     %fclose all;
 end
