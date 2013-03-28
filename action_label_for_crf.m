@@ -129,22 +129,59 @@ function action_label_for_crf()
             s_end = action_table(i,4,action);
             video_index = action_table(i,5,action);
             %Approximation here..
-            start_frame = round(m_start*60*29.97 + s_start*29.97);
-            end_frame = round(m_end*60*29.97 + s_end*29.97);
+            fps = 30;
+            start_frame = round(m_start*60*fps + s_start*fps);
+            end_frame = round(m_end*60*fps + s_end*fps);
             
             fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
             
             action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
             
+%             If min1 ? max2 or min2 ? max1 then overlap is 0
+%             If min1 ? min2 then overlap is max1 - min2
+%             Otherwise overlap is max2 - min1
+
+            overlap_tolerance = 0.5;
+
             for obj=1:89
                 for j=1:obj_counter(1,obj)
-                    if obj_table(j,3,obj) == video_index
-                        %fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);
-                        %fprintf('obj %d shown in video %d%d\n',obj,video_index);
-                        if abs(start_frame-obj_table(j,1,obj)) < 30 && abs(end_frame-obj_table(j,2,obj))
-                            fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);
+                    if obj_table(j,3,obj)
+                        
+                        %calc overlap
+                        min1 = start_frame;
+                        max1 = end_frame;
+                        min2 = obj_table(j,1,obj);
+                        max2 = obj_table(j,2,obj);
+                        
+                        if min1 >= max2 || min2 >= max1
+                            overlap = 0;
+                        elseif min1 <= min2
+                            if max2 <=max1
+                                overlap = max2-min2;
+                            else
+                                overlap = max1-min2;
+                            end                            
+                        else
+                            if max2 <= max1
+                                overlap = max2-min1;
+                            else
+                                overlap = max1-min1;
+                            end
                         end
+                        
+                        %normalize
+                        overlap = overlap/(max1-min1)
+                        
+                        if 0
+                            fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);
+                            action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+                        else
+                            action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+                        end
+                                             
+                    else
+                        action_observation_table(action_observation_counter(1,action),obj,action) = 0;
                     end
                 end
             end
