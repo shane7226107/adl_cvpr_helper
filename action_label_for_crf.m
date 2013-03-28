@@ -7,6 +7,10 @@ function action_label_for_crf()
     action_counter = zeros(1,32);
     video_counter = 0;
     
+    %(obj_annotation , obj duration , video_index)
+    obj_table = ones(500,2,89)*-1;
+    obj_counter = zeros(1,89);
+    
     %Load action annotation for each video
     for i=1:size(listing,1)
         
@@ -45,25 +49,63 @@ function action_label_for_crf()
     dir_name = '../ADL_annotations/object_annotation/translated_2';
     listing = dir(dir_name);
     
+    
+    
     for i=1:size(listing,1)
         if(strcmp(listing(i).name,'.') || strcmp(listing(i).name,'..') || strcmp(listing(i).name,'.DS_Store'))
             continue;
         end
         
         fprintf('\n=============\n processing : %s\n',listing(i).name);
-        obj_annotation = obj_annotation_read([dir_name '/' listing(i).name]);
+        obj_annotation = obj_annotation_read([dir_name '/' listing(i).name]);        
         
-        %builid the action table
+        last_obj = -1;
+        last_frame = -1;
         
-    end
+        for j=1:size(obj_annotation,1)
+            obj_index = obj_annotation(j,7);
+            frame_index = obj_annotation(j,5);
+            x1 = obj_annotation(j,1)*2; %Have to multiply by 2 here(WTF!)
+            y1 = obj_annotation(j,2)*2;
+            width = obj_annotation(j,3)*2 - x1;
+            height = obj_annotation(j,4)*2 - y1;
+            %fprintf('%d %d %d %d %d %d\n',x1,y1,width,height,frame_index,obj_index);
+            
+            if obj_index == last_obj
+                last_frame = frame_index;
+            else
+                obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
+                if last_obj == -1
+                    %The beginning of file
+                    obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
+                    %For those with only 1 line annotation
+                    obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
+                    
+                    last_obj = obj_index;
+                else
+                    obj_table(obj_counter(1,last_obj),2,last_obj) = last_frame;
+                    
+                    obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
+                    %For those with only 1 line annotation
+                    obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
+                    
+                    last_obj = obj_index;
+                end
+            end
+        end
+        
+    end    
     
-    
-    
-    
+    save('obj_table.mat','obj_table');
     
     %By using the action table and obj table ,build the action labels with
     %observations
-  
+    %(action_annotation , action time , video_index)    
+    %(obj_annotation , obj duration , video_index)
+    % stageful action [9, 12, 13, 16]
+    action_observation_table = ones(100,89,32)*-1;
+    
+    
 end
 
 function obj_annotation = obj_annotation_read(name)    
