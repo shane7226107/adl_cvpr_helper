@@ -126,7 +126,8 @@ end
     %(action_annotation , action time , video_index)    
     %(obj_annotation , obj duration , video_index)
     stageful_action  = [9, 12, 13, 16];
-    action_observation_table = ones(100,89,32)*-1;
+    % the 90th feature is the video index where the action shown
+    action_observation_table = ones(100,90,32)*-1;
     action_observation_counter = zeros(1,32);
     
     for action = 1:32
@@ -166,6 +167,7 @@ end
                         if obj_frame_start >= start_frame && obj_frame_start <= end_frame
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+                            action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
                             break;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
