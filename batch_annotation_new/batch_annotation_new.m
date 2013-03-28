@@ -53,7 +53,7 @@ function batch_annotation_new(video_list)
             width = obj_anno{3}(line)*2 - x;
             height = obj_anno{4}(line)*2 - y;
             frame_index = obj_anno{5}(line);
-            if frame_index==0
+            if frame_index== 0
                 frame_index = 1;
             end
             obj_index = obj_anno{7}(line);
@@ -88,12 +88,6 @@ function batch_annotation_new(video_list)
             
             fprintf('video:%d background line:%d/%d\n',video,line,size(obj_anno{1},1));
             
-            %skipping if the training data is enough
-            if obj_counter_background(obj_index) > bg_txt_num
-                fprintf('skkiping because the number is enough\n');
-                continue;
-            end
-            
             %skipping when the bg create by this obj in this video is enough
             if obj_counter_background_in_this_video(obj_index) > 30
                 continue;
@@ -109,6 +103,12 @@ function batch_annotation_new(video_list)
                 
                 %skipping the other objs shown simultaneosly in the same frame
                 if find(obj_record_positive(:,other_obj) == frame_index, 1)
+                    continue;
+                end
+                
+                 %skipping if the training data is enough for the other obj
+                if obj_counter_background(other_obj) > bg_txt_num
+                    fprintf('skkiping because the number is enough\n');
                     continue;
                 end
                 
@@ -128,6 +128,8 @@ function batch_annotation_new(video_list)
         save('record.mat','record');
         save('obj_counter_positive.mat','obj_counter_positive');
         save('obj_counter_background.mat','obj_counter_background');
+        
+        clear video_obj;
         
     end
     
