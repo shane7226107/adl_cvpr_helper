@@ -1,1 +1,13 @@
 .DS_Store
+*.mat
+batch_expand/backup/
+batch_expand/output/
+obj_annotation.mat
+obj_counter.mat
+obj_table.mat
+output/
+test.m
+test1/
+test2/
+test3/
+batch_annotation_new/translated_with_obj_name/
