@@ -7,10 +7,6 @@ function action_label_for_crf()
     action_counter = zeros(1,32);
     video_counter = 0;
     
-    %(obj_annotation , obj duration and video shown, obj_index)
-    obj_table = ones(500,3,89)*-1;
-    obj_counter = zeros(1,89);
-    
     %Load action annotation for each video
     for i=1:size(listing,1)
         
@@ -50,6 +46,10 @@ function action_label_for_crf()
     %Load obj annotation for each video
     dir_name = '../ADL_annotations/object_annotation/translated_2';
     listing = dir(dir_name);
+    
+    %(obj_annotation , obj duration and video shown, obj_index)
+    obj_table = ones(600,3,89)*-1;
+    obj_counter = zeros(1,89);
     
     video_counter = 0;
     
@@ -99,6 +99,8 @@ function action_label_for_crf()
                     last_obj = obj_index;
                 end
             end
+%             obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
+%             obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;            
         end
         
     end    
@@ -137,12 +139,8 @@ function action_label_for_crf()
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
             
             action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
-            
-%             If min1 ? max2 or min2 ? max1 then overlap is 0
-%             If min1 ? min2 then overlap is max1 - min2
-%             Otherwise overlap is max2 - min1
-
-            overlap_tolerance = 0.5;
+           
+            overlap_thres = 0.5;
 
             for obj=1:89
                 for j=1:obj_counter(1,obj)
@@ -154,27 +152,38 @@ function action_label_for_crf()
                         min2 = obj_table(j,1,obj);
                         max2 = obj_table(j,2,obj);
                         
+                        
+                        
                         if min1 >= max2 || min2 >= max1
                             overlap = 0;
+                            flag = 'A';
                         elseif min1 <= min2
                             if max2 <=max1
                                 overlap = max2-min2;
+                                flag = 'B';
                             else
                                 overlap = max1-min2;
+                                flag = 'C';
                             end                            
                         else
                             if max2 <= max1
                                 overlap = max2-min1;
+                                flag = 'D';
                             else
                                 overlap = max1-min1;
+                                flag = 'E';
                             end
                         end
                         
-                        %normalize
-                        overlap = overlap/(max1-min1)
                         
-                        if 0
+                        %normalize
+                        overlap = overlap/(max2-min2);
+                        
+                        if overlap > overlap_thres && video_index == obj_table(j,3,obj)
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);
+                            fprintf('overlapping %f\n',overlap);
+                            fprintf('min1:%d max1:%d min2:%d max2:%d\n',min1,max1,min2,max2);
+                            fprintf([flag '\n']);
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
