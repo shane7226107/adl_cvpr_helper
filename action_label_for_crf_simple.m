@@ -1,7 +1,10 @@
-function action_label_for_crf()
+function action_label_for_crf_simple()
     dir_name = '../ADL_annotations/action_annotation/no_additional_comment';
     listing = dir(dir_name);
-    
+
+use_record = 1;
+
+if(~use_record)
     %(action_annotation , action time , video_index)
     action_table = ones(100,5,32)*-1;
     action_counter = zeros(1,32);
@@ -40,6 +43,7 @@ function action_label_for_crf()
     end
     
     save('action_table.mat','action_table');
+    save('action_counter.mat','action_counter');
     
     
     
@@ -75,38 +79,48 @@ function action_label_for_crf()
             height = obj_annotation(j,4)*2 - y1;
             %fprintf('%d %d %d %d %d %d\n',x1,y1,width,height,frame_index,obj_index);
             
-            if obj_index == last_obj
-                last_frame = frame_index;
-                obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
-            else
-                obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
-                if last_obj == -1
-                    %The beginning of file
-                    obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
-                    %For those with only 1 line annotation
-                    obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
-                    obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
-                    
-                    last_obj = obj_index;
-                else
-                    obj_table(obj_counter(1,last_obj),2,last_obj) = last_frame;
-                    obj_table(obj_counter(1,last_obj),3,last_obj) = video_counter;
-                    
-                    obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
-                    %For those with only 1 line annotation
-                    obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
-                    
-                    last_obj = obj_index;
-                end
-            end
-%             obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
-%             obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;            
+%             if obj_index == last_obj
+%                 last_frame = frame_index;
+%                 obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
+%             else
+%                 obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
+%                 if last_obj == -1
+%                     %The beginning of file
+%                     obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
+%                     %For those with only 1 line annotation
+%                     obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
+%                     obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
+%                     
+%                     last_obj = obj_index;
+%                 else
+%                     obj_table(obj_counter(1,last_obj),2,last_obj) = last_frame;
+%                     obj_table(obj_counter(1,last_obj),3,last_obj) = video_counter;
+%                     
+%                     obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
+%                     %For those with only 1 line annotation
+%                     obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
+%                     
+%                     last_obj = obj_index;
+%                 end
+%             end
+            obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
+            obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
+            obj_table(obj_counter(1,obj_index),2,obj_index) = 0;
+            obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;            
         end
         
     end    
+    save('obj_table.mat','obj_table');    
+    save('obj_counter.mat','obj_counter');    
+else
     
-    save('obj_table.mat','obj_table');
+    load('obj_table.mat');
+    load('action_table.mat');
+    load('obj_counter.mat');
+    load('action_counter.mat');
     
+end 
+
     %By using the action table and obj table ,build the action labels with
     %observations
     %(action_annotation , action time , video_index)    
@@ -139,56 +153,24 @@ function action_label_for_crf()
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
             
             action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
-           
-            overlap_thres = 0.5;
-
+            
             for obj=1:89
                 for j=1:obj_counter(1,obj)
-                    if obj_table(j,3,obj) == video_index
-                        
-                        %calc overlap
-                        min1 = start_frame;
-                        max1 = end_frame;
-                        min2 = obj_table(j,1,obj);
-                        max2 = obj_table(j,2,obj);
-                        
-                        
-                        
-                        if min1 >= max2 || min2 >= max1
-                            overlap = 0;
-                            flag = 'A';
-                        elseif min1 <= min2
-                            if max2 <=max1
-                                overlap = max2-min2;
-                                flag = 'B';
-                            else
-                                overlap = max1-min2;
-                                flag = 'C';
-                            end                            
-                        else
-                            if max2 <= max1
-                                overlap = max2-min1;
-                                flag = 'D';
-                            else
-                                overlap = max1-min1;
-                                flag = 'E';
-                            end
-                        end
-                        
-                        
-                        %normalize
-                        overlap = overlap/(max2-min2);
-                        
-                        if overlap > overlap_thres
-                            fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);
-                            fprintf('overlapping %f\n',overlap);
-                            fprintf('min1:%d max1:%d min2:%d max2:%d\n',min1,max1,min2,max2);
-                            fprintf([flag '\n']);
+                    
+                    obj_in_video = obj_table(j,3,obj);
+                    
+                    if obj_in_video == video_index
+                                                
+                        obj_frame_start = obj_table(j,1,obj);
+                                                
+                        if obj_frame_start >= start_frame && obj_frame_start <= end_frame
+                            fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+                            break;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
-                        end
-                                             
+                        end                        
+                                        
                     else
                         action_observation_table(action_observation_counter(1,action),obj,action) = 0;
                     end
@@ -198,6 +180,7 @@ function action_label_for_crf()
         end
     end
     
+    save('action_observation_counter.mat','action_observation_counter');
     save('action_observation_table.mat','action_observation_table');
     
 end
