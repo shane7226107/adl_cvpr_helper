@@ -1,6 +1,44 @@
-function action_observation_to_crf(chosen_actions)
+function action_observation_to_crf( sample_set, fold)
+    
+    if nargin < 1
+        sample_set = 1:20;
+    end
+    
+    if nargin < 2
+        fold = 5;
+    end
+
+
     load('action_observation_counter.mat');
-    load('action_observation_table.mat');
+    load('action_observation_table.mat');    
+    
+    indices = crossvalind('Kfold',size(sample_set,2),fold)';
+    
+    for i=1:fold
+              
+        %testing data indices
+        test_set = find(indices==i);
+        
+        %training data indeices
+        train_set = find(indices~=i);
+        
+        %producing testing data
+        str = ['cross_valid/fold_' int2str(i) '_testing.txt'];
+        output_crf_data(str , test_set , action_observation_table, action_observation_counter);
+        
+        %producing training data
+        str = ['cross_valid/fold_' int2str(i) '_training.txt'];
+        output_crf_data(str , train_set , action_observation_table, action_observation_counter);
+        
+    end
+    
+end
+
+function output_crf_data(filename,sample_set,action_observation_table,action_observation_counter)
+
+    
+    chosen_actions = [1 2 3 4 5 6 9 10 11 12 13 14 15 17 20 22 23 24];
+   
     
     action_list = {
         'combing_hair'
@@ -38,13 +76,7 @@ function action_observation_to_crf(chosen_actions)
     };
     
 
-    f_out_id = fopen('crf_train.txt','w');
-    
-    %training actions in CVPR2012
-    chosen_actions = [1 2 3 4 5 6 9 10 11 12 13 14 15 17 20 22 23 24];
-    
-    sample_set = [1 2 3 4 5 6];
-    %sample_set = 1:20;
+    f_out_id = fopen(filename,'w');
     
     for action=chosen_actions
         
