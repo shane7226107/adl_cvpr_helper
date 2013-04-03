@@ -53,7 +53,7 @@ for subdir in all_subdirs:
         
                 #end time
                 end_time = time.time()
-                localtime = time.asctime(time.localtime(begin_time))
+                localtime = time.asctime(time.localtime(end_time))
                 log.append("End: "+localtime)
         
                 #time spent
