@@ -22,12 +22,15 @@ for subdir in all_subdirs:
                 print "skipping", subdir
                 continue
 
-        os.chdir(subdir + "/classifier")
+        os.chdir(subdir)
 
-        print "cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml"
-        os.system("cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml")
+        print "mkdir " + "~/Desktop/label/" + subdir
+        os.system("mkdir " + "~/Desktop/label/" + subdir)
 
-        os.chdir("../..")
+        print "cp " + "info.dat " + "~/Desktop/label/" + subdir + "/info.dat"
+        os.system("cp " + "info.dat " + "~/Desktop/label/" + subdir + "/info.dat")
+
+        os.chdir("..")
 '''
         #flag
         find_cascade_file = False
