@@ -104,11 +104,12 @@ function action_label_for_crf_stageful()
     %(action_annotation , action time , video_index)    
     %(obj_annotation , obj duration , video_index)
     stageful_action  = [9, 12, 13, 16];
-    % the 90th feature is the video index where the action shown
-    action_observation_table = ones(100,90,32)*-1;
+    %the 90th feature is the video index where the action shown
+    %the 91th .... is the stage index, 0 means single state
+    action_observation_table = ones(100,91,32)*-1;
     action_observation_counter = zeros(1,32);
     
-    for action = 1:32
+    for action = stageful_action
                 
         fprintf('\n===============================\n proceesing : action %d\n',action);
         
@@ -144,6 +145,7 @@ function action_label_for_crf_stageful()
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
                             action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
+                            action_observation_table(action_observation_counter(1,action),91,action) = stage;                            
                             break;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
@@ -157,9 +159,10 @@ function action_label_for_crf_stageful()
             
         end
     end
-    
-    save('action_observation_counter_complex.mat','action_observation_counter');
-    save('action_observation_table_complex.mat','action_observation_table');
+    action_observation_counter_complex = action_observation_counter;
+    action_observation_table_complex = action_observation_table;
+    save('action_observation_counter_complex.mat','action_observation_counter_complex');
+    save('action_observation_table_complex.mat','action_observation_table_complex');
     
 end
 

@@ -104,7 +104,8 @@ end
     %(obj_annotation , obj duration , video_index)
     stageful_action  = [9, 12, 13, 16];
     % the 90th feature is the video index where the action shown
-    action_observation_table = ones(100,90,32)*-1;
+    %the 91th .... is the stage index, 0 means single state
+    action_observation_table = ones(100,91,32)*-1;
     action_observation_counter = zeros(1,32);
     
     for action = 1:32
@@ -122,7 +123,10 @@ end
             m_end = action_table(i,3,action);
             s_end = action_table(i,4,action);
             video_index = action_table(i,5,action);
+            stage = 0;
+            
             %Approximation here..
+            
             fps = 30;
             start_frame = round(m_start*60*fps + s_start*fps);
             end_frame = round(m_end*60*fps + s_end*fps);
@@ -145,6 +149,7 @@ end
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
                             action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
+                            action_observation_table(action_observation_counter(1,action),91,action) = stage;
                             break;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
