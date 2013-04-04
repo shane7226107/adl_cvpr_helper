@@ -22,28 +22,16 @@ for subdir in all_subdirs:
                 print "skipping", subdir
                 continue
 
-        os.chdir(subdir + "/classifier")
+        if os.path.isfile(subdir + "/classifier"):
 
-        print "cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml"
-        os.system("cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml")
+                os.chdir(subdir + "/classifier")
+        
+                print "cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml"
+                os.system("cp " + "cascade.xml " + "~/Desktop/cascade/" + subdir + ".xml")
 
-        os.chdir("../..")
-'''
-        #flag
-        find_cascade_file = False
+                os.chdir("../..")
+        else:
+                print subdir, "is not successfully trianed!"
 
-        os.chdir(subdir + "/classifier")
-
-        for files in os.listdir("."):
-                if files == "cascade.xml":
-                        print "find",files
-                        find_cascade_file = True
-                        break
-
-        os.chdir("../..")
-
-        if not find_cascade_file:
-                print subdir, "is not successful trianed!"
-'''
 
 print '\n\nBatch copy is done.'
