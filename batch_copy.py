@@ -22,7 +22,7 @@ for subdir in all_subdirs:
                 print "skipping", subdir
                 continue
 
-        if os.path.isfile(subdir + "/classifier"):
+        if os.path.isfile(subdir + "/classifier/cascade.xml"):
 
                 os.chdir(subdir + "/classifier")
         
