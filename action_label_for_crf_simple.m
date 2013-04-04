@@ -77,32 +77,9 @@ if(~use_record)
             y1 = obj_annotation(j,2)*2;
             width = obj_annotation(j,3)*2 - x1;
             height = obj_annotation(j,4)*2 - y1;
+            
             %fprintf('%d %d %d %d %d %d\n',x1,y1,width,height,frame_index,obj_index);
             
-%             if obj_index == last_obj
-%                 last_frame = frame_index;
-%                 obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
-%             else
-%                 obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
-%                 if last_obj == -1
-%                     %The beginning of file
-%                     obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
-%                     %For those with only 1 line annotation
-%                     obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
-%                     obj_table(obj_counter(1,obj_index),3,obj_index) = video_counter;
-%                     
-%                     last_obj = obj_index;
-%                 else
-%                     obj_table(obj_counter(1,last_obj),2,last_obj) = last_frame;
-%                     obj_table(obj_counter(1,last_obj),3,last_obj) = video_counter;
-%                     
-%                     obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
-%                     %For those with only 1 line annotation
-%                     obj_table(obj_counter(1,obj_index),2,obj_index) = frame_index + 30;
-%                     
-%                     last_obj = obj_index;
-%                 end
-%             end
             obj_counter(1,obj_index) = obj_counter(1,obj_index) + 1;
             obj_table(obj_counter(1,obj_index),1,obj_index) = frame_index;
             obj_table(obj_counter(1,obj_index),2,obj_index) = 0;

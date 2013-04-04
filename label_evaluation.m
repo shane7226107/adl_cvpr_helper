@@ -1,5 +1,5 @@
 function label_evaluation()
-    listing = dir('label_0305');
+    listing = dir('cascade_0404_with_infodat');
     
     width_stds = [];
     width_in_mean_stds = [];
@@ -8,7 +8,7 @@ function label_evaluation()
     height_in_mean_stds = [];
     height_in_median_stds = [];
     
-    f_out_id = fopen(['label_0305/mean_std.txt'],'w');
+    f_out_id = fopen(['cascade_0404_with_infodat/mean_std.txt'],'w');
     
 %     figure();
 %     hold on;
@@ -109,7 +109,7 @@ end
 
 function obj_annotation = file_read(name)
     
-    fid = fopen(['label_0305/' name '/info_x_y_width_height.txt']);
+    fid = fopen(['cascade_0404_with_infodat/' name '/info_x_y_width_height.txt']);
     
     [A ,count] = fscanf(fid, '%d %d %d %d',[4 , inf]);
     
