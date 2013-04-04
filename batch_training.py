@@ -2,7 +2,7 @@ import os
 import time
 import datetime
 
-#sub-routine used for appending log msgs
+#sub-routine used for appending log msgs with muti-lines
 def append_log(p,log):
         while 1:
                 line = p.readline()
@@ -39,27 +39,30 @@ for subdir in all_subdirs:
         p = os.popen(cmd , 'r')
         
         #produce sample.vec
-        log.append('\n===produce sample.vec===\n') 
-        cmd = 'opencv_createsamples -info ' + subdir + '/info.dat -vec ' + subdir + '/samples.vec -bg ' + subdir +'/bg.txt -w 24 -h 24 -num 7000'
-        p = os.popen(cmd , 'r')
-        log = append_log(p,log)
-
-        #training
-        log.append('\n===training===\n') 
-        cmd = 'opencv_traincascade -data '+ subdir + '/classifier -vec ' + subdir + '/samples.vec -bg ' + subdir + '/bg.txt -featureType LBP -precalcValBufSize 512 -precalcIdxBufSize 512'
-        p = os.popen(cmd , 'r')
-        log = append_log(p,log)
-
-        #end time
-        end_time = time.time()
-        localtime = time.asctime(time.localtime(begin_time))
-        log.append("End: "+localtime)
-
-        #time spent
-        time_spent = str(datetime.timedelta(seconds= (end_time-begin_time )))
-        print time_spent
-        log.append("\n\n\ntime spent: "+ time_spent)
-
+        if os.path.isfile(subdir + '/info.dat'):
+                log.append('\n===produce sample.vec===\n') 
+                cmd = 'opencv_createsamples -info ' + subdir + '/info.dat -vec ' + subdir + '/samples.vec -bg ' + subdir +'/bg.txt -w 24 -h 24 -num 7000'
+                p = os.popen(cmd , 'r')
+                log = append_log(p,log)
+        
+                #training
+                log.append('\n===training===\n') 
+                cmd = 'opencv_traincascade -data '+ subdir + '/classifier -vec ' + subdir + '/samples.vec -bg ' + subdir + '/bg.txt -featureType LBP -precalcValBufSize 512 -precalcIdxBufSize 512'
+                p = os.popen(cmd , 'r')
+                log = append_log(p,log)
+        
+                #end time
+                end_time = time.time()
+                localtime = time.asctime(time.localtime(end_time))
+                log.append("End: "+localtime)
+        
+                #time spent
+                time_spent = str(datetime.timedelta(seconds= (end_time-begin_time )))
+                print time_spent
+                log.append("\n\n\ntime spent: "+ time_spent)
+        else:
+                log.append("No info.dat found for" + subdir)
+                
         #logging
         for line in log:
                 f_out_id.write(line)

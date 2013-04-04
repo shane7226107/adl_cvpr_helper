@@ -33,64 +33,67 @@ for subdir in all_subdirs:
                 continue
 
         #######info.dat
-        print 'info.dat'
-        f_in_id = open(subdir + '/info.dat','r')
+        if os.path.isfile(subdir + '/info.dat','r'):
+                print 'info.dat'
+                f_in_id = open(subdir + '/info.dat','r')
 
-        lines = []
-        while True:
-                line = f_in_id.readline()
+                lines = []
+                while True:
+                        line = f_in_id.readline()
 
-                if len(line) == 0:break
+                        if len(line) == 0:break
 
-                lines.append(line)
+                        lines.append(line)
         
 
-        print 'lines:',len(lines)
+                print 'lines:',len(lines)
 
-        if len(lines) >= info_dat_num:
-                repeat = 0
-        else:
-                repeat = math.ceil(float(info_dat_num)/float(len(lines)))
+                if len(lines) >= info_dat_num:
+                        repeat = 0
+                else:
+                        repeat = math.ceil(float(info_dat_num)/float(len(lines)))
+                print 'repeat:' , repeat
+                
+                f_in_id.close()
 
-        f_in_id.close()
+                f_out_id = open(subdir + '/info.dat','a')
+                for x in range(int(repeat)):
+                        for l in lines:
+                                f_out_id.write(l)
 
-        f_out_id = open(subdir + '/info.dat','a')
-        for x in range(int(repeat)):
-                for l in lines:
-                        f_out_id.write(l)
-
-        f_out_id.close()
+                f_out_id.close()
 
 
         ###### bg.txt
-        print 'bg.txt'
-        f_in_id = open(subdir + '/bg.txt','r')
+        if os.path.isfile(subdir + '/bg.txt'):
+                print 'bg.txt'
+                f_in_id = open(subdir + '/bg.txt','r')
 
-        lines = []
-        while True:
+                lines = []
+                while True:
                 
-                line = f_in_id.readline()
+                        line = f_in_id.readline()
 
-                if len(line) == 0:break
+                        if len(line) == 0:break
 
-                lines.append(line)
+                        lines.append(line)
         
 
-        print 'lines:',len(lines)
+                print 'lines:',len(lines)
 
-        if len(lines) >= info_dat_num:
-                repeat = 0
-        else:
-                repeat = math.ceil(float(info_dat_num)/float(len(lines)))
-        print 'repeat:' , repeat
+                if len(lines) >= info_dat_num:
+                        repeat = 0
+                else:
+                        repeat = math.ceil(float(info_dat_num)/float(len(lines)))
+                print 'repeat:' , repeat
 
-        f_in_id.close()
+                f_in_id.close()
 
-        f_out_id = open(subdir + '/bg.txt','a')
-        for x in range(int(repeat)):
-                for l in lines:
-                        f_out_id.write(l)
+                f_out_id = open(subdir + '/bg.txt','a')
+                for x in range(int(repeat)):
+                        for l in lines:
+                                f_out_id.write(l)
 
-        f_out_id.close()
+                f_out_id.close()
 
 print '\n\nDone.'
