@@ -1,14 +1,17 @@
 fold = 5;
-score = [];
+avg_accuracy_total = [];
+confusion_matrix_total = zeros(32,32);
 
 for i = 1:fold
-    %score = [score crf_evaluation(['cross_valid/result/unigram/fold_' int2str(i) '_result.txt'])];
-    score = [score crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt'])];
+    %avg_accuracy = [avg_accuracy crf_evaluation(['cross_valid/result/unigram/fold_' int2str(i) '_result.txt'])];
+    [avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt']);
+    avg_accuracy_total = [avg_accuracy_total avg_accuracy];
+    confusion_matrix_total = confusion_matrix_total + confusion_matrix;
 end
 
-avg = mean(score)
+avg = mean(avg_accuracy_total)
 
-plot([score avg],'--rs','LineWidth',2,...
+plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor','g',...
                 'MarkerSize',10)
