@@ -66,7 +66,7 @@ function [source target] = con_matrix(str1,str2)
             'reading_book'
             'using_mouth_wash'
             'writing'
-            'putting_on_shoes_sucks'
+            'putting_on_shoes_socks'
             'drinking_coffee_tea'
             'grabbing_water_from_tap'
     };
