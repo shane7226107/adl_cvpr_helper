@@ -1,10 +1,10 @@
 function [avg_accuracy confusion_matrix]= crf_evaluation(filename)
     fprintf('crf_evaluation\n');
-    
+    num_class = 16;
     lines = read(filename);
     
     acc_counter = 0;
-    confusion_matrix = zeros(32,32);
+    confusion_matrix = zeros(num_class,num_class);
     
     num_lines = size(lines{1},1);
     
@@ -36,15 +36,15 @@ function lines = read(file_name)
 end
 
 function [source target] = con_matrix(str1,str2)
-    action_list = {
+            action_list = {
             'combing_hair'
             'make_up'
             'brushing_teeth'
             'dental_floss'
             'washing_hands_face'
-            'drying_hands_face'
-            'enter_leave_room'
-            'adjusting_thermostat'
+%           'drying_hands_face'
+%             'enter_leave_room'
+%             'adjusting_thermostat'
             'laundry'
             'washing_dishes'
             'moving_dishes'
@@ -52,23 +52,23 @@ function [source target] = con_matrix(str1,str2)
             'making_coffee'
             'drinking_water_bottle'
             'drinking_water_tap'
-            'making_hot_food'
-            'making_cold_food_snack'
-            'eating_food_snack'
-            'mopping_in_kitchen'
+%             'making_hot_food'
+%             'making_cold_food_snack'
+%             'eating_food_snack'
+%             'mopping_in_kitchen'
             'vacuuming'
-            'taking_pills'
+%             'taking_pills'
             'watching_tv'
             'using_computer'
             'using_cell'
-            'making_bed'
-            'cleaning_house'
-            'reading_book'
-            'using_mouth_wash'
-            'writing'
-            'putting_on_shoes_socks'
-            'drinking_coffee_tea'
-            'grabbing_water_from_tap'
+%             'making_bed'
+%             'cleaning_house'
+%             'reading_book'
+%             'using_mouth_wash'
+%             'writing'
+%             'putting_on_shoes_socks'
+%             'drinking_coffee_tea'
+%             'grabbing_water_from_tap'
     };
     
     for i=1:size(action_list,1)

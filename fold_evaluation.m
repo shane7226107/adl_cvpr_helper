@@ -1,5 +1,5 @@
 fold = 5;
-num_class = 32;
+num_class = 16;
 avg_accuracy_total = [];
 confusion_matrix_total = zeros(num_class,num_class);
 
@@ -23,9 +23,9 @@ plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
             'brushing_teeth'
             'dental_floss'
             'washing_hands_face'
-            'drying_hands_face'
-            'enter_leave_room'
-            'adjusting_thermostat'
+%            'drying_hands_face'
+%             'enter_leave_room'
+%             'adjusting_thermostat'
             'laundry'
             'washing_dishes'
             'moving_dishes'
@@ -33,23 +33,23 @@ plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
             'making_coffee'
             'drinking_water_bottle'
             'drinking_water_tap'
-            'making_hot_food'
-            'making_cold_food_snack'
-            'eating_food_snack'
-            'mopping_in_kitchen'
+%             'making_hot_food'
+%             'making_cold_food_snack'
+%             'eating_food_snack'
+%             'mopping_in_kitchen'
             'vacuuming'
-            'taking_pills'
+%             'taking_pills'
             'watching_tv'
             'using_computer'
             'using_cell'
-            'making_bed'
-            'cleaning_house'
-            'reading_book'
-            'using_mouth_wash'
-            'writing'
-            'putting_on_shoes_socks'
-            'drinking_coffee_tea'
-            'grabbing_water_from_tap'
+%             'making_bed'
+%             'cleaning_house'
+%             'reading_book'
+%             'using_mouth_wash'
+%             'writing'
+%             'putting_on_shoes_socks'
+%             'drinking_coffee_tea'
+%             'grabbing_water_from_tap'
     };
             
 
