@@ -9,11 +9,12 @@ function FP_ADL_evaluation(file,video)
     b = load('action_table.mat');
     a.action_table;
     b.action_table(:,6,:) = 0;
-    action_table = a.action_table + b.action_table;
+    %action_table = [a.action_table ; b.action_table];
+    %save('test.mat','action_table');
     
     c = load('action_counter_complex.mat');
     d = load('action_counter.mat');
-    action_counter = c.action_counter + d.action_counter;
+    %action_counter = c.action_counter + d.action_counter;
     
     for i=1:size(activity_result,1)
         
@@ -30,19 +31,41 @@ function FP_ADL_evaluation(file,video)
             %interval, minus one from accurate
             for k=1:32
                 break_flag = 0;
-                for j=1:action_counter(1,k)
+                
+                for j=1:c.action_counter(1,k)
 
-                    m_start = action_table(j,1,k);
-                    sec_start = action_table(j,2,k);
-                    m_end = action_table(j,3,k);
-                    sec_end = action_table(j,4,k);
+                    m_start = a.action_table(j,1,k);
+                    sec_start = a.action_table(j,2,k);
+                    m_end = a.action_table(j,3,k);
+                    sec_end = a.action_table(j,4,k);
+                    video_index = a.action_table(j,5,k);
 
                     %Approximation here..   
                     fps = 30;
                     start_frame = round(m_start*60*fps + sec_start*fps);
                     end_frame = round(m_end*60*fps + sec_end*fps);
 
-                    if at_frame >= start_frame && at_frame <= end_frame
+                    if at_frame >= start_frame && at_frame <= end_frame && video_index == video
+                       activities_accurate = activities_accurate - 1;
+                       break_flag = 1;
+                       break;
+                    end
+                end
+                
+                for j=1:d.action_counter(1,k)
+
+                    m_start = b.action_table(j,1,k);
+                    sec_start = b.action_table(j,2,k);
+                    m_end = b.action_table(j,3,k);
+                    sec_end = b.action_table(j,4,k);
+                    video_index = b.action_table(j,5,k);
+
+                    %Approximation here..   
+                    fps = 30;
+                    start_frame = round(m_start*60*fps + sec_start*fps);
+                    end_frame = round(m_end*60*fps + sec_end*fps);
+
+                    if at_frame >= start_frame && at_frame <= end_frame && video_index == video
                        activities_accurate = activities_accurate - 1;
                        break_flag = 1;
                        break;
@@ -54,19 +77,39 @@ function FP_ADL_evaluation(file,video)
                 end
             end
         else
-            for j=1:action_counter(1,action_index)
+            for j=1:c.action_counter(1,action_index)
             
-                m_start = action_table(j,1,action_index);
-                sec_start = action_table(j,2,action_index);
-                m_end = action_table(j,3,action_index);
-                sec_end = action_table(j,4,action_index);
-
+                m_start = a.action_table(j,1,action_index);
+                sec_start = a.action_table(j,2,action_index);
+                m_end = a.action_table(j,3,action_index);
+                sec_end = a.action_table(j,4,action_index);
+                video_index = a.action_table(j,5,action_index);
+                
                 %Approximation here..   
                 fps = 30;
                 start_frame = round(m_start*60*fps + sec_start*fps);
                 end_frame = round(m_end*60*fps + sec_end*fps);
 
-                if at_frame >= start_frame && at_frame <= end_frame
+                if at_frame >= start_frame && at_frame <= end_frame && video == video_index
+                   activities_accurate = activities_accurate + 1;
+                   break;
+                end
+            end
+            
+            for j=1:d.action_counter(1,action_index)
+            
+                m_start = b.action_table(j,1,action_index);
+                sec_start = b.action_table(j,2,action_index);
+                m_end = b.action_table(j,3,action_index);
+                sec_end = b.action_table(j,4,action_index);
+                video_index = b.action_table(j,5,action_index);
+                
+                %Approximation here..   
+                fps = 30;
+                start_frame = round(m_start*60*fps + sec_start*fps);
+                end_frame = round(m_end*60*fps + sec_end*fps);
+
+                if at_frame >= start_frame && at_frame <= end_frame && video == video_index
                    activities_accurate = activities_accurate + 1;
                    break;
                 end
