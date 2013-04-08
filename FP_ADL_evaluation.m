@@ -1,6 +1,5 @@
-function FP_ADL_evaluation(file,video)
+function precision = FP_ADL_evaluation(file,video)
     activity_result = file_read(file);
-    %activity_reuslt(5,2)
     
     activities_total = size(activity_result,1);
     activities_accurate = 0;
@@ -9,19 +8,21 @@ function FP_ADL_evaluation(file,video)
     b = load('action_table.mat');
     a.action_table;
     b.action_table(:,6,:) = 0;
-    %action_table = [a.action_table ; b.action_table];
-    %save('test.mat','action_table');
     
     c = load('action_counter_complex.mat');
     d = load('action_counter.mat');
-    %action_counter = c.action_counter + d.action_counter;
     
     for i=1:size(activity_result,1)
         
         at_frame = activity_result(i,1);
         action_index = activity_result(i,2);
         stage = activity_result(i,3);
-        fprintf('%d %d %d\n',at_frame,action_index,stage);
+        prob = activity_result(i,4);
+        fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
+        
+        if prob < prob_threshold
+            action_index = -1;
+        end
         
         if action_index == -1
             %Add one into accurate first.
@@ -117,6 +118,7 @@ function FP_ADL_evaluation(file,video)
         end
     end
     
+    precision = activities_accurate/activities_total;
     
     fprintf('Precision: %f  %d/%d\n', activities_accurate/activities_total , activities_accurate , activities_total);
 end
@@ -127,7 +129,7 @@ function activity_result = file_read(name)
     
     %00:08 00:33 12 1
     %00:59 01:30 12 2
-    [A ,count] = fscanf(fid, '%d %d %d',[3 , inf]);
+    [A ,count] = fscanf(fid, '%d %d %d %d',[3 , inf]);
     
     activity_result = A';
     
