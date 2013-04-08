@@ -49,7 +49,6 @@ function action_observation_to_crf_complex( sample_set, fold)
 end
 
 function output_crf_data(filename,sample_set,action_observation_table,action_observation_counter)
-
     
     chosen_actions = [1 2 3 4 5 6 9 10 11 12 13 14 15 16 17 20 22 23 24];
    
@@ -84,13 +83,17 @@ function output_crf_data(filename,sample_set,action_observation_table,action_obs
         'reading book'
         'using_mouth_wash'
         'writing'
-        'putting_on_shoes_sucks'
+        'putting_on_shoes_socks'
         'drinking_coffee_tea'
         'grabbing_water_from_tap'
     };
     
-
     f_out_id = fopen(filename,'w');
+    f_out_id_2 = fopen([filename '_indices.txt'],'w');
+    
+    for i=sample_set
+        fprintf(f_out_id_2,'%d ',i);
+    end
     
     for action=chosen_actions
         

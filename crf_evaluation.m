@@ -36,7 +36,8 @@ function lines = read(file_name)
 end
 
 function [source target] = con_matrix(str1,str2)
-            action_list = {
+            
+action_list = {
             'combing_hair'
             'make_up'
             'brushing_teeth'
