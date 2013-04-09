@@ -20,9 +20,6 @@ function batch_FP_ADL_evaluation_stageful_only(videos,thres_range)
         avg_precision = mean(precision_list);
         fprintf('Avg precision: %f \n',avg_precision);
         
-        
-        %avg_precision_list(1,avg_index) = thres;
-        %avg_precision_list(2,avg_index) = avg_precision;
         avg_precision_list = [avg_precision_list [thres;avg_precision]];
         
         avg_index = avg_index+1;

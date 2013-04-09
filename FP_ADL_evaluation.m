@@ -19,7 +19,7 @@ function precision = FP_ADL_evaluation(file,video,thres)
     
     for i=1:size(activity_result,1)
         
-        at_frame = activity_result(i,1);
+        at_frame = activity_result(i,1) + 150;
         action_index = activity_result(i,2);
         stage = activity_result(i,3);
         prob = activity_result(i,4);
