@@ -1,8 +1,8 @@
 function [avg_accuracy confusion_matrix]= crf_evaluation(filename)
     fprintf('crf_evaluation\n');
-    num_class = 16;
+    num_class = 18;
     lines = read(filename);
-    
+    filename
     acc_counter = 0;
     confusion_matrix = zeros(num_class,num_class);
     
@@ -43,7 +43,7 @@ action_list = {
             'brushing_teeth'
             'dental_floss'
             'washing_hands_face'
-%           'drying_hands_face'
+            'drying_hands_face'
 %             'enter_leave_room'
 %             'adjusting_thermostat'
             'laundry'
@@ -54,7 +54,7 @@ action_list = {
             'drinking_water_bottle'
             'drinking_water_tap'
 %             'making_hot_food'
-%             'making_cold_food_snack'
+             'making_cold_food_snack'
 %             'eating_food_snack'
 %             'mopping_in_kitchen'
             'vacuuming'

@@ -1,11 +1,14 @@
-fold = 5;
-num_class = 16;
+fold = 20;
+num_class = 18;
 avg_accuracy_total = [];
 confusion_matrix_total = zeros(num_class,num_class);
 
 for i = 1:fold
     %avg_accuracy = [avg_accuracy crf_evaluation(['cross_valid/result/unigram/fold_' int2str(i) '_result.txt'])];
-    [avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt']);
+    %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt']);
+    %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all/result/result_' int2str(i) '.txt']);
+    [avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all_more_segment/result/result_' int2str(i) '.txt']);
+    
     avg_accuracy_total = [avg_accuracy_total avg_accuracy];
     confusion_matrix_total = confusion_matrix_total + confusion_matrix;
 end
@@ -23,7 +26,7 @@ plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
             'brushing_teeth'
             'dental_floss'
             'washing_hands_face'
-%            'drying_hands_face'
+            'drying_hands_face'
 %             'enter_leave_room'
 %             'adjusting_thermostat'
             'laundry'
@@ -34,7 +37,7 @@ plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
             'drinking_water_bottle'
             'drinking_water_tap'
 %             'making_hot_food'
-%             'making_cold_food_snack'
+            'making_cold_food_snack'
 %             'eating_food_snack'
 %             'mopping_in_kitchen'
             'vacuuming'

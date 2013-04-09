@@ -1,4 +1,4 @@
-function action_label_for_crf_simple()
+function action_label_for_crf_simple_more_segment()
     dir_name = '../ADL_annotations/action_annotation/no_additional_comment';
     listing = dir(dir_name);
 
@@ -105,7 +105,7 @@ end
     stageful_action  = [9, 12, 13, 16];
     % the 90th feature is the video index where the action shown
     %the 91th .... is the stage index, 0 means single state
-    action_observation_table = ones(100,91,32)*-1;
+    action_observation_table = ones(1000,91,32)*-1;
     action_observation_counter = zeros(1,32);
     
     for action = 1:32
@@ -127,24 +127,27 @@ end
             
             %Approximation here..
             fps = 30;
+            start_frame_a = round(m_start*60*fps + s_start*fps);
+            end_frame_a = round(m_end*60*fps + s_end*fps);
             
-            start_frame = round(m_start*60*fps + s_start*fps);
-            end_frame = round(m_end*60*fps + s_end*fps);
+            %Produce the biggest segment as training data
+            start_frame = start_frame_a;
+            end_frame = end_frame_a;
             
             fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
-            
+
             action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
-            
+
             for obj=1:89
                 for j=1:obj_counter(1,obj)
-                    
+
                     obj_in_video = obj_table(j,3,obj);
-                    
+
                     if obj_in_video == video_index
-                                                
+
                         obj_frame_start = obj_table(j,1,obj);
-                                                
+
                         if obj_frame_start >= start_frame && obj_frame_start <= end_frame
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
@@ -154,13 +157,48 @@ end
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
                         end                        
-                                        
+
                     else
                         action_observation_table(action_observation_counter(1,action),obj,action) = 0;
                     end
                 end
             end
             
+            %Produce "lot more" segments as training data
+            for stat_frame=start_frame_a:150:end_frame_a
+                
+                end_frame = stat_frame + 150;
+            
+                fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
+                fprintf('frame:%d -> %d\n',start_frame,end_frame);
+
+                action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
+
+                for obj=1:89
+                    for j=1:obj_counter(1,obj)
+
+                        obj_in_video = obj_table(j,3,obj);
+
+                        if obj_in_video == video_index
+
+                            obj_frame_start = obj_table(j,1,obj);
+
+                            if obj_frame_start >= start_frame && obj_frame_start <= end_frame
+                                fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
+                                action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+                                action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
+                                action_observation_table(action_observation_counter(1,action),91,action) = stage;
+                                break;
+                            else
+                                action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+                            end                        
+
+                        else
+                            action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+                        end
+                    end
+                end
+            end
         end
     end
     
