@@ -1,4 +1,4 @@
-function precision = FP_ADL_evaluation(file,video,thres)
+function precision = FP_ADL_evaluation_stageful_only(file,video,thres)
 
     prob_threshold = thres;
     
@@ -25,6 +25,14 @@ function precision = FP_ADL_evaluation(file,video,thres)
         prob = activity_result(i,4);
         fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
         
+        %Non-stageful filter
+        if stage == 0
+           ignore = ignore + 1;
+           fprintf('skipped\n');
+           continue; 
+        end
+        
+        %Prob threshold
         if prob < prob_threshold
             ignore = ignore + 1;
             continue;
@@ -35,7 +43,7 @@ function precision = FP_ADL_evaluation(file,video,thres)
             activities_accurate = activities_accurate + 1;
             
             %Check all the actions, if there is any one happended in this
-            %interval, minus one from accurate
+            %interval, minus one from accurate count
             for k=1:32
                 
                 break_flag = 0;
@@ -137,7 +145,11 @@ function precision = FP_ADL_evaluation(file,video,thres)
         end
     end
     
-    precision = activities_accurate/(activities_total-ignore);
+    if activities_total-ignore == 0
+        precision = -1;
+    else
+        precision = activities_accurate/(activities_total-ignore);
+    end
     
     fprintf('Precision: %f  %d/%d\n', precision , activities_accurate , (activities_total-ignore));
                 
