@@ -108,7 +108,7 @@ function action_label_for_crf_stageful_more_segment()
     %the 91th .... is the stage index, 0 means single state
     action_observation_table = ones(1000,91,32)*-1;
     action_observation_counter = zeros(1,32);
-    start_end_buffer = zeros(3,2);
+    start_end_buffer = zeros(4,2);
     
     for action = stageful_action
                 
@@ -133,16 +133,8 @@ function action_label_for_crf_stageful_more_segment()
             end_frame = end_frame_a;
             
             %Keep start_end frame info
-            if stage == 1
-                start_end_buffer(1,1) = start_frame;
-                start_end_buffer(1,2) = end_frame;
-            elseif stage == 2
-                start_end_buffer(2,1) = start_frame;
-                start_end_buffer(2,2) = end_frame;
-            else
-                start_end_buffer(3,1) = start_frame;
-                start_end_buffer(3,2) = end_frame;
-            end
+            start_end_buffer(stage+1,1) = start_frame;
+            start_end_buffer(stage+1,2) = end_frame;
             
             fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
@@ -175,45 +167,46 @@ function action_label_for_crf_stageful_more_segment()
             end
             
             
-            %TODO ?????action table?????stage, ?????moresegment, ??continue
+            %TODO ??"???"action table??action?????stage, ?????more segment, ????
             if action_table(i+1,6,action) == 0 || action_table(i+1,6,action) == 1
-                %more segment
                 
-            end
-            
-            %Produce "lot more" segments as training data
-%             for stat_frame=start_frame_a:150:end_frame_a
-%                 end_frame = stat_frame + 150;
-%                 fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
-%                 fprintf('frame:%d -> %d\n',start_frame,end_frame);
-% 
-%                 action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
-% 
-%                 for obj=1:89
-%                     for j=1:obj_counter(1,obj)
-% 
-%                         obj_in_video = obj_table(j,3,obj);
-% 
-%                         if obj_in_video == video_index
-% 
-%                             obj_frame_start = obj_table(j,1,obj);
-% 
-%                             if obj_frame_start >= start_frame && obj_frame_start <= end_frame
-%                                 fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
-%                                 action_observation_table(action_observation_counter(1,action),obj,action) = 1;
-%                                 action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
-%                                 action_observation_table(action_observation_counter(1,action),91,action) = stage;
-%                                 break;
-%                             else
-%                                 action_observation_table(action_observation_counter(1,action),obj,action) = 0;
-%                             end                        
-% 
-%                         else
-%                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
-%                         end
-%                     end
-%                 end
-%             end
+                %?buffer??????
+                %Produce "lot more" segments as training data
+                for buffer_index=1:stage+1
+                    for stat_frame=start_end_buffer(buffer_index,1):150:start_end_buffer(buffer_index,2)
+                        end_frame = stat_frame + 150;
+                        fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
+                        fprintf('frame:%d -> %d\n',start_frame,end_frame);
+                        action_observation_counter(1,action) = action_observation_counter(1,action) + 1;
+                        
+                        for obj=1:89
+                            for j=1:obj_counter(1,obj)
+
+                                obj_in_video = obj_table(j,3,obj);
+
+                                if obj_in_video == video_index
+
+                                    obj_frame_start = obj_table(j,1,obj);
+
+                                    if obj_frame_start >= start_frame && obj_frame_start <= end_frame
+                                        fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
+                                        action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+                                        action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
+                                        action_observation_table(action_observation_counter(1,action),91,action) = 0;
+                                        break;
+                                    else
+                                        action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+                                    end                        
+
+                                else
+                                    action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+                                end
+                            end
+                        end
+                    end
+                end                
+     
+            end            
             
         end
     end
