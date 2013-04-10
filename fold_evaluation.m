@@ -4,6 +4,10 @@ avg_accuracy_total = [];
 confusion_matrix_total = zeros(num_class,num_class);
 
 for i = 1:fold
+    %Remove the outlier
+%     if i==10
+%         continue;
+%     end
     %avg_accuracy = [avg_accuracy crf_evaluation(['cross_valid/result/unigram/fold_' int2str(i) '_result.txt'])];
     %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt']);
     %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all/result/result_' int2str(i) '.txt']);
