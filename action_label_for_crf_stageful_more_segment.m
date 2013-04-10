@@ -108,11 +108,12 @@ function action_label_for_crf_stageful_more_segment()
     %the 91th .... is the stage index, 0 means single state
     action_observation_table = ones(1000,91,32)*-1;
     action_observation_counter = zeros(1,32);
+    start_end_buffer = zeros(3,2);
     
     for action = stageful_action
                 
         fprintf('\n===============================\n proceesing : action %d\n',action);
-        
+         
         for i=1:action_counter(1,action)           
             
             m_start = action_table(i,1,action);
@@ -130,6 +131,18 @@ function action_label_for_crf_stageful_more_segment()
             %Produce the biggest segment as training data
             start_frame = start_frame_a;
             end_frame = end_frame_a;
+            
+            %Keep start_end frame info
+            if stage == 1
+                start_end_buffer(1,1) = start_frame;
+                start_end_buffer(1,2) = end_frame;
+            elseif stage == 2
+                start_end_buffer(2,1) = start_frame;
+                start_end_buffer(2,2) = end_frame;
+            else
+                start_end_buffer(3,1) = start_frame;
+                start_end_buffer(3,2) = end_frame;
+            end
             
             fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
             fprintf('frame:%d -> %d\n',start_frame,end_frame);
@@ -149,7 +162,7 @@ function action_label_for_crf_stageful_more_segment()
                             fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
                             action_observation_table(action_observation_counter(1,action),obj,action) = 1;
                             action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
-                            action_observation_table(action_observation_counter(1,action),91,action) = stage;                            
+                            action_observation_table(action_observation_counter(1,action),91,action) = stage;
                             break;
                         else
                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
@@ -161,39 +174,46 @@ function action_label_for_crf_stageful_more_segment()
                 end
             end
             
-            %Produce "lot more" segments as training data
-            for stat_frame=start_frame_a:150:end_frame_a
-                end_frame = stat_frame + 150;
-                fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
-                fprintf('frame:%d -> %d\n',start_frame,end_frame);
-
-                action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
-
-                for obj=1:89
-                    for j=1:obj_counter(1,obj)
-
-                        obj_in_video = obj_table(j,3,obj);
-
-                        if obj_in_video == video_index
-
-                            obj_frame_start = obj_table(j,1,obj);
-
-                            if obj_frame_start >= start_frame && obj_frame_start <= end_frame
-                                fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
-                                action_observation_table(action_observation_counter(1,action),obj,action) = 1;
-                                action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
-                                action_observation_table(action_observation_counter(1,action),91,action) = stage;
-                                break;
-                            else
-                                action_observation_table(action_observation_counter(1,action),obj,action) = 0;
-                            end                        
-
-                        else
-                            action_observation_table(action_observation_counter(1,action),obj,action) = 0;
-                        end
-                    end
-                end
+            
+            %TODO ?????action table?????stage, ?????moresegment, ??continue
+            if action_table(i+1,6,action) == 0 || action_table(i+1,6,action) == 1
+                %more segment
+                
             end
+            
+            %Produce "lot more" segments as training data
+%             for stat_frame=start_frame_a:150:end_frame_a
+%                 end_frame = stat_frame + 150;
+%                 fprintf('%d:%d -> %d:%d in video %d\n',m_start,s_start,m_end,s_end,video_index);
+%                 fprintf('frame:%d -> %d\n',start_frame,end_frame);
+% 
+%                 action_observation_counter(1,action) = action_observation_counter(1,action) + 1;      
+% 
+%                 for obj=1:89
+%                     for j=1:obj_counter(1,obj)
+% 
+%                         obj_in_video = obj_table(j,3,obj);
+% 
+%                         if obj_in_video == video_index
+% 
+%                             obj_frame_start = obj_table(j,1,obj);
+% 
+%                             if obj_frame_start >= start_frame && obj_frame_start <= end_frame
+%                                 fprintf('obj %d shown in video %d for action %d\n',obj,video_index,action);                            
+%                                 action_observation_table(action_observation_counter(1,action),obj,action) = 1;
+%                                 action_observation_table(action_observation_counter(1,action),90,action) = obj_in_video;
+%                                 action_observation_table(action_observation_counter(1,action),91,action) = stage;
+%                                 break;
+%                             else
+%                                 action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+%                             end                        
+% 
+%                         else
+%                             action_observation_table(action_observation_counter(1,action),obj,action) = 0;
+%                         end
+%                     end
+%                 end
+%             end
             
         end
     end
