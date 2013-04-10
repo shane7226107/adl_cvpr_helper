@@ -33,6 +33,6 @@ function batch_FP_ADL_evaluation_stageful_only(videos,thres_range)
     xlabel('Threshold');
     ylabel('Accuracy');
     
-    fprintf('tatal avg precision: %f\n',mean(avg_precision_list(2,:)));
+    fprintf('total avg precision: %f\n',mean(avg_precision_list(2,:)));
     
 end

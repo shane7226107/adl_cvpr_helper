@@ -7,16 +7,16 @@ function action_observation_to_crf_1_vs_all_more_segment()
     load('action_observation_counter_complex.mat');
     load('action_observation_table_complex.mat');
     
-    action_observation_counter(1,6) = action_observation_counter_complex(1,6);
+    
     action_observation_counter(1,9) = action_observation_counter_complex(1,9);
     action_observation_counter(1,12) = action_observation_counter_complex(1,12);
     action_observation_counter(1,13) = action_observation_counter_complex(1,13);
+    action_observation_counter(1,16) = action_observation_counter_complex(1,16);
     
-    action_observation_table(:,:,6) = action_observation_table_complex(:,:,6);
     action_observation_table(:,:,9) = action_observation_table_complex(:,:,9);
     action_observation_table(:,:,12) = action_observation_table_complex(:,:,12);
     action_observation_table(:,:,13) = action_observation_table_complex(:,:,13);
-    
+    action_observation_table(:,:,16) = action_observation_table_complex(:,:,16);
 
     
     for i=1:20
