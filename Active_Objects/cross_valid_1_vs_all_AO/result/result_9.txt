@@ -1,0 +1,290 @@
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	81	combing_hair	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	56	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	54	brushing_teeth	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	1	0	0	54	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	66	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	0	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	0	0	0	0	66	washing_hands_face	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	1	0	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	1	1	0	0	0	0	1	1	0	0	1	0	0	0	0	1	0	0	1	1	0	0	66	drying_hands_face	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	1	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	61	washing_dishes	drinking_water_bottle
+
+0	0	1	0	0	0	0	0	0	0	0	1	0	1	0	1	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	61	washing_dishes	drinking_water_bottle
+
+0	0	1	0	0	0	0	0	1	0	0	1	0	1	0	1	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	61	washing_dishes	drinking_water_bottle
+
+0	0	1	0	0	0	0	0	0	1	0	1	0	1	0	1	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	53	making_tea	making_tea
+
+0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	48	drinking_water_bottle	making_cold_food_snack
+
+0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	1	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	47	drinking_water_bottle	making_cold_food_snack
+
+0	0	1	0	0	0	0	1	0	0	0	1	0	0	0	1	1	0	0	0	0	1	1	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	48	drinking_water_bottle	brushing_teeth
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	61	drinking_water_bottle	washing_dishes
+
+0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	47	drinking_water_bottle	drinking_water_bottle
+
+0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	47	drinking_water_bottle	drinking_water_bottle
+
+0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	47	drinking_water_bottle	drinking_water_bottle
+
+0	0	1	0	0	0	0	1	0	0	0	1	0	0	0	1	1	0	0	0	0	1	1	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	47	drinking_water_bottle	brushing_teeth
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	72	vacuuming	vacuuming
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	washing_hands_face
+
+0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	1	1	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	58	watching_tv	watching_tv
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	69	using_cell	using_cell
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+
+0	1	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	58	using_cell	watching_tv
+

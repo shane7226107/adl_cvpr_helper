@@ -8,14 +8,14 @@ for i = 1:fold
     %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_complex/result/bigram/fold_' int2str(i) '_result.txt']);
     %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all/result/result_' int2str(i) '.txt']);
     %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all_more_segment/result/result_' int2str(i) '.txt']);
-    [avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all_more_segment_2/result/result_' int2str(i) '.txt']);
+    %[avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all_more_segment_2/result/result_' int2str(i) '.txt']);
+    [avg_accuracy confusion_matrix]= crf_evaluation(['cross_valid_1_vs_all_AO/result/result_' int2str(i) '.txt']);
     
     avg_accuracy_total = [avg_accuracy_total avg_accuracy];
     confusion_matrix_total = confusion_matrix_total + confusion_matrix;
 end
 
 avg = mean(avg_accuracy_total)
-
 figure
 plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
                 'MarkerEdgeColor','k',...
@@ -57,7 +57,7 @@ plot([avg_accuracy_total avg],'--rs','LineWidth',2,...
 %             'grabbing_water_from_tap'
     };
             
-
+figure
 confusion_matrix_frac = zeros(num_class,num_class);
 
 for ci=1:num_class
@@ -74,5 +74,4 @@ for ci=1:num_class
     end
 end
 
-figure
 draw_cm(confusion_matrix_frac,action_list,num_class);

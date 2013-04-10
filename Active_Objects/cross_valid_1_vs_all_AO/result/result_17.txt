@@ -1,0 +1,128 @@
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	make_up	combing_hair
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	make_up	drying_hands_face
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	make_up	drying_hands_face
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	make_up	combing_hair
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	56	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	54	brushing_teeth	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	brushing_teeth
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_hands_face	brushing_teeth
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	66	washing_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	washing_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	66	washing_hands_face	drying_hands_face
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	66	drying_hands_face	combing_hair
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	66	drying_hands_face	combing_hair
+
+0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	1	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	66	drying_hands_face	drying_hands_face
+
+0	0	1	0	0	0	1	0	1	0	0	1	0	1	0	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	66	drying_hands_face	washing_dishes
+
+0	0	1	0	0	0	1	0	1	0	0	1	0	1	0	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	66	drying_hands_face	washing_dishes
+
+0	0	1	0	0	0	1	0	1	0	0	1	0	1	0	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	52	drying_hands_face	washing_dishes
+
+0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	65	laundry	laundry
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	61	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	1	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	54	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	1	1	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	54	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	0	1	1	0	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	1	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	49	washing_dishes	washing_dishes
+
+0	0	1	0	0	0	1	0	1	1	0	1	0	1	1	1	1	1	0	0	0	1	1	0	0	1	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_tea	making_cold_food_snack
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	51	making_cold_food_snack	making_cold_food_snack
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	50	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	0	0	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	49	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	0	1	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	49	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	49	making_cold_food_snack	washing_dishes
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	1	0	0	0	1	1	1	0	0	1	0	1	1	1	1	0	0	0	0	1	1	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	47	making_cold_food_snack	drinking_water_bottle
+
+0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	64	using_computer	using_computer
+
+0	0	0	0	0	0	1	1	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	49	using_computer	watching_tv
+
+0	1	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	69	using_cell	using_cell
+
+0	1	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	69	using_cell	using_cell
+
+0	1	0	0	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	69	using_cell	using_cell
+
+0	1	0	0	0	0	0	1	0	1	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	69	using_cell	using_cell
+
