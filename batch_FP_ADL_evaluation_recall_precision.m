@@ -16,8 +16,8 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
             %filename = ['FP_exp_0411_no_pyramid/result_' int2str(i) '.txt'];
             
             
-            %filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
-            filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
+            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
+            %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
             
             precision_list(i) = FP_ADL_evaluation(filename, i, thres);
 
@@ -46,8 +46,8 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
 
             %filename = ['FP_exp_1_vs_all_more_segment_2/result_' int2str(i) '.txt'];
             %filename = ['FP_exp_1_vs_all_more_segment_0409_error_in_stageful_data/result_' int2str(i) '.txt'];
-            %filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
-            filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
+            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
+            %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
             
             recall = FP_ADL_evaluation_recall_stageful_only(filename, i, thres);
             if recall ~= -1
@@ -63,6 +63,9 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
         
         avg_index = avg_index+1;
     end
+
+%%%%Save 
+    save('recall_precision_no_pyramid.mat','avg_precision_list','avg_recall_list');
 
     
 %%%%Plot
