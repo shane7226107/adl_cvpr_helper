@@ -25,11 +25,20 @@ function precision = FP_ADL_evaluation_stageful_only(file,video,thres)
         prob = activity_result(i,4);
         fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
         
-        %Non-stageful filter
-        if stage == 0
-           ignore = ignore + 1;
-           fprintf('skipped\n');
-           continue; 
+%         %Non-stageful filter
+%         if stage == 0
+%            ignore = ignore + 1;
+%            fprintf('skipped\n');
+%            continue; 
+%         end
+
+        %Multi-stage only
+        muti_stages = [9 12 13 16];
+
+        if isempty(find(muti_stages==action_index,1))
+            ignore = ignore + 1;
+            fprintf('skipped\n');
+            continue; 
         end
         
         %Prob threshold

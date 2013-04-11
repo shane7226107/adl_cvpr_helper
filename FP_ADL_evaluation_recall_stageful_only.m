@@ -16,8 +16,8 @@ function recall = FP_ADL_evaluation_recall_stageful_only(file,video,thres)
     
     activity_total = 0;
     
-    %for k=[9 12 13 16]
-    for k=1:32
+    for k=[9 12 13 16]
+    %for k=1:32
         for j=1:c.action_counter(1,k)
             m_start = a.action_table(j,1,k);
             sec_start = a.action_table(j,2,k);
