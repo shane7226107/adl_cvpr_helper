@@ -4,9 +4,6 @@ function recall = FP_ADL_evaluation_recall_stageful_only(file,video,thres)
     
     activity_result = file_read(file);
     
-    activities_total = size(activity_result,1);
-    activities_accurate = 0;
-    
     a = load('action_table_complex.mat');
     b = load('action_table.mat');
     a.action_table;
@@ -15,13 +12,12 @@ function recall = FP_ADL_evaluation_recall_stageful_only(file,video,thres)
     c = load('action_counter_complex.mat');
     d = load('action_counter.mat');
     
-    ignore = 0;
-    
     accurate = 0;
     
     activity_total = 0;
     
-    for k=[9 12 13 16]
+    %for k=[9 12 13 16]
+    for k=1:32
         for j=1:c.action_counter(1,k)
             m_start = a.action_table(j,1,k);
             sec_start = a.action_table(j,2,k);
@@ -45,12 +41,51 @@ function recall = FP_ADL_evaluation_recall_stageful_only(file,video,thres)
                 at_frame = activity_result(i,1)+ 150;
                 action_index = activity_result(i,2);
                 stage = activity_result(i,3);
-                prob = activity_result(i,4);
-                fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
+                prob = activity_result(i,4);                
                 
                 if prob < prob_threshold
                     continue;
                 end
+                
+                fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
+                
+                if at_frame >= start_frame && at_frame <= end_frame && video_index == video
+                    accurate = accurate + 1;
+                    break;
+                end
+            end
+        end
+        
+        for j=1:d.action_counter(1,k)
+            m_start = b.action_table(j,1,k);
+            sec_start = b.action_table(j,2,k);
+            m_end = b.action_table(j,3,k);
+            sec_end = b.action_table(j,4,k);
+            video_index = b.action_table(j,5,k);
+
+            if video_index == video 
+                activity_total = activity_total + 1;
+            else
+                continue;
+            end
+            
+            %Approximation here..
+            fps = 30;
+            start_frame = round(m_start*60*fps + sec_start*fps);
+            end_frame = round(m_end*60*fps + sec_end*fps);
+
+            for i=1:size(activity_result,1)                
+               
+                at_frame = activity_result(i,1)+ 150;
+                action_index = activity_result(i,2);
+                stage = activity_result(i,3);
+                prob = activity_result(i,4);                
+                
+                if prob < prob_threshold
+                    continue;
+                end
+                
+                fprintf('%d %d %d %f\n',at_frame,action_index,stage, prob);
                 
                 if at_frame >= start_frame && at_frame <= end_frame && video_index == video
                     accurate = accurate + 1;
