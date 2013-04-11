@@ -9,8 +9,10 @@ function batch_FP_ADL_evaluation_stageful_only(videos,thres_range)
         for i=videos
             fprintf('%d\n',i);
 
-            filename = ['FP_exp_1_vs_all_more_segment_2/result_' int2str(i) '.txt'];
+            %filename = ['FP_exp_1_vs_all_more_segment_2/result_' int2str(i) '.txt'];
             %filename = ['FP_exp_1_vs_all_more_segment_0409_error_in_stageful_data/result_' int2str(i) '.txt'];
+            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
+            %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
             
             precision = FP_ADL_evaluation_stageful_only(filename, i, thres);
             if precision ~= -1
