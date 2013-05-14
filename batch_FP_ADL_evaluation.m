@@ -16,8 +16,9 @@ function batch_FP_ADL_evaluation(videos,thres_range)
             %filename = ['FP_exp_0411_no_pyramid/result_' int2str(i) '.txt'];
             
             
-            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
+            %filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
             %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
+            filename = ['0416_FPN_300/result_' int2str(i) '.txt'];
             
             precision_list(i) = FP_ADL_evaluation(filename, i, thres);
 

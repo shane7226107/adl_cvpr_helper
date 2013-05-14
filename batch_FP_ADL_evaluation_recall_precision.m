@@ -66,6 +66,7 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
 
 %%%%Save 
     save('recall_precision_no_pyramid.mat','avg_precision_list','avg_recall_list');
+    %save('recall_precision_with_pyramid.mat','avg_precision_list','avg_recall_list');
 
     
 %%%%Plot
