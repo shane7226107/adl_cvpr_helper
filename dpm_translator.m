@@ -57,11 +57,18 @@ function load_dpm_detection(path)
             for i=1:size(frs,2)
                 if(~isempty(boxes{i}))
                     sorted_boxes = nestedSortStruct(boxes{i}, 's');
-                    disp(sorted_boxes(1));
-%                 for j = 1:length(sorted_boxes)
-%                     fprintf('%d\n',j)
-%                     disp(sorted_boxes(j));
-%                 end
+                    %disp(sorted_boxes(1));
+                    
+                    %CHEK THIS PART LATER!!
+                    %CHEK THIS PART LATER!!
+                    %CHEK THIS PART LATER!!
+                    score = sorted_boxes(1).s;
+                    x = int32(sorted_boxes(1).xy(1));
+                    y = int32(sorted_boxes(1).xy(2));
+                    width = int32(sorted_boxes(1).xy(3) - x);
+                    height = int32(sorted_boxes(1).xy(4) - y);
+                    
+                    fprintf('x:%04d y:%04d width:%04d height:%04d score:%f \n',x,y,width,height,score);
                 end
             end
         end
