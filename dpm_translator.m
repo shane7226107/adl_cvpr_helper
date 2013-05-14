@@ -2,25 +2,22 @@ function dpm_translator()
     
     fprintf('\ndpm_translator\n\n');
     
+    global obj_detection
+    global obj_detection_count
                             %video, obj, count, info
     obj_detection = -1*ones( 20,    89,  500,   6);
     obj_detection_count = zeros(20,89);
-
-%     for video=1:1
-%         fprintf(' video : %d\n',video);
-%         load('../')
-%     end
     
-    %testset active
+    %train set active
     path = '../ADL_detected_objects/trainset/active/';
     sub_dirs = subfolders(path);
     run_through_all_object_folders(path,sub_dirs);
     
-%     %testset passive    
+%     %train set passive    
 %     subfolders('../ADL_detected_objects/trainset/passive/')
-%     %train set active
+%     %test set active
 %     subfolders('../ADL_detected_objects/testset/active/')
-%     %train set passive
+%     %test set passive
 %     subfolders('../ADL_detected_objects/testset/passive/')
 end
 
@@ -32,9 +29,23 @@ function subdir = subfolders(path)
     subdir = nameFolds;
 end
 
-function run_through_all_object_folders(parent,sub_dirs)
-    
+function run_through_all_object_folders(parent,sub_dirs)    
     for obj=1:size(sub_dirs,1)
-        fprintf('%s\n',[parent sub_dirs{obj}]);
+        fprintf('\n===%s===\n\n',[parent sub_dirs{obj}]);
+        load_dpm_detection([parent sub_dirs{obj}]);
     end
 end
+
+function load_dpm_detection(path)
+    for video=1:20
+        filepath = [path '/' sprintf('P_%02d.mat',video)];
+        if (exist(filepath, 'file'))
+            fprintf('%s\n',filepath);
+        end
+    end 
+end
+
+
+
+
+
