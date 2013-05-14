@@ -12,10 +12,11 @@ function dpm_translator()
     obj_detection_count = zeros(20,89);
     
     %train set active
+    current_obj_active = true;
     path = '../ADL_detected_objects/trainset/active/';
     sub_dirs = subfolders(path);
     run_through_all_object_folders(path,sub_dirs);
-    current_obj_active = true;
+    
     
 %     %train set passive
 %     path = '../ADL_detected_objects/trainset/passive/';
@@ -32,6 +33,9 @@ function dpm_translator()
 %     sub_dirs = subfolders(path);
 %     run_through_all_object_folders(path,sub_dirs);
 
+    save('dpm_obj_detection.mat', 'obj_detection');
+    save('dpm_obj_detection_count.mat', 'obj_detection_count');
+
 end
 
 function subdir = subfolders(path)
@@ -44,18 +48,24 @@ end
 
 function run_through_all_object_folders(parent,sub_dirs)
     
-    global current_obj_name
+    global current_obj_name current_obj_active
     
     for obj=1:size(sub_dirs,1)
         fprintf('\n===%s===\n\n',[parent sub_dirs{obj}]);
-        current_obj_name = sub_dirs{obj};
+        
+        if current_obj_active
+            current_obj_name = ['active_' sub_dirs{obj}];
+        else
+            current_obj_name = sub_dirs{obj};
+        end
+        
         load_dpm_detection([parent sub_dirs{obj}]);
     end
 end
 
 function load_dpm_detection(path)
     
-    global current_obj_name current_obj_active
+    global current_obj_name current_obj_active obj_detection obj_detection_count
     
     %for video=1:20
     for video=1:1
@@ -67,22 +77,38 @@ function load_dpm_detection(path)
             
             for i=1:size(frs,2)
                 if(~isempty(boxes{i}))
-                    sorted_boxes = nestedSortStruct(boxes{i}, 's');
+                    sorted_boxes = nestedSortStruct(boxes{i}, 's');                    
                     %disp(sorted_boxes(1));
                     
                     %CHEK THIS PART LATER!!
                     %CHEK THIS PART LATER!!
                     %CHEK THIS PART LATER!!
-                    score = sorted_boxes(1).s;
+                    
                     x = int32(sorted_boxes(1).xy(1));
                     y = int32(sorted_boxes(1).xy(2));
                     width = int32(sorted_boxes(1).xy(3) - x);
                     height = int32(sorted_boxes(1).xy(4) - y);
+                    frame = int32(frs{i});
+                    obj_index = get_obj_index(current_obj_name);                    
+                    score = sorted_boxes(1).s;
                     
-                    fprintf('\n %s active:%d\n',current_obj_name,current_obj_active);
-                    fprintf('x:%04d y:%04d width:%04d height:%04d score:%f \n\n',x,y,width,height,score);
+                    %fprintf('\n %s active:%d\n',current_obj_name,current_obj_active);
+                    %fprintf('x:%04d y:%04d width:%04d height:%04d score:%f \n\n',x,y,width,height,score);
+                    
+                    obj_detection_count(video,obj_index) = obj_detection_count(video,obj_index) + 1;
+                    
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 1) = x;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 2) = y;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 3) = width;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 4) = height;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 5) = current_obj_active;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 6) = score;                    
                 end
             end
+            
+            clear frs;
+            clear boxes;
+          
         end
     end 
 end
@@ -90,12 +116,12 @@ end
 function obj_index = get_obj_index(name)
 
 list = {
-    'bed' 'book' 'bottle' 'cell' 'dent_floss' 
-    'detergent' 'dish' 'door' 'fridge' 'kettle' 
-    'laptop' 'microwave' 'monitor' 'pan' 'pitcher' 
-    'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv' 
-    'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can' 
-    'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket' 
+    'bed' 'book' 'bottle' 'cell' 'dent_floss' %5
+    'detergent' 'dish' 'door' 'fridge' 'kettle' %10
+    'laptop' 'microwave' 'monitor' 'pan' 'pitcher' %15
+    'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv' %20
+    'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can' %25 
+    'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'%30
     'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes' 
     'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container' 
     'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice' 
