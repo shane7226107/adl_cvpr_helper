@@ -4,7 +4,7 @@ function dpm_translator()
     
     global obj_detection
     global obj_detection_count
-                            %video, obj, count, info
+                            %video, obj, count, info(x,y,width,height,active,score)
     obj_detection = -1*ones( 20,    89,  500,   6);
     obj_detection_count = zeros(20,89);
     
@@ -46,10 +46,22 @@ function run_through_all_object_folders(parent,sub_dirs)
 end
 
 function load_dpm_detection(path)
-    for video=1:20
+    %for video=1:20
+    for video=1:1
         filepath = [path '/' sprintf('P_%02d.mat',video)];
         if (exist(filepath, 'file'))
             fprintf('%s\n',filepath);
+            
+            load(filepath);
+            
+            for i=1:size(frs,2)
+                sorted_boxes = nestedSortStruct(boxes{i}, 's');
+                
+%                 for j = 1:length(sorted_boxes)
+%                     fprintf('%d\n',j)
+%                     disp(sorted_boxes(j));
+%                 end
+            end
         end
     end 
 end
