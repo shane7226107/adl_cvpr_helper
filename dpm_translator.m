@@ -4,15 +4,18 @@ function dpm_translator()
     
     global obj_detection
     global obj_detection_count
+    global current_obj_name
+    global current_obj_active
+    
                             %video, obj, count, info(x,y,width,height,active,score)
     obj_detection = -1*ones( 20,    89,  500,   6);
     obj_detection_count = zeros(20,89);
     
     %train set active
     path = '../ADL_detected_objects/trainset/active/';
-    %sub_dirs = subfolders(path);
-    %run_through_all_object_folders(path,sub_dirs);
-    obj_index = get_obj_index('active_cell')
+    sub_dirs = subfolders(path);
+    run_through_all_object_folders(path,sub_dirs);
+    current_obj_active = true;
     
 %     %train set passive
 %     path = '../ADL_detected_objects/trainset/passive/';
@@ -39,14 +42,21 @@ function subdir = subfolders(path)
     subdir = nameFolds;
 end
 
-function run_through_all_object_folders(parent,sub_dirs)    
+function run_through_all_object_folders(parent,sub_dirs)
+    
+    global current_obj_name
+    
     for obj=1:size(sub_dirs,1)
         fprintf('\n===%s===\n\n',[parent sub_dirs{obj}]);
+        current_obj_name = sub_dirs{obj};
         load_dpm_detection([parent sub_dirs{obj}]);
     end
 end
 
 function load_dpm_detection(path)
+    
+    global current_obj_name current_obj_active
+    
     %for video=1:20
     for video=1:1
         filepath = [path '/' sprintf('P_%02d.mat',video)];
@@ -69,7 +79,8 @@ function load_dpm_detection(path)
                     width = int32(sorted_boxes(1).xy(3) - x);
                     height = int32(sorted_boxes(1).xy(4) - y);
                     
-                    fprintf('x:%04d y:%04d width:%04d height:%04d score:%f \n',x,y,width,height,score);
+                    fprintf('\n %s active:%d\n',current_obj_name,current_obj_active);
+                    fprintf('x:%04d y:%04d width:%04d height:%04d score:%f \n\n',x,y,width,height,score);
                 end
             end
         end
@@ -96,7 +107,7 @@ list = {
     'active_dent_floss' 'active_vacuum' 'active_kettle' 'active_pitcher' 'active_detergent'%75
     'active_washer_dryer' 'active_cell' 'active_book' 'active_shoes' 'active_cloth' %80
     'active_comb' 'active_electric_keys' 'active_tv' 'active_milk_juice' 'active_basket' %85
-    'active_large_container' 'active_mop' 'active_bed' 'active_blanket' 'dump_obj' %90
+    'active_large_container' 'active_mop' 'active_bed' 'active_blanket' 'dump_element' %90
 };
 
 list=list';
