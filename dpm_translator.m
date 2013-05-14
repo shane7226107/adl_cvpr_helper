@@ -13,12 +13,21 @@ function dpm_translator()
     sub_dirs = subfolders(path);
     run_through_all_object_folders(path,sub_dirs);
     
-%     %train set passive    
-%     subfolders('../ADL_detected_objects/trainset/passive/')
+%     %train set passive
+%     path = '../ADL_detected_objects/trainset/passive/';
+%     sub_dirs = subfolders(path);
+%     run_through_all_object_folders(path,sub_dirs);
+%     
 %     %test set active
-%     subfolders('../ADL_detected_objects/testset/active/')
+%     path = '../ADL_detected_objects/testset/active/';
+%     sub_dirs = subfolders(path);
+%     run_through_all_object_folders(path,sub_dirs);
+%     
 %     %test set passive
-%     subfolders('../ADL_detected_objects/testset/passive/')
+%     path = '../ADL_detected_objects/testset/passive/';
+%     sub_dirs = subfolders(path);
+%     run_through_all_object_folders(path,sub_dirs);
+
 end
 
 function subdir = subfolders(path)
