@@ -1,4 +1,4 @@
-function dpm_translator()
+function dpm_translator(load_detection_mat)
     
     fprintf('\ndpm_translator\n\n');
     
@@ -10,40 +10,45 @@ function dpm_translator()
                             %video, obj, count, info(x,y,width,height,active,score)
     obj_detection = -1*ones( 20,    89,  500,   7);
     obj_detection_count = zeros(20,89);
-    
-%     %train set active
-%     current_obj_active = true;
-%     path = '../ADL_detected_objects/trainset/active/';
-%     sub_dirs = subfolders(path);
-%     run_through_all_object_folders(path,sub_dirs);
-%     
-%     %train set passive
-%     current_obj_active = false;
-%     path = '../ADL_detected_objects/trainset/passive/';
-%     sub_dirs = subfolders(path);
-%     run_through_all_object_folders(path,sub_dirs);
-%     
-%     %test set active
-%     current_obj_active = true;
-%     path = '../ADL_detected_objects/testset/active/';
-%     sub_dirs = subfolders(path);
-%     run_through_all_object_folders(path,sub_dirs);
-%     
-%     %test set passive
-%     current_obj_active = false;
-%     path = '../ADL_detected_objects/testset/passive/';
-%     sub_dirs = subfolders(path);
-%     run_through_all_object_folders(path,sub_dirs);
-% 
-%     save('dpm_obj_detection.mat', 'obj_detection');
-%     save('dpm_obj_detection_count.mat', 'obj_detection_count');
-    
-    load 'dpm_obj_detection.mat';
-    load 'dpm_obj_detection_count.mat';
-    
-    for i=1:20
-        output(i);
+   
+    if load_detection_mat
+        %train set active
+        current_obj_active = true;
+        path = '../ADL_detected_objects/trainset/active/';
+        sub_dirs = subfolders(path);
+        run_through_all_object_folders(path,sub_dirs);
+
+        %train set passive
+        current_obj_active = false;
+        path = '../ADL_detected_objects/trainset/passive/';
+        sub_dirs = subfolders(path);
+        run_through_all_object_folders(path,sub_dirs);
+
+        %test set active
+        current_obj_active = true;
+        path = '../ADL_detected_objects/testset/active/';
+        sub_dirs = subfolders(path);
+        run_through_all_object_folders(path,sub_dirs);
+
+        %test set passive
+        current_obj_active = false;
+        path = '../ADL_detected_objects/testset/passive/';
+        sub_dirs = subfolders(path);
+        run_through_all_object_folders(path,sub_dirs);
+
+        save('dpm_obj_detection.mat', 'obj_detection');
+        save('dpm_obj_detection_count.mat', 'obj_detection_count');
+    else
+        %Output txt
+        load 'dpm_obj_detection.mat';
+        load 'dpm_obj_detection_count.mat';
+        
+        for i=1:20
+            output(i);
+        end
     end
+    
+    
 
 end
 
@@ -95,8 +100,8 @@ function load_dpm_detection(path)
                     
                     x1 = int32(sorted_boxes(1).xy(1));
                     y1 = int32(sorted_boxes(1).xy(2));
-                    x2 = int32(sorted_boxes(1).xy(3) - x);
-                    y2 = int32(sorted_boxes(1).xy(4) - y);
+                    x2 = int32(sorted_boxes(1).xy(3));
+                    y2 = int32(sorted_boxes(1).xy(4));
                     frame = int32(frs(i));
                     obj_index = get_obj_index(current_obj_name);                    
                     score = sorted_boxes(1).s;
