@@ -93,10 +93,10 @@ function load_dpm_detection(path)
                     %CHEK THIS PART LATER!!
                     %CHEK THIS PART LATER!!
                     
-                    x = int32(sorted_boxes(1).xy(1));
-                    y = int32(sorted_boxes(1).xy(2));
-                    width = int32(sorted_boxes(1).xy(3) - x);
-                    height = int32(sorted_boxes(1).xy(4) - y);
+                    x1 = int32(sorted_boxes(1).xy(1));
+                    y1 = int32(sorted_boxes(1).xy(2));
+                    x2 = int32(sorted_boxes(1).xy(3) - x);
+                    y2 = int32(sorted_boxes(1).xy(4) - y);
                     frame = int32(frs(i));
                     obj_index = get_obj_index(current_obj_name);                    
                     score = sorted_boxes(1).s;
@@ -106,10 +106,10 @@ function load_dpm_detection(path)
                     
                     obj_detection_count(video,obj_index) = obj_detection_count(video,obj_index) + 1;
                     
-                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 1) = x;
-                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 2) = y;
-                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 3) = width;
-                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 4) = height;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 1) = x1;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 2) = y1;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 3) = x2;
+                    obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 4) = y2;
                     obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 5) = frame;
                     obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 6) = current_obj_active;
                     obj_detection(video, obj_index ,obj_detection_count(video,obj_index), 7) = score;                    
@@ -131,15 +131,15 @@ function output(video)
     
     for obj_index=1:89
         for i=1:obj_detection_count(video,obj_index)
-            x = obj_detection(video, obj_index ,i, 1);
-            y = obj_detection(video, obj_index ,i, 2);
-            width = obj_detection(video, obj_index ,i, 3);
-            height = obj_detection(video, obj_index ,i, 4);
+            x1 = obj_detection(video, obj_index ,i, 1);
+            y1 = obj_detection(video, obj_index ,i, 2);
+            x2 = obj_detection(video, obj_index ,i, 3);
+            y2 = obj_detection(video, obj_index ,i, 4);
             frame = obj_detection(video, obj_index ,i, 5);
             active = obj_detection(video, obj_index ,i, 6);
             score = abs(obj_detection(video, obj_index ,i, 7));
             
-            fprintf(fid,'%04d %04d %04d %04d %08d %d %d %f %s\n',x,y,width,height,frame,active,obj_index,score,get_obj_name(obj_index));
+            fprintf(fid,'%04d %04d %04d %04d %08d %d %d %f %s\n',x1,y1,x2,y2,frame,active,obj_index,score,get_obj_name(obj_index));
         end
     end
     
