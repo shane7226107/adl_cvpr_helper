@@ -6,6 +6,30 @@ function dpm_translator(load_detection_mat)
     global obj_detection_count
     global current_obj_name
     global current_obj_active
+    global list
+    
+    list = {
+        'bed' 'book' 'bottle' 'cell' 'dent_floss' %5
+        'detergent' 'dish' 'door' 'fridge' 'kettle' %10
+        'laptop' 'microwave' 'monitor' 'pan' 'pitcher' %15
+        'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv' %20
+        'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can' %25 
+        'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'%30
+        'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes' 
+        'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container' 
+        'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice' 
+        'mop' 'active_fridge' 'active_bottle' 'active_dish' 'active_knife_spoon_fork' 
+        'active_food_snack' 'active_microwave' 'active_oven_stove' 'active_tap' 'active_pills' %55
+        'active_tooth_brush' 'active_tooth_paste' 'active_tv_remote' 'active_container' 'active_trash_can' %60
+        'active_mug_cup' 'active_tea_bag' 'active_soap_liquid' 'active_laptop' 'active_door' %65
+        'active_towel' 'active_thermostat' 'active_pan' 'active_cell_phone' 'active_person' %70
+        'active_dent_floss' 'active_vacuum' 'active_kettle' 'active_pitcher' 'active_detergent'%75
+        'active_washer_dryer' 'active_cell' 'active_book' 'active_shoes' 'active_cloth' %80
+        'active_comb' 'active_electric_keys' 'active_tv' 'active_milk_juice' 'active_basket' %85
+        'active_large_container' 'active_mop' 'active_bed' 'active_blanket' 'dump_element' %90
+    };
+
+    list=list';
     
                             %video, obj, count, info(x,y,width,height,active,score)
     obj_detection = -1*ones( 20,    89,  500,   7);
@@ -131,6 +155,8 @@ end
 function output(video)
     global obj_detection obj_detection_count
     
+    fprintf(' === Output video %d === \n',video);
+    
     filepath = sprintf('dpm_obj_detection/P_%02d.txt',video);
     fid = fopen(filepath,'w');
     
@@ -153,28 +179,7 @@ end
 
 function obj_index = get_obj_index(name)
 
-list = {
-    'bed' 'book' 'bottle' 'cell' 'dent_floss' %5
-    'detergent' 'dish' 'door' 'fridge' 'kettle' %10
-    'laptop' 'microwave' 'monitor' 'pan' 'pitcher' %15
-    'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv' %20
-    'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can' %25 
-    'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'%30
-    'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes' 
-    'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container' 
-    'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice' 
-    'mop' 'active_fridge' 'active_bottle' 'active_dish' 'active_knife_spoon_fork' 
-    'active_food_snack' 'active_microwave' 'active_oven_stove' 'active_tap' 'active_pills' %55
-    'active_tooth_brush' 'active_tooth_paste' 'active_tv_remote' 'active_container' 'active_trash_can' %60
-    'active_mug_cup' 'active_tea_bag' 'active_soap_liquid' 'active_laptop' 'active_door' %65
-    'active_towel' 'active_thermostat' 'active_pan' 'active_cell_phone' 'active_person' %70
-    'active_dent_floss' 'active_vacuum' 'active_kettle' 'active_pitcher' 'active_detergent'%75
-    'active_washer_dryer' 'active_cell' 'active_book' 'active_shoes' 'active_cloth' %80
-    'active_comb' 'active_electric_keys' 'active_tv' 'active_milk_juice' 'active_basket' %85
-    'active_large_container' 'active_mop' 'active_bed' 'active_blanket' 'dump_element' %90
-};
-
-list=list';
+global list
 
 obj_index = -1;
 
@@ -188,28 +193,7 @@ end
 
 function obj_name = get_obj_name(index)
 
-list = {
-    'bed' 'book' 'bottle' 'cell' 'dent_floss' %5
-    'detergent' 'dish' 'door' 'fridge' 'kettle' %10
-    'laptop' 'microwave' 'monitor' 'pan' 'pitcher' %15
-    'soap_liquid' 'tap' 'tea_bag' 'tooth_paste' 'tv' %20
-    'tv_remote' 'mug_cup' 'oven_stove' 'person' 'trash_can' %25 
-    'cloth' 'knife_spoon_fork' 'food_snack' 'pills' 'basket'%30
-    'towel' 'tooth_brush' 'electric_keys' 'container' 'shoes' 
-    'cell_phone' 'thermostat' 'vacuum' 'washer_dryer' 'large_container' 
-    'keyboard' 'blanket' 'comb' 'perfume' 'milk_juice' 
-    'mop' 'active_fridge' 'active_bottle' 'active_dish' 'active_knife_spoon_fork' 
-    'active_food_snack' 'active_microwave' 'active_oven_stove' 'active_tap' 'active_pills' %55
-    'active_tooth_brush' 'active_tooth_paste' 'active_tv_remote' 'active_container' 'active_trash_can' %60
-    'active_mug_cup' 'active_tea_bag' 'active_soap_liquid' 'active_laptop' 'active_door' %65
-    'active_towel' 'active_thermostat' 'active_pan' 'active_cell_phone' 'active_person' %70
-    'active_dent_floss' 'active_vacuum' 'active_kettle' 'active_pitcher' 'active_detergent'%75
-    'active_washer_dryer' 'active_cell' 'active_book' 'active_shoes' 'active_cloth' %80
-    'active_comb' 'active_electric_keys' 'active_tv' 'active_milk_juice' 'active_basket' %85
-    'active_large_container' 'active_mop' 'active_bed' 'active_blanket' 'dump_element' %90
-};
-
-list=list';
+global list
 
 obj_name = list{index};
 
