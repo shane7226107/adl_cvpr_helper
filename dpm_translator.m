@@ -115,7 +115,7 @@ function load_dpm_detection(path)
             
             for i=1:size(frs,2)
                 if(~isempty(boxes{i}))
-                    sorted_boxes = nestedSortStruct(boxes{i}, 's');                    
+                    sorted_boxes = nestedSortStruct(boxes{i}, 's', -1);                    
                     %disp(sorted_boxes(1));
                     
                     %CHEK THIS PART LATER!!
@@ -162,13 +162,14 @@ function output(video)
     
     for obj_index=1:89
         for i=1:obj_detection_count(video,obj_index)
+            
             x1 = obj_detection(video, obj_index ,i, 1);
             y1 = obj_detection(video, obj_index ,i, 2);
             x2 = obj_detection(video, obj_index ,i, 3);
             y2 = obj_detection(video, obj_index ,i, 4);
             frame = obj_detection(video, obj_index ,i, 5);
             active = obj_detection(video, obj_index ,i, 6);
-            score = abs(obj_detection(video, obj_index ,i, 7));
+            score = obj_detection(video, obj_index ,i, 7);
             
             fprintf(fid,'%04d %04d %04d %04d %08d %d %d %f %s\n',x1,y1,x2,y2,frame,active,obj_index,score,get_obj_name(obj_index));
         end
