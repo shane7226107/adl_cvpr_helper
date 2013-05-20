@@ -1,9 +1,9 @@
 function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
     
     %filename = '0410_FPN_300/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
-    filename = '0410_FPN_300/more_segment_for_training/result_';matfile='recall_precision_with_pyramid.mat';
-    %filename = '0516_FPN_300/no_pyramid/result_';
-    %filename = '0516_FPN_300/pyramid/result_';
+    %filename = '0410_FPN_300/more_segment_for_training/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0516_FPN_300/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
+    %filename = '0516_FPN_300/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
 
     avg_precision_list = zeros(2,size(thres_range,2));
         
@@ -42,7 +42,7 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
             fprintf('%d\n',i);
             
             filepath = [filename int2str(i) '.txt'];
-            recall = FP_ADL_evaluation_recall_stageful_only(filepath, i, thres);
+            recall = FP_ADL_evaluation_recall(filepath, i, thres);
             if recall ~= -1
                 recall_list = [recall_list recall];
             end
