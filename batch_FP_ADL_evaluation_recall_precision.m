@@ -1,5 +1,10 @@
 function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
     
+    %filename = '0410_FPN_300/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
+    filename = '0410_FPN_300/more_segment_for_training/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0516_FPN_300/no_pyramid/result_';
+    %filename = '0516_FPN_300/pyramid/result_';
+
     avg_precision_list = zeros(2,size(thres_range,2));
         
     avg_index = 1;
@@ -9,17 +14,9 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
 
         for i=videos
             fprintf('%d\n',i);
-    
-            %filename = ['FP_exp_1_vs_all_more_segment/result_' int2str(i) '.txt'];
-            %filename = ['FP_exp_1_vs_all_more_segment_2/result_' int2str(i) '.txt'];
-            %filename = ['FP_exp_1_vs_all_more_segment_stageful_data_unbias/result_' int2str(i) '.txt'];
-            %filename = ['FP_exp_0411_no_pyramid/result_' int2str(i) '.txt'];
             
-            
-            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
-            %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
-            
-            precision_list(i) = FP_ADL_evaluation(filename, i, thres);
+            filepath = [filename int2str(i) '.txt'];
+            precision_list(i) = FP_ADL_evaluation(filepath, i, thres);
 
         end
         
@@ -43,13 +40,9 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
 
         for i=videos
             fprintf('%d\n',i);
-
-            %filename = ['FP_exp_1_vs_all_more_segment_2/result_' int2str(i) '.txt'];
-            %filename = ['FP_exp_1_vs_all_more_segment_0409_error_in_stageful_data/result_' int2str(i) '.txt'];
-            filename = ['0410_FPN_300/no_pyramid/result_' int2str(i) '.txt'];
-            %filename = ['0410_FPN_300/more_segment_for_training/result_' int2str(i) '.txt'];
             
-            recall = FP_ADL_evaluation_recall_stageful_only(filename, i, thres);
+            filepath = [filename int2str(i) '.txt'];
+            recall = FP_ADL_evaluation_recall_stageful_only(filepath, i, thres);
             if recall ~= -1
                 recall_list = [recall_list recall];
             end
@@ -64,20 +57,19 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
         avg_index = avg_index+1;
     end
 
-%%%%Save 
-    save('recall_precision_no_pyramid.mat','avg_precision_list','avg_recall_list');
-    %save('recall_precision_with_pyramid.mat','avg_precision_list','avg_recall_list');
-
+%%%%Save the mat file for function draw_recall_precision_both
+    save(matfile,'avg_precision_list','avg_recall_list');
     
-%%%%Plot
-    plot(avg_precision_list(2,:),avg_recall_list(2,:),'--rs','LineWidth',2,...
+    
+    plot(avg_recall_list(2,:),avg_precision_list(2,:),'--rs','LineWidth',2,...
                 'MarkerEdgeColor','k',...
                 'MarkerFaceColor','g',...
                 'MarkerSize',10)
     
-    xlabel('Precision');
-    ylabel('Recall');
-    
+    xlabel('Recall');
+    ylabel('Precision');
+
+
     fprintf('tatal avg precision: %f\n',mean(avg_precision_list(2,:)));
     
 end
