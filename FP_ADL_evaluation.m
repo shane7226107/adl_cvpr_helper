@@ -137,7 +137,12 @@ function precision = FP_ADL_evaluation(file,video,thres)
         end
     end
     
-    precision = activities_accurate/(activities_total-ignore);
+    
+    if activities_total-ignore > 0
+        precision = activities_accurate/(activities_total-ignore);
+    else
+        precision = -1;
+    end    
     
     fprintf('Precision: %f  %d/%d\n', precision , activities_accurate , (activities_total-ignore));
                 
