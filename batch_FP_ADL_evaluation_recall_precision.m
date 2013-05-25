@@ -1,9 +1,12 @@
 function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
     
     %filename = '0410_FPN_300/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
-    filename = '0410_FPN_300/more_segment_for_training/result_';matfile='recall_precision_with_pyramid.mat';
-    %filename = '0516_FPN_300/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
-    %filename = '0516_FPN_300/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0410_FPN_300/more_segment_for_training/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0516_FPN_300_dpm_thres_0.7/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
+    %filename = '0516_FPN_300_dpm_thres_0.7/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0520_FPN_300_dpm_thres_0.75/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
+    filename = '0520_FPN_300_dpm_thres_0.75/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    
 
     avg_precision_list = [];
         
@@ -84,7 +87,7 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
         ylabel('Precision');
 
 
-        fprintf('total avg precision: %f\n',mean(avg_precision_list(2,:)));
+        fprintf('\n============\ntotal avg precision: %f\n',mean(avg_precision_list(2,:)));
         fprintf('total avg recall: %f\n',mean(avg_recall_list(2,:)));
     else
         fprintf('Not enough data for drawing the curve!\n');
