@@ -45,7 +45,18 @@ function annotation_to_train_cascade(videos)
     for obj=1:21
         fprintf('obj %d  %s\n',obj,obj_list{obj});
         for video=videos
-            
+            fprintf('seeking object in video:%d\n',video);
+            obj_annotation = obj_annotation_read(video);
+            for line=1:size(obj_annotation{1},1)
+                x = obj_annotation{1}(line);
+                y = obj_annotation{2}(line);
+                width = obj_annotation{3}(line) - x;
+                height = obj_annotation{4}(line) - y;
+                frame_index = obj_annotation{5}(line);
+                obj_index = obj_annotation{7}(line);            
+                
+                fprintf('%d %d %d %d %06d %d\n',x,y,width,height,frame_index,obj_index);
+            end
         end
     end
 
@@ -53,15 +64,16 @@ end
 
 function obj_annotation = obj_annotation_read(index)    
     
-    index_to_str = num2str(index, '%02d');
+    filename = sprintf('annotations/P%02d.mp4_label.txt',index);
     
-    filename = ['translated_with_obj_name/object_annot_P_' index_to_str '_translated_with_obj_name.txt'];
     fprintf('reading: %s\n', filename);
     
     fid = fopen(filename);
-    
-    obj_annotation = textscan(fid, '%d %d %d %d %d %d %d %s');
-    
+    %236 147 387 290 000001 0 1
+    obj_annotation = textscan(fid, '%d %d %d %d %d %d %d');
+    %Usage:
+    %obj_anno{col}(row)
+    %obj_anno{7}(1)
     fclose all;
     fprintf('finished reading annotation file\n');
 end
