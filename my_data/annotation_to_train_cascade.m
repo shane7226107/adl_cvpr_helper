@@ -42,18 +42,25 @@ function annotation_to_train_cascade(videos)
     };
     obj_list = obj_list';
     
+    num_of_obj = 21;
+    num_of_videos = size(videos);
+    obj_pos = zeros(num_of_obj,num_of_videos,20000);
+    
+    %
     %positive
-    for obj=1:21
+    %
+    for obj=1:num_of_obj
         
         fprintf('obj %d  %s\n',obj,obj_list{obj});
         
         filename = sprintf('cascade/%02d_%s.info',obj,obj_list{obj});
-        fid = fopen(filename,'w');
+        fid_pos = fopen(filename,'w');
         
         for video=videos
-            fprintf('seeking object in video:%d\n',video);
+            fprintf('seeking positive instances in video:%d\n',video);
             obj_annotation = obj_annotation_read(video);
             for line=1:size(obj_annotation{1},1)
+                
                 x = obj_annotation{1}(line);
                 y = obj_annotation{2}(line);
                 width = obj_annotation{3}(line) - x;
@@ -61,14 +68,48 @@ function annotation_to_train_cascade(videos)
                 frame_index = obj_annotation{5}(line);
                 obj_index = obj_annotation{7}(line);            
                 
-                if obj_index == obj
-                    fprintf(fid,'img_P%02d_frame_%06d.jpg 1 %d %d %d %d\n',video,frame_index,x,y,width,height);
+                
+                if obj_index == obj                    
+                    fprintf(fid_pos,'img_P%02d_frame_%06d.jpg 1 %d %d %d %d\n',video,frame_index,x,y,width,height);
+                    obj_pos(obj,video,frame_index) = 1;             
                 end
             end
         end
         
-        fclose(fid);
+        fclose(fid_pos);
+        
+        
+    end   
+    
+    %
+    %Background
+    %
+    for obj=1:num_of_obj
+        
+        filename = sprintf('cascade/%02d_%s.bg',obj,obj_list{obj});
+        fid_bg = fopen(filename,'w');
+        
+        last_frame = -1;
+        for video = videos
+            fprintf('seeking positive instances in video:%d\n',video);
+            obj_annotation = obj_annotation_read(video);
+            
+            for line=1:size(obj_annotation{1},1)
+                
+                frame_index = obj_annotation{5}(line);
+                obj_index = obj_annotation{7}(line);
+                
+                if obj_index ~= obj && obj_pos(obj,video,frame_index) == 0 && frame_index ~= last_frame      
+                    fprintf(fid_bg,'img_P%02d_frame_%06d.jpg\n',video,frame_index);
+                    last_frame = frame_index;
+                end  
+
+            end
+        end
     end
+    
+    
+    fclose(fid_bg);
 
 end
 
