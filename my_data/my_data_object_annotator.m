@@ -24,7 +24,7 @@ function my_data_object_annotator(start_frame)
         8 : dispenser
         9 : tap
         10: human
-        11: copier %keyboard = 'c'
+        21: copier %keyboard = 'c'
     %}
 
     obj_list = {          
@@ -68,8 +68,9 @@ function my_data_object_annotator(start_frame)
             frame_index = frame_index + video_obj.FrameRate;
         elseif (key >= 48 && key <= 57) || (key == 99)
             
+            %copier
             if key == 99
-                obj_index = 11;
+                obj_index = 21;
             else
                 obj_index = key-48;
             end
@@ -88,7 +89,9 @@ function my_data_object_annotator(start_frame)
             if key ~= 32
                 if key == 97
                     active = 1;
-                    obj_index = obj_index + 10;
+                    if obj_index ~= 21
+                        obj_index = obj_index + 10;
+                    end
                 else
                     active = 0;
                 end
