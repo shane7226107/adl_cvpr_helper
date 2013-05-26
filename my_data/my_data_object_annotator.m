@@ -5,7 +5,7 @@ function my_data_object_annotator(start_frame)
     end
 
     %video name
-    video_name = 'P01.mp4';
+    video_name = 'P02.mp4';
 
     %output
     global f_id obj_list
@@ -45,7 +45,7 @@ function my_data_object_annotator(start_frame)
     %Load video
     video_obj = video_load(['videos/' video_name]);   
     
-    frame_index = start_frame;
+    frame_index = int32(start_frame);
     hFig = figure;
     
     while 1
