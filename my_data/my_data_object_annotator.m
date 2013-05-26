@@ -1,14 +1,15 @@
 function my_data_object_annotator
     
+    %video name
+    video_name = 'P01.mp4';
+
     %output
     global f_id obj_list
-    f_id = fopen('out.txt','a');
+    f_id = fopen([video_name '_label.txt'],'a');
     fprintf(f_id,'\n %s \n\n',datestr(now,'dd-mm-yyyy HH:MM:SS FFF'));
     
     %obj_list
-    %{
-        obj list
-
+    %{            
         1 : laptop
         2 : cup
         3 : book
@@ -36,7 +37,7 @@ function my_data_object_annotator
     obj_list = obj_list';
     
     %Load video
-    video_obj = video_load('videos/P01.mp4');   
+    video_obj = video_load(['videos/' video_name]);   
     
     frame_index = 1;
     hFig = figure;
