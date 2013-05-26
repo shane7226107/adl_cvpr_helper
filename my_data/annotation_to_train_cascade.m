@@ -42,8 +42,14 @@ function annotation_to_train_cascade(videos)
     };
     obj_list = obj_list';
     
+    %positive
     for obj=1:21
+        
         fprintf('obj %d  %s\n',obj,obj_list{obj});
+        
+        filename = sprintf('cascade/%02d_%s.info',obj,obj_list{obj});
+        fid = fopen(filename,'w');
+        
         for video=videos
             fprintf('seeking object in video:%d\n',video);
             obj_annotation = obj_annotation_read(video);
@@ -55,9 +61,11 @@ function annotation_to_train_cascade(videos)
                 frame_index = obj_annotation{5}(line);
                 obj_index = obj_annotation{7}(line);            
                 
-                fprintf('%d %d %d %d %06d %d\n',x,y,width,height,frame_index,obj_index);
+                %fprintf('%d %d %d %d %06d %d\n',x,y,width,height,frame_index,obj_index);
             end
         end
+        
+        fclose all;
     end
 
 end
