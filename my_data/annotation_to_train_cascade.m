@@ -1,4 +1,4 @@
-function annotation_to_train_cascade()
+function annotation_to_train_cascade(videos)
 
 
 %obj_list
@@ -13,11 +13,41 @@ function annotation_to_train_cascade()
     8 : dispenser
     9 : tap
     10: human
-    11: copier %keyboard = 'c'
+    21: copier %keyboard = 'c'
 %}
-
-for obj=1:11
-end
+    
+    global obj_list
+    obj_list = {          
+        'laptop'
+        'cup'
+        'book'
+        'teabag'
+        'cell'
+        'window'
+        'papers'
+        'dispenser'
+        'tap'
+        'human'
+        'active_laptop'
+        'active_cup'
+        'active_book'
+        'active_teabag'
+        'active_cell'
+        'active_window'
+        'active_papers'
+        'active_dispenser'
+        'active_tap'
+        'active_human'
+        'active_copier'
+    };
+    obj_list = obj_list';
+    
+    for obj=1:21
+        fprintf('obj %d  %s\n',obj,obj_list{obj});
+        for video=videos
+            
+        end
+    end
 
 end
 

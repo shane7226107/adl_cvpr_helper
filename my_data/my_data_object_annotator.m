@@ -28,17 +28,27 @@ function my_data_object_annotator(start_frame)
     %}
 
     obj_list = {          
-    'laptop'
-    'cup'
-    'book'
-    'teabag'
-    'cell'
-    'window'
-    'papers'
-    'dispenser'
-    'tap'
-    'human'
-    'copier'
+        'laptop'
+        'cup'
+        'book'
+        'teabag'
+        'cell'
+        'window'
+        'papers'
+        'dispenser'
+        'tap'
+        'human'
+        'active_laptop'
+        'active_cup'
+        'active_book'
+        'active_teabag'
+        'active_cell'
+        'active_window'
+        'active_papers'
+        'active_dispenser'
+        'active_tap'
+        'active_human'
+        'active_copier'
     };
     obj_list = obj_list';
     
