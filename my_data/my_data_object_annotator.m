@@ -1,5 +1,9 @@
-function my_data_object_annotator
+function my_data_object_annotator(start_frame)
     
+    if nargin < 1
+        start_frame = 1;
+    end
+
     %video name
     video_name = 'P01.mp4';
 
@@ -20,6 +24,7 @@ function my_data_object_annotator
         8 : dispenser
         9 : tap
         10: human
+        11: copier %keyboard = 'c'
     %}
 
     obj_list = {          
@@ -32,14 +37,15 @@ function my_data_object_annotator
     'papers'
     'dispenser'
     'tap'
-    'human'      
+    'human'
+    'copier'
     };
     obj_list = obj_list';
     
     %Load video
     video_obj = video_load(['videos/' video_name]);   
     
-    frame_index = 1;
+    frame_index = start_frame;
     hFig = figure;
     
     while 1
@@ -60,8 +66,14 @@ function my_data_object_annotator
         elseif key == 29            
             fprintf('next frame\n');
             frame_index = frame_index + video_obj.FrameRate;
-        elseif key >= 48 && key <= 57
-            obj_index = key-48;
+        elseif (key >= 48 && key <= 57) || (key == 99)
+            
+            if key == 99
+                obj_index = 11;
+            else
+                obj_index = key-48;
+            end
+            
             if obj_index == 0
                 obj_index = 10;
             end
