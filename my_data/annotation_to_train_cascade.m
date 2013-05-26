@@ -61,11 +61,13 @@ function annotation_to_train_cascade(videos)
                 frame_index = obj_annotation{5}(line);
                 obj_index = obj_annotation{7}(line);            
                 
-                %fprintf('%d %d %d %d %06d %d\n',x,y,width,height,frame_index,obj_index);
+                if obj_index == obj
+                    fprintf(fid,'img_P%02d_frame_%06d.jpg 1 %d %d %d %d\n',video,frame_index,x,y,width,height);
+                end
             end
         end
         
-        fclose all;
+        fclose(fid);
     end
 
 end
@@ -82,6 +84,6 @@ function obj_annotation = obj_annotation_read(index)
     %Usage:
     %obj_anno{col}(row)
     %obj_anno{7}(1)
-    fclose all;
+    fclose(fid);
     fprintf('finished reading annotation file\n');
 end
