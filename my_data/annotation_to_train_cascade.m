@@ -70,7 +70,7 @@ function annotation_to_train_cascade(videos)
                 
                 
                 if obj_index == obj                    
-                    fprintf(fid_pos,'img_P%02d_frame_%06d.jpg 1 %d %d %d %d\n',video,frame_index,x,y,width,height);
+                    fprintf(fid_pos,'../img_P%02d_frame_%06d.jpg 1 %d %d %d %d\n',video,frame_index,x,y,width,height);
                     obj_pos(obj,video,frame_index) = 1;             
                 end
             end
@@ -100,7 +100,7 @@ function annotation_to_train_cascade(videos)
                 obj_index = obj_annotation{7}(line);
                 
                 if obj_index ~= obj && obj_pos(obj,video,frame_index) == 0 && frame_index ~= last_frame      
-                    fprintf(fid_bg,'img_P%02d_frame_%06d.jpg\n',video,frame_index);
+                    fprintf(fid_bg,'../img_P%02d_frame_%06d.jpg\n',video,frame_index);
                     last_frame = frame_index;
                 end  
 

@@ -1,18 +1,6 @@
 import os
 import math
 
-#sub-routine used for appending log msgs
-def append_log(p,log):
-        while 1:
-                line = p.readline()
-                if not line: break
-                log.append(line)
-        return log
-
-def append_file(fid,lines):
-        for l in lines:
-                fid.write(l)
-
 print 'Batch expand the traning data...'
 
 info_dat_num = 10000
