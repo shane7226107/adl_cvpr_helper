@@ -5,7 +5,11 @@ function batch_FP_ADL_evaluation_recall_precision(videos,thres_range)
     %filename = '0516_FPN_300_dpm_thres_0.7/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
     %filename = '0516_FPN_300_dpm_thres_0.7/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
     %filename = '0520_FPN_300_dpm_thres_0.75/no_pyramid/result_';matfile='recall_precision_no_pyramid.mat';
-    filename = '0520_FPN_300_dpm_thres_0.75/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = '0520_FPN_300_dpm_thres_0.75/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = 'thres_test/5/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = 'thres_test/7/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    %filename = 'thres_test/30/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
+    filename = 'thres_test/60/pyramid/result_';matfile='recall_precision_with_pyramid.mat';
     
 
     avg_precision_list = [];
