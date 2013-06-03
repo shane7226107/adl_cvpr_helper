@@ -5,7 +5,7 @@ function my_data_action_annotator(start_frame)
     end
 
     %video name
-    video_name = 'P02.mp4';
+    video_name = 'P03.mp4';
         
     %action_list
     %{            
