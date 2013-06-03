@@ -5,33 +5,8 @@ function my_data_action_annotator(start_frame)
     end
 
     %video name
-    video_name = 'P05.mp4';
-    
-    [    ]????
-
-[    ]????
-
-[    ]??
-
-[    ]??( ?????????)
-
-[    ]????
-
-[    ]???
-
-[    ]??
-
-Multi-stage activities:
-
-???  [    ]??????(??????)  -> [    ]?????
-
-?? [     ]???? -> [    ]????? -> [    ]????
-    
-    %output
-    global f_id action_list
-    f_id = fopen([video_name '_label.txt'],'a');
-    fprintf(f_id,'\n %s \n\n',datestr(now,'dd-mm-yyyy HH:MM:SS FFF'));
-    
+    video_name = 'P02.mp4';
+        
     %action_list
     %{            
         1 : use_computer
@@ -41,11 +16,11 @@ Multi-stage activities:
         5 : talk_to_people
         6 : check_the_weather
         7 : reading
-        8 : beverage_stage_1
-        9 : beverage_stage_2
-        10: copy_documents_stage_1
-        11: copy_documents_stage_2
-        12: copy_documents_stage_3
+        8 : make_coffee_stage_1
+        9 : make_coffee_stage_2
+        10(a): copy_documents_stage_1
+        11(b): copy_documents_stage_2
+        12(c): copy_documents_stage_3
     %}
 
     action_list = {          
@@ -56,8 +31,8 @@ Multi-stage activities:
         'talk_to_people'
         'check_the_weather'
         'reading'
-        'beverage_stage_1'
-        'beverage_stage_2'
+        'making_coffee_stage_1'
+        'making_coffee_stage_2'
         'copy_documents_stage_1'
         'copy_documents_stage_2'
         'copy_documents_stage_3'
@@ -91,14 +66,47 @@ Multi-stage activities:
         elseif key == 27
             fprintf('Quit\n');        
             break;
+        elseif (key >= 49 && key <= 57)
+            fprintf('%s\n',action_list{key-48});
+        elseif ( key >= 97 && key <= 99)
+            fprintf('%s\n',action_list{key-87});
         else
             %do nothing
         end
     end
     
+    
+    %output
+    global f_id action_list
+    f_id = fopen([video_name '_actions.txt'],'a');
+    fprintf(f_id,'\n %s \n\n',datestr(now,'dd-mm-yyyy HH:MM:SS FFF'));
+    
+    
     clear all;
     close all;
     fclose all;
+end
+
+function output(obj_index,active,frame_index)
+    global f_id
+    
+    [x,y,key] = ginput(2);
+    %bounding range
+    x = max(x,0);
+    y = max(y,0);
+    x = min(x,720);
+    y = min(y,480);    
+    
+    str = sprintf('%d %d %d %d\n Y or N?',int32(x(1)),int32(y(1)),int32(x(2)),int32(y(2)));
+    text(10,60,str);
+    
+    [x2,y2,key] = ginput(1);
+    
+    if key == 121
+        fprintf(f_id,'%03d %03d %03d %03d %06d %d %d\n',int32(x(1)),int32(y(1)),int32(x(2)),int32(y(2)),int32(frame_index),active,int32(obj_index));
+    else
+        fprintf('action canceled\n');
+    end
 end
 
 function video_obj = video_load(filename)
@@ -125,6 +133,8 @@ end
 % left : 28
 % right : 29
 % numbers #0~#9 : 48~57
-
+% a = 97
+% b = 98
+% c = 99
 
 
