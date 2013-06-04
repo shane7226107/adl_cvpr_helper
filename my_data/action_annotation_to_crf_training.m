@@ -2,12 +2,29 @@ function action_annotation_to_crf_training()
 
     fprintf('action_annotation_to_crf_training\n');
     
+    video_length = [10831 12481 14551 12331 13021];
     
     for video=1:1
+        
         obj_annotation = obj_annotation_read(video);
         action_annotation = action_annotation_read(video);
+        
+        obj_frame_matrix = zeros(video_length,21);
+        
+        for line=1:size(obj_annotation{1},1)
+            
+            x = obj_annotation{1}(line);
+            y = obj_annotation{2}(line);
+            width = obj_annotation{3}(line) - x;
+            height = obj_annotation{4}(line) - y;
+            frame_index = obj_annotation{5}(line);
+            obj_index = obj_annotation{7}(line);   
+            
+            obj_frame_matrix(frame_index,obj_index) = 1;
+        end
     end
     
+    save('obj_frame_matrix.mat','obj_frame_matrix');
 end
 
 
