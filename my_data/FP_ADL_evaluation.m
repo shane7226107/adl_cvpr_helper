@@ -1,6 +1,6 @@
 function FP_ADL_evaluation()
     
-    global action_list
+    global action_list 
     action_list = {          
         'use_computer'
         'use_cell'
@@ -18,14 +18,21 @@ function FP_ADL_evaluation()
     
     for test_video=1:5
         
-       action_annotation = action_annotation_read(test_video);
+       action_annotation = action_annotation_read(test_video);       
        
        result_no_pyramid = result_read(test_video,0);
        
-       result_pyramid = result_read(test_video,1);
+       %result_pyramid = result_read(test_video,1);       
        
-%        precision_list = [];
-%        recall_list = [];
+       precision_list = [];
+       recall_list = [];
+       
+       for action=1:size(action_list,2)
+           action_name = action_list{action};
+           
+           precision= action_evaluation_precision(result_no_pyramid,action_name,action_annotation);
+           
+       end
 %        
 %        for action=1:size(action_list,2)
 %             action_name = action_list{action};
@@ -78,42 +85,67 @@ function action_annotation = action_annotation_read(index)
     fprintf('finished reading action annotation file\n');
 end
 
-function [precision,recall] = action_evaluation(result,action_name)    
+function [precision,recall] = action_evaluation(result,action_name,action_annotation,thres)
     
     tp = 0;
     fp = 0;
     tn = 0;
     fn = 0;
-    
+
     for line=1:size(result{1},1)
         
-        truth = result{22}{line};
-        prediction = result{23}{line};
+        frame = result{1}(line);
+        prediction = result{2}{line};        
+        prob = result{3}(line);
         
-        %fprintf('%s %s\n',truth,prediction);      
-        
-        if strcmp(truth,action_name)           
-            if strcmp(truth,prediction)
+        if prob >= thres && strcmp(prediction,action_name)
+            
+            true = -1;
+            
+            for i=1:size(action_annotation{1},1)
+                start_frame = action_annotation{1}(i);
+                end_frame = action_annotation{2}(i);
+                ground_truth = action_annotation{4}{i};
+                
+                if frame >= start_frame && frame <= end_frame && strcmp(action_name, ground_truth)
+                    true = 1;
+                    break;
+                end
+            end
+            
+            if true == 1
                 tp = tp + 1;
+            else
+                fp = fp + 1;
+            end
+        else
+            true = 1;
+            
+            for i=1:size(action_annotation{1},1)
+                start_frame = action_annotation{1}(i);
+                end_frame = action_annotation{2}(i);
+                ground_truth = action_annotation{4}{i};
+                
+                if frame >= start_frame && frame <= end_frame && strcmp(action_name, ground_truth)
+                    true = -1;
+                    break;
+                end
+            end
+            
+            if true == 1
+                tn = tn + 1;
             else
                 fn = fn + 1;
             end
-        else
-            if strcmp(action_name,prediction)
-                fp = fp + 1;
-            else
-                tn = tn + 1;
-            end
-        end
+        end       
+
+        
         
     end
     
-    if (tp+fp) == 0 || (tp+fn) == 0
-        precision = -1;
-        recall = -1;
-    else
-        precision = tp/(tp+fp);
-        recall = tp/(tp+fn);   
-    end    
+    
+    precision = tp/(tp+fp);
+    recall = tp/(tp+fn);   
+    
     
 end
