@@ -1,4 +1,4 @@
-function FP_ADL_evaluation()
+function FP_ADL_evaluation(thres,pyramid)
     
     global action_list 
     action_list = {          
@@ -15,28 +15,98 @@ function FP_ADL_evaluation()
         'copy_documents_stage_2'        
     };
     action_list = action_list';
+       
+
+   precision_list = [];
+   recall_list = [];
+
+   for action=1:11
+       
+       action_name = action_list{action};
+
+       for test_video=1:5
+           action_annotation = action_annotation_read(test_video);
+           FP_ADL_result = result_read(test_video,pyramid);
+           [precision,recall] = evaluation(action_name,thres,FP_ADL_result,action_annotation);
+           
+           if precision ~= -1 && recall ~= -1
+                precision_list = [precision_list precision];
+                recall_list = [recall_list recall];
+            end
+       end           
+   end
+
+   
+   fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));
+
+       
+
+end
+
+function [precision,recall] = evaluation(action_name,thres,result,ground_truth)
     
-    for test_video=1:5
+    tp = 0;
+    fp = 0;
+    tn = 0;
+    fn = 0;
+
+    for line=1:size(result{1},1)
         
-       action_annotation = action_annotation_read(test_video);       
-       
-       result_no_pyramid = result_read(test_video,0);
-       
-       %result_pyramid = result_read(test_video,1);       
-       
-       precision_list = [];
-       recall_list = [];
-       
-       for action=1:11
-           action_name = action_list{action}
-       end
-
-       
-%      fprintf('video %d \n avg precision : %f \n avg recall : %f \n', test_video,mean(precision_list),mean(recall_list));
-
-       
+        frame = result{1}(line);
+        prediction = result{2}{line};        
+        prob = result{3}(line);
+        
+        if prob >= thres && strcmp(prediction,action_name)
+            
+            true = -1;
+            
+            for i=1:size(ground_truth{1},1)
+                start_frame = ground_truth{1}(i);
+                end_frame = ground_truth{2}(i);
+                ground_truth_action = ground_truth{4}{i};
+                
+                if frame >= start_frame && frame <= end_frame && strcmp(action_name, ground_truth_action)
+                    true = 1;
+                    break;
+                end
+            end
+            
+            if true == 1
+                tp = tp + 1;
+            else
+                fp = fp + 1;
+            end
+        else
+            true = 1;
+            
+            for i=1:size(ground_truth{1},1)
+                start_frame = ground_truth{1}(i);
+                end_frame = ground_truth{2}(i);
+                ground_truth_action = ground_truth{4}{i};
+                
+                if frame >= start_frame && frame <= end_frame && strcmp(action_name, ground_truth_action)
+                    true = -1;
+                    break;
+                end
+            end
+            
+            if true == 1
+                tn = tn + 1;
+            else
+                fn = fn + 1;
+            end
+        end
+        
     end
-
+    
+    if (tp+fp) == 0 || (tp+fn) == 0
+        precision = -1;
+        recall = -1;
+    else
+        precision = tp/(tp+fp);
+        recall = tp/(tp+fn);   
+    end  
+    
 end
 
 function result = result_read(index,pyramid)    
