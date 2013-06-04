@@ -37,11 +37,37 @@ function action_annotation_to_crf_training_cross_valid()
 
             %Action annotaion reading
             action_annotation = action_annotation_read(video);
-            for line=1:size(action_annotation{1},1)
+
+            for line=1:size(action_annotation{1},1)        
+
                 start_frame = action_annotation{1}(line);
                 end_frame = action_annotation{2}(line);
                 action_id = action_annotation{3}(line);
                 action_name = action_annotation{4}{line};
+
+                if ~isempty(strfind(action_name, 'stage'))
+                    fprintf('multi stage action : %s\n',action_name);
+
+                    if ~isempty(strfind(action_name, 'make_coffee_stage_1'))
+                        make_coffee(1) = start_frame;
+                        make_coffee(2) = end_frame;
+                    elseif ~isempty(strfind(action_name, 'make_coffee_stage_2'))
+                        make_coffee(3) = start_frame;
+                        make_coffee(4) = end_frame;
+                    elseif ~isempty(strfind(action_name, 'copy_documents_stage_1'))
+                        copy_documents(1) = start_frame;
+                        copy_documents(2) = end_frame;
+                    elseif ~isempty(strfind(action_name, 'copy_documents_stage_2'))
+                        copy_documents(3) = start_frame;
+                        copy_documents(4) = end_frame;
+                    else                    
+                        %ignoring copy document stage 3
+                    end
+
+                    continue;
+                else
+                    fprintf('%d %d %d %s \n', start_frame,end_frame,action_id,action_name);
+                end
 
                 fprintf('%d %d %d %s \n', start_frame,end_frame,action_id,action_name);
 
@@ -58,10 +84,60 @@ function action_annotation_to_crf_training_cross_valid()
                     %output
                     fprintf(fid_out,'%d ',features(1,:));
                     fprintf(fid_out,'%s \n\n',action_name);
-                end
-
-
+                end            
             end
+
+            %multi-stage outputs
+            %coffee
+            features_stage_1 = zeros(1,21);
+            features_stage_2 = zeros(1,21);
+            for frame=make_coffee(1):1:make_coffee(2)
+
+                if frame > video_length(video)
+                    continue;
+                end            
+
+                features_stage_1 = features_stage_1 | obj_frame_matrix(frame,:);            
+            end
+            for frame=make_coffee(3):1:make_coffee(4)
+
+                if frame > video_length(video)
+                    continue;
+                end            
+
+                features_stage_2 = features_stage_2 | obj_frame_matrix(frame,:);            
+            end
+            %output
+            fprintf(fid_out,'%d ',features_stage_1(1,:));
+            fprintf(fid_out,'%s \n','make_coffee_stage_1');
+            fprintf(fid_out,'%d ',features_stage_2(1,:));
+            fprintf(fid_out,'%s \n\n','make_coffee_stage_2');
+
+            %multi-stage outputs
+            %copy
+            features_stage_1 = zeros(1,21);
+            features_stage_2 = zeros(1,21);
+            for frame=copy_documents(1):1:copy_documents(2)
+
+                if frame > video_length(video)
+                    continue;
+                end            
+
+                features_stage_1 = features_stage_1 | obj_frame_matrix(frame,:);            
+            end
+            for frame=copy_documents(3):1:copy_documents(4)
+
+                if frame > video_length(video)
+                    continue;
+                end            
+
+                features_stage_2 = features_stage_2 | obj_frame_matrix(frame,:);            
+            end
+            %output
+            fprintf(fid_out,'%d ',features_stage_1(1,:));
+            fprintf(fid_out,'%s \n','copy_documents_stage_1');
+            fprintf(fid_out,'%d ',features_stage_2(1,:));
+            fprintf(fid_out,'%s \n\n','copy_documents_stage_2');
         end
         
         
