@@ -20,11 +20,21 @@ function cross_valid_evaluation()
         
        result = result_read(test_video);
        
+       precision_list = [];
+       recall_list = [];
+       
        for action=1:size(action_list,2)
             action_name = action_list{action};
             [precision,recall] = action_evaluation(result,action_name);
-            fprintf('precision : %f \n recall : %f \n', precision,recall);
-       end
+            
+            if precision ~= -1 && recall ~= -1
+                precision_list = [precision_list precision];
+                recall_list = [recall_list recall];
+            end
+       end      
+       
+       fprintf('video %d \n avg precision : %f \n avg recall : %f \n', test_video,mean(precision_list),mean(recall_list));
+       
     end
 
 end
@@ -57,8 +67,7 @@ function [precision,recall] = action_evaluation(result,action_name)
         truth = result{22}{line};
         prediction = result{23}{line};
         
-        fprintf('%s %s\n',truth,prediction);       
-       
+        %fprintf('%s %s\n',truth,prediction);      
         
         if strcmp(truth,action_name)           
             if strcmp(truth,prediction)
