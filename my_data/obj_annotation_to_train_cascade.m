@@ -1,4 +1,4 @@
-function annotation_to_train_cascade(videos)
+function obj_annotation_to_train_cascade(videos)
 
 
 %obj_list
