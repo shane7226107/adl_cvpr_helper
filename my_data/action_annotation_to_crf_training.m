@@ -6,8 +6,8 @@ function action_annotation_to_crf_training()
     
     for video=1:1
         
+        %Object annotaion reading
         obj_annotation = obj_annotation_read(video);
-        action_annotation = action_annotation_read(video);
         
         obj_frame_matrix = zeros(video_length,21);
         
@@ -18,13 +18,25 @@ function action_annotation_to_crf_training()
             width = obj_annotation{3}(line) - x;
             height = obj_annotation{4}(line) - y;
             frame_index = obj_annotation{5}(line);
-            obj_index = obj_annotation{7}(line);   
+            obj_id = obj_annotation{7}(line);   
             
-            obj_frame_matrix(frame_index,obj_index) = 1;
+            obj_frame_matrix(frame_index,obj_id) = 1;
+        end
+        
+        %Action annotaion reading
+        action_annotation = action_annotation_read(video);
+        for line=1:size(action_annotation{1},1)
+            start_frame = action_annotation{1}(line);
+            end_frame = action_annotation{2}(line);
+            action_id = action_annotation{3}(line);
+            action_name = action_annotation{4}{line};
+            
+            fprintf('%d %d %d %s \n', start_frame,end_frame,action_id,action_name);
         end
     end
     
-    save('obj_frame_matrix.mat','obj_frame_matrix');
+    
+    %save('obj_frame_matrix.mat','obj_frame_matrix');
 end
 
 
