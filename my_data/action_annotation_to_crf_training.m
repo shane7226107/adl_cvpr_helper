@@ -4,7 +4,12 @@ function action_annotation_to_crf_training()
     
     video_length = [10831 12481 14551 12331 13021];
     
+    FPN = 90;
+    
     for video=1:1
+        
+        filename = sprintf('action_crf_training/P_%02d.txt',video);
+        fid_out = fopen(filename,'w');
         
         %Object annotaion reading
         obj_annotation = obj_annotation_read(video);
@@ -32,14 +37,20 @@ function action_annotation_to_crf_training()
             action_name = action_annotation{4}{line};
             
             fprintf('%d %d %d %s \n', start_frame,end_frame,action_id,action_name);
+            
+            features = zeros(1,21);
+            for frame=start_frame:FPN:end_frame
+                features = features | obj_frame_matrix(frame,:);
+            end
+            
+            fprintf(fid_out,'%d ',features(1,:));
+            fprintf(fid_out,'%s \n\n',action_name);
         end
     end
     
     
     %save('obj_frame_matrix.mat','obj_frame_matrix');
 end
-
-
 
 function obj_annotation = obj_annotation_read(index)    
     
