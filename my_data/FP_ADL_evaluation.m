@@ -1,4 +1,4 @@
-function FP_ADL_evaluation(thres,pyramid)
+function [recall,precision] = FP_ADL_evaluation(thres,pyramid)
     
     global action_list 
     action_list = {          
@@ -38,8 +38,9 @@ function FP_ADL_evaluation(thres,pyramid)
 
    
    fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));
-
-       
+    
+   recall = mean(recall_list);
+   precision = mean(precision_list);       
 
 end
 
