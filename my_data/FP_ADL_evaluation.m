@@ -86,19 +86,20 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
     end
     
     %recall
-    for frame=ground_truth_start:FPN:ground_truth_end
+    for GT_frame=ground_truth_start:FPN:ground_truth_end
         
         this_is_false_negative=1;
         
-        for line=1:size(result{1},1)
-            
+        for line=1:size(result{1},1)            
             prediction_frame = result{1}(line);
             prediction = result{2}{line};
-            prediction_prob = result{3}(line);            
+            prediction_prob = result{3}(line);
             
-            if prob >= thres && strcmp(prediction,action_name)
-                this_is_false_negative = 0;
-                break;
+            if prediction_frame == GT_frame && strcmp(prediction,action_name)
+                if prediction_prob >= thres
+                    this_is_false_negative = 0;
+                    break;
+                end
             end
         end
         
