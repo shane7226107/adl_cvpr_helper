@@ -9,8 +9,8 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
         'talk_to_people'
         'check_the_weather'
         'reading'
-        'making_coffee_stage_1'
-        'making_coffee_stage_2'
+        'make_coffee_stage_1'
+        'make_coffee_stage_2'
         'copy_documents_stage_1'
         'copy_documents_stage_2'        
     };
@@ -20,8 +20,8 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
    precision_list = [];
    recall_list = [];
     
-   %for action=8:11
-   for action=1:11
+   for action=9
+   %for action=1:11
        
        action_name = action_list{action};
 
@@ -36,13 +36,17 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
            end
        end           
    end
-
    
    fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));
-    
-   recall = mean(recall_list);
-   precision = mean(precision_list);       
-
+   
+   if isempty(precision_list) || isempty(recall_list)
+       recall = -1;
+       precision = -1;
+   else
+       recall = mean(recall_list);
+       precision = mean(precision_list);
+   end
+   
 end
 
 function [precision,recall] = evaluation(action_name,thres,result,ground_truth,FPN)

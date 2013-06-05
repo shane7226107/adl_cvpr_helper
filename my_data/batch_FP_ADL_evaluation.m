@@ -8,13 +8,19 @@ recall_list_pyramid = [];
 for thres=thres_range
     
    [recall,precision] = FP_ADL_evaluation(thres,0,FPN);
-   precision_list_no_pyramid = [precision_list_no_pyramid precision];
-   recall_list_no_pyramid = [recall_list_no_pyramid recall];
+   if recall ~= -1 && precision ~= -1
+       precision_list_no_pyramid = [precision_list_no_pyramid precision];
+       recall_list_no_pyramid = [recall_list_no_pyramid recall];
+   end
    
    [recall,precision] = FP_ADL_evaluation(thres,1,FPN);
-   precision_list_pyramid = [precision_list_pyramid precision];
-   recall_list_pyramid = [recall_list_pyramid recall];
+   if recall ~= -1 && precision ~= -1
+       precision_list_pyramid = [precision_list_pyramid precision];
+       recall_list_pyramid = [recall_list_pyramid recall];
+   end
    
+   recall_list_no_pyramid
+   recall_list_pyramid
 end
 
 %precision only
