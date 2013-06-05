@@ -20,8 +20,8 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
    precision_list = [];
    recall_list = [];
     
-   for action=9
-   %for action=1:11
+   %for action=11
+   for action=1:11
        
        action_name = action_list{action};
 
@@ -53,8 +53,6 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
     
     tp = 0;
     fp = 0;
-    tn = 0;
-    fn = 0;
     
     %Find the ground truth first
     ground_truth_start = -1;
@@ -89,28 +87,26 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end
     
-%     %recall
-%     for GT_frame=ground_truth_start:FPN:ground_truth_end
-%         
-%         this_is_false_negative=1;
-%         
-%         for line=1:size(result{1},1)            
-%             prediction_frame = result{1}(line);
-%             prediction = result{2}{line};
-%             prediction_prob = result{3}(line);
-%             
-%             if prediction_frame == GT_frame && strcmp(prediction,action_name)
-%                 if prediction_prob >= thres
-%                     this_is_false_negative = 0;
-%                     break;
-%                 end
-%             end
-%         end
-%         
-%         fn = fn + this_is_false_negative;
-%     end
+    %recall
+    %
+    hit = 0;    
+    for GT_frame=ground_truth_start:FPN:ground_truth_end        
+        for line=1:size(result{1},1)
+            
+            frame = result{1}(line);
+            prediction = result{2}{line};        
+            prob = result{3}(line);
+            
+            if prob >= thres && strcmp(prediction,action_name)
+                if frame - FPN  <= GT_frame && frame + FPN  >= GT_frame
+                    hit = hit + 1;
+                    break;
+                end
+            end
+        end
+    end   
     
-    
+    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN);    
     
     if (tp+fp) == 0
         precision = -1;
@@ -118,8 +114,9 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
     else
         precision = tp/(tp+fp);
         %recall = tp/(tp+fn);      
-        A = double((ground_truth_end-ground_truth_start)/FPN);        
-        recall = tp/A;
+        %A = double((ground_truth_end-ground_truth_start)/FPN);        
+        %recall = tp/A;
+        recall = hit/number_of_GT_instances;
     end  
     
 end
