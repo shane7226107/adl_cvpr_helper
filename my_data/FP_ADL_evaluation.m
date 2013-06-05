@@ -85,35 +85,37 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end
     
-    %recall
-    for GT_frame=ground_truth_start:FPN:ground_truth_end
-        
-        this_is_false_negative=1;
-        
-        for line=1:size(result{1},1)            
-            prediction_frame = result{1}(line);
-            prediction = result{2}{line};
-            prediction_prob = result{3}(line);
-            
-            if prediction_frame == GT_frame && strcmp(prediction,action_name)
-                if prediction_prob >= thres
-                    this_is_false_negative = 0;
-                    break;
-                end
-            end
-        end
-        
-        fn = fn + this_is_false_negative;
-    end
+%     %recall
+%     for GT_frame=ground_truth_start:FPN:ground_truth_end
+%         
+%         this_is_false_negative=1;
+%         
+%         for line=1:size(result{1},1)            
+%             prediction_frame = result{1}(line);
+%             prediction = result{2}{line};
+%             prediction_prob = result{3}(line);
+%             
+%             if prediction_frame == GT_frame && strcmp(prediction,action_name)
+%                 if prediction_prob >= thres
+%                     this_is_false_negative = 0;
+%                     break;
+%                 end
+%             end
+%         end
+%         
+%         fn = fn + this_is_false_negative;
+%     end
     
     
     
-    if (tp+fp) == 0 || (tp+fn) == 0
+    if (tp+fp) == 0
         precision = -1;
         recall = -1;
     else
         precision = tp/(tp+fp);
-        recall = tp/(tp+fn);       
+        %recall = tp/(tp+fn);      
+        A = double((ground_truth_end-ground_truth_start)/FPN);        
+        recall = tp/A;
     end  
     
 end

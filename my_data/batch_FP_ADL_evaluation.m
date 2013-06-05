@@ -18,7 +18,7 @@ for thres=thres_range
 end
 
 %precision only
-if 0 
+if 0
     plot(precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
 
     hold all
