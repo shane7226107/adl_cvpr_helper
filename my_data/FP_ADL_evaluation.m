@@ -25,7 +25,7 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
        
        action_name = action_list{action};
 
-       for test_video=1:5
+       for test_video=1:1
            action_annotation = action_annotation_read(test_video);
            FP_ADL_result = result_read(test_video,pyramid,FPN);
            [precision,recall] = evaluation(action_name,thres,FP_ADL_result,action_annotation,FPN);

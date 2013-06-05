@@ -24,7 +24,11 @@ if 0
     hold all
 
     plot(precision_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+    
+    xlabel('Recall');
+    ylabel('Precision');
 end
+
 
 %recall only
 if 1
@@ -33,6 +37,9 @@ if 1
     hold all
 
     plot(recall_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+    
+    xlabel('Recall');
+    ylabel('Precision');
 end
 
 %both
@@ -44,9 +51,6 @@ if 0
     plot(recall_list_pyramid ,precision_list_pyramid,'-rs','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
 
 end
-
-xlabel('Recall');
-ylabel('Precision');
 
 end
 
