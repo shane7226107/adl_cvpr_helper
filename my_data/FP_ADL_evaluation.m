@@ -106,7 +106,7 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end   
     
-    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN);    
+    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN) + 1;    
     
     if (tp+fp) == 0
         precision = -1;
