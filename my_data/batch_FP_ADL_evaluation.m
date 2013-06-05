@@ -6,25 +6,21 @@ precision_list_pyramid = [];
 recall_list_pyramid = [];
 
 for thres=thres_range
-    
-   [recall,precision] = FP_ADL_evaluation(thres,0,FPN);
-   if recall ~= -1 && precision ~= -1
-       precision_list_no_pyramid = [precision_list_no_pyramid precision];
-       recall_list_no_pyramid = [recall_list_no_pyramid recall];
-   end
    
-   [recall,precision] = FP_ADL_evaluation(thres,1,FPN);
-   if recall ~= -1 && precision ~= -1
-       precision_list_pyramid = [precision_list_pyramid precision];
-       recall_list_pyramid = [recall_list_pyramid recall];
-   end
+   %no pyramid
+   [recall,precision] = FP_ADL_evaluation(thres,0,FPN);   
+   precision_list_no_pyramid = [precision_list_no_pyramid precision];
+   recall_list_no_pyramid = [recall_list_no_pyramid recall];   
    
-   recall_list_no_pyramid
-   recall_list_pyramid
+   %with pyramid
+   [recall,precision] = FP_ADL_evaluation(thres,1,FPN);   
+   precision_list_pyramid = [precision_list_pyramid precision];
+   recall_list_pyramid = [recall_list_pyramid recall];
+   
 end
 
 %precision only
-if 0
+if 1
     plot(precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
 
     hold all
@@ -35,7 +31,7 @@ end
 
 
 %recall only
-if 1
+if 0
     plot(recall_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
 
     hold all
