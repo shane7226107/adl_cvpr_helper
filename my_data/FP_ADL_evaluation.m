@@ -53,8 +53,7 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
     fn = 0;
     
     %TODO :
-    % FPN included to count the recall rate? no need to fix    
-    % stage_1 activities ignored mistake ! 
+    % FPN included to count the recall rate?    
     
     %Find the ground truth first
     ground_truth_start = -1;
@@ -84,20 +83,16 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
                 fp = fp + 1;
             end
         else
-            if frame < ground_truth_start || frame > ground_truth_end
-                tn = tn + 1;
-            else
-                fn = fn + 1;
-            end
+            
         end
     end
     
-    if (tp+fp) == 0 || (tp+fn) == 0
+    if (tp+fp) == 0
         precision = -1;
         recall = -1;
     else
         precision = tp/(tp+fp);
-        recall = tp/(tp+fn);        
+        recall = 1       
     end  
     
 end
