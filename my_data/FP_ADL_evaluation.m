@@ -20,40 +20,32 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
    precision_list = [];
    recall_list = [];
     
-   %for action=11
-   for action=1:11
+   %for action=4
+   for action=1:11      
        
        action_name = action_list{action};
-
-       for test_video=1:1
+        
+       %for test_video=1
+       for test_video=1:5
            action_annotation = action_annotation_read(test_video);
            FP_ADL_result = result_read(test_video,pyramid,FPN);
            [precision,recall] = evaluation(action_name,thres,FP_ADL_result,action_annotation,FPN);
            
-           if precision ~= -1 && recall ~= -1
-                precision_list = [precision_list precision];
-                recall_list = [recall_list recall];
-           end
+           precision_list = [precision_list precision];
+           recall_list = [recall_list recall];
        end           
    end
    
    fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));
    
-   if isempty(precision_list) || isempty(recall_list)
-       recall = -1;
-       precision = -1;
-   else
-       recall = mean(recall_list);
-       precision = mean(precision_list);
-   end
+   
+   recall = mean(recall_list);
+   precision = mean(precision_list);  
    
 end
 
 function [precision,recall] = evaluation(action_name,thres,result,ground_truth,FPN)
-    
-    tp = 0;
-    fp = 0;
-    
+       
     %Find the ground truth first
     ground_truth_start = -1;
     ground_truth_end = -1;
@@ -66,10 +58,13 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         if strcmp(action_name, ground_truth_action)
             ground_truth_start = start_frame;
             ground_truth_end = end_frame;
+            break;
         end
     end    
     
     %precision
+    tp = 0;
+    fp = 0;
     for line=1:size(result{1},1)
         
         frame = result{1}(line);
@@ -87,8 +82,7 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end
     
-    %recall
-    %
+    %recall    
     hit = 0;    
     for GT_frame=ground_truth_start:FPN:ground_truth_end        
         for line=1:size(result{1},1)
@@ -104,21 +98,18 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
                 end
             end
         end
-    end   
+    end
     
-    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN) + 1;    
+    hit
+    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN) + 1    
     
     if (tp+fp) == 0
-        precision = -1;
-        recall = -1;
+        precision = 0;
     else
-        precision = tp/(tp+fp);
-        %recall = tp/(tp+fn);      
-        %A = double((ground_truth_end-ground_truth_start)/FPN);        
-        %recall = tp/A;
-        recall = hit/number_of_GT_instances;
+        precision = tp/(tp+fp);                
     end  
     
+    recall = hit/number_of_GT_instances;
 end
 
 function result = result_read(index,pyramid,FPN)    
