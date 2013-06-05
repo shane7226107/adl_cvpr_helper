@@ -17,14 +17,27 @@ for thres=thres_range
    
 end
 
-plot(recall_list_no_pyramid,precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
-        
+% plot(precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
+% 
+% hold all
+% 
+% plot(precision_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+
+plot(recall_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
+
 hold all
 
-plot(recall_list_pyramid ,precision_list_pyramid,'-rs','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+plot(recall_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
 
-xlabel('Recall');
-ylabel('Precision');
+
+% plot(recall_list_no_pyramid,precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
+%         
+% hold all
+% 
+% plot(recall_list_pyramid ,precision_list_pyramid,'-rs','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+% 
+% xlabel('Recall');
+% ylabel('Precision');
 
 end
 
