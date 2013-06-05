@@ -57,7 +57,7 @@ function action_annotation_to_crf_training()
                     %ignoring copy document stage 3
                 end
                 
-                continue;
+                %continue;
             else
                 fprintf('%d %d %d %s \n', start_frame,end_frame,action_id,action_name);
             end

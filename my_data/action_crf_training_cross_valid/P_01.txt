@@ -68,6 +68,22 @@
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 wash_hand 
 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 1 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
 
 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
@@ -84,13 +100,55 @@
 
 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_3 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_3 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_3 
 
 0 1 0 0 0 0 1 0 0 0 0 1 1 1 0 0 0 0 0 0 0 make_coffee_stage_1 
 0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
@@ -166,6 +224,28 @@
 
 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 drink_water 
 
+0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 talk_to_people 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 talk_to_people 
@@ -181,6 +261,52 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 talk_to_people 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 talk_to_people 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_3 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_3 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
 0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 make_coffee_stage_2 
@@ -188,7 +314,11 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 copy_documents_stage_2 
 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+1 1 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
 
@@ -198,6 +328,8 @@
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 talk_to_people 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 talk_to_people 
@@ -227,6 +359,44 @@
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
 
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 1 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 1 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 1 0 0 1 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_3 
 
 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 drink_water 
 
@@ -320,6 +490,16 @@
 
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 reading 
 
+0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 wash_hand 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 wash_hand 
@@ -328,6 +508,20 @@
 
 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 wash_hand 
 
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 make_coffee_stage_2 
+
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 drink_water 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 drink_water 
@@ -341,6 +535,24 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 talk_to_people 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 talk_to_people 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_1 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 copy_documents_stage_2 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 check_the_weather 
 
@@ -349,6 +561,10 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 check_the_weather 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_3 
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 copy_documents_stage_3 
 
 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 make_coffee_stage_1 
 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 make_coffee_stage_2 
