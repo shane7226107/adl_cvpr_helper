@@ -36,8 +36,7 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
        end           
    end
    
-   fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));
-   
+   %fprintf('all actions in all video\n avg precision : %f \n avg recall : %f \n',mean(precision_list),mean(recall_list));   
    
    recall = mean(recall_list);
    precision = mean(precision_list);  
@@ -100,8 +99,8 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end
     
-    hit
-    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN) + 1    
+    %hit
+    number_of_GT_instances = double((ground_truth_end-ground_truth_start)/FPN) + 1;    
     
     if (tp+fp) == 0
         if number_of_GT_instances > 0
@@ -124,7 +123,7 @@ function result = result_read(index,pyramid,FPN)
         filename = sprintf('FP_ADL_result/FPN_%d/no_pyramid/result_%02d.txt',FPN,index);
     end
     
-    fprintf('reading: %s\n', filename);
+    %fprintf('reading: %s\n', filename);
     
     fid = fopen(filename);
     %1 use_cell 0.890130
@@ -133,14 +132,14 @@ function result = result_read(index,pyramid,FPN)
     %obj_anno{col}(row)
     %obj_anno{7}(1)
     fclose(fid);
-    fprintf('finished reading FP_ADL_result file\n');
+    %fprintf('finished reading FP_ADL_result file\n');
 end
 
 function action_annotation = action_annotation_read(index)    
     
     filename = sprintf('annotations/action/P%02d.txt',index);
     
-    fprintf('reading: %s\n', filename);
+    %fprintf('reading: %s\n', filename);
     
     fid = fopen(filename);
     %001021 001351 4 drink_water
@@ -149,5 +148,5 @@ function action_annotation = action_annotation_read(index)
     %obj_anno{col}(row)
     %obj_anno{7}(1)
     fclose(fid);
-    fprintf('finished reading action annotation file\n');
+    %fprintf('finished reading action annotation file\n');
 end

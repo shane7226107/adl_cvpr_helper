@@ -7,6 +7,8 @@ recall_list_pyramid = [];
 
 for thres=thres_range
    
+   fprintf('thres = %f\n',thres); 
+    
    %no pyramid
    [recall,precision] = FP_ADL_evaluation(thres,0,FPN);   
    precision_list_no_pyramid = [precision_list_no_pyramid precision];
