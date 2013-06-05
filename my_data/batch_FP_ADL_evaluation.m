@@ -1,9 +1,9 @@
 function batch_FP_ADL_evaluation(FPN,thres_range)
 
-precision_list_no_pyramid = [];
-recall_list_no_pyramid = [];
-precision_list_pyramid = [];
-recall_list_pyramid = [];
+precision_list_no_pyramid = [0];
+recall_list_no_pyramid = [1];
+precision_list_pyramid = [0];
+recall_list_pyramid = [1];
 
 for thres=thres_range
    
@@ -20,6 +20,12 @@ for thres=thres_range
    recall_list_pyramid = [recall_list_pyramid recall];
    
 end
+
+precision_list_no_pyramid = [precision_list_no_pyramid 1];
+recall_list_no_pyramid = [recall_list_no_pyramid 0];   
+precision_list_pyramid = [precision_list_pyramid 1];
+recall_list_pyramid = [recall_list_pyramid 0];
+
 
 %precision only
 if 0

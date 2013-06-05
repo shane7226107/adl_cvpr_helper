@@ -20,8 +20,8 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
    precision_list = [];
    recall_list = [];
     
-   %for action=4
-   for action=1:11      
+   for action=[8 9 10 11]
+   %for action=1:11      
        
        action_name = action_list{action};
         
