@@ -1,4 +1,4 @@
-function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
+function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN,stage_only)
     
     global action_list 
     action_list = {          
@@ -19,9 +19,14 @@ function [recall,precision] = FP_ADL_evaluation(thres,pyramid,FPN)
 
    precision_list = [];
    recall_list = [];
-    
-   for action=[8 9 10 11]
-   %for action=1:11      
+   
+   if stage_only == 1
+       test_actions = [8 9 10 11];
+   else
+       test_actions = 1:11;
+   end
+   
+   for action=test_actions      
        
        action_name = action_list{action};
         

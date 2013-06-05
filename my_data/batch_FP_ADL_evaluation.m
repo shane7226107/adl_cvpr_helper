@@ -1,4 +1,4 @@
-function batch_FP_ADL_evaluation(FPN,thres_range)
+function batch_FP_ADL_evaluation(FPN,thres_range,stage_only)
 
 precision_list_no_pyramid = [0];
 recall_list_no_pyramid = [1];
@@ -10,12 +10,12 @@ for thres=thres_range
    fprintf('thres = %f\n',thres); 
     
    %no pyramid
-   [recall,precision] = FP_ADL_evaluation(thres,0,FPN);   
+   [recall,precision] = FP_ADL_evaluation(thres,0,FPN,stage_only);   
    precision_list_no_pyramid = [precision_list_no_pyramid precision];
    recall_list_no_pyramid = [recall_list_no_pyramid recall];   
    
    %with pyramid
-   [recall,precision] = FP_ADL_evaluation(thres,1,FPN);   
+   [recall,precision] = FP_ADL_evaluation(thres,1,FPN,stage_only);   
    precision_list_pyramid = [precision_list_pyramid precision];
    recall_list_pyramid = [recall_list_pyramid recall];
    
