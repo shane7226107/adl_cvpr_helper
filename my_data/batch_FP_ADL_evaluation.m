@@ -17,27 +17,35 @@ for thres=thres_range
    
 end
 
-plot(precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
+%precision only
+if 0 
+    plot(precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
 
-hold all
+    hold all
 
-plot(precision_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+    plot(precision_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+end
 
-% plot(recall_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
-% 
-% hold all
-% 
-% plot(recall_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+%recall only
+if 0
+    plot(recall_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
 
+    hold all
 
-% plot(recall_list_no_pyramid,precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
-%         
-% hold all
-% 
-% plot(recall_list_pyramid ,precision_list_pyramid,'-rs','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
-% 
-% xlabel('Recall');
-% ylabel('Precision');
+    plot(recall_list_pyramid,'-.s','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+end
+
+%both
+if 1
+    plot(recall_list_no_pyramid,precision_list_no_pyramid,'-.s','Markersize',6,'MarkerFaceColor','k','LineWidth',3);
+
+    hold all
+
+    plot(recall_list_pyramid ,precision_list_pyramid,'-rs','Markersize',6,'MarkerFaceColor','b','LineWidth',3);
+
+    xlabel('Recall');
+    ylabel('Precision');
+end
 
 end
 

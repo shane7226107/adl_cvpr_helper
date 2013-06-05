@@ -52,9 +52,6 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
     tn = 0;
     fn = 0;
     
-    %TODO :
-    % FPN included to count the recall rate?    
-    
     %Find the ground truth first
     ground_truth_start = -1;
     ground_truth_end = -1;
@@ -70,6 +67,7 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end    
     
+    %precision
     for line=1:size(result{1},1)
         
         frame = result{1}(line);
@@ -87,12 +85,34 @@ function [precision,recall] = evaluation(action_name,thres,result,ground_truth,F
         end
     end
     
-    if (tp+fp) == 0
+    %recall
+    for frame=ground_truth_start:FPN:ground_truth_end
+        
+        this_is_false_negative=1;
+        
+        for line=1:size(result{1},1)
+            
+            prediction_frame = result{1}(line);
+            prediction = result{2}{line};
+            prediction_prob = result{3}(line);            
+            
+            if prob >= thres && strcmp(prediction,action_name)
+                this_is_false_negative = 0;
+                break;
+            end
+        end
+        
+        fn = fn + this_is_false_negative;
+    end
+    
+    
+    
+    if (tp+fp) == 0 || (tp+fn) == 0
         precision = -1;
         recall = -1;
     else
         precision = tp/(tp+fp);
-        recall = 1       
+        recall = tp/(tp+fn);       
     end  
     
 end
